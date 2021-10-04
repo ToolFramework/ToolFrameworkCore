@@ -37,6 +37,7 @@ class Tool{
   
   
  private:
+  std::string m_tool_name;
   
   
   
