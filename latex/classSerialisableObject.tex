@@ -1,0 +1,44 @@
+\hypertarget{classSerialisableObject}{}\doxysection{Serialisable\+Object Class Reference}
+\label{classSerialisableObject}\index{SerialisableObject@{SerialisableObject}}
+
+
+{\ttfamily \#include $<$Serialisable\+Object.\+h$>$}
+
+Inheritance diagram for Serialisable\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSerialisableObject}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSerialisableObject_a3783b1798068a4bdc58fe6cdf7f7929b}\label{classSerialisableObject_a3783b1798068a4bdc58fe6cdf7f7929b}} 
+bool {\bfseries Serialise\+Wrapper} (\mbox{\hyperlink{classBinaryStream}{Binary\+Stream}} \&bs)
+\item 
+\mbox{\Hypertarget{classSerialisableObject_ab8916a102bc94764f023b1713fb040db}\label{classSerialisableObject_ab8916a102bc94764f023b1713fb040db}} 
+virtual bool {\bfseries Serialise} (\mbox{\hyperlink{classBinaryStream}{Binary\+Stream}} \&bs)=0
+\item 
+\mbox{\Hypertarget{classSerialisableObject_a345b21d2a7c869dedd96ad691fc602bd}\label{classSerialisableObject_a345b21d2a7c869dedd96ad691fc602bd}} 
+virtual std\+::string {\bfseries Get\+Version} ()=0
+\item 
+\mbox{\Hypertarget{classSerialisableObject_a9055c98969917d4c652eefdc924b6b75}\label{classSerialisableObject_a9055c98969917d4c652eefdc924b6b75}} 
+virtual bool \mbox{\hyperlink{classSerialisableObject_a9055c98969917d4c652eefdc924b6b75}{Print}} ()=0
+\begin{DoxyCompactList}\small\item\em Simple virtual Pritn function to ensure inhereted classes have one. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An abstract base class for sustom calsses to inherit from to ensure version and type information are present, as well as a Print function and some form of sereialisation.
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/28 10\+:44\+:00 
+\end{DoxyParagraph}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Store/Serialisable\+Object.\+h\item 
+src/\+Store/Binary\+Stream.\+cpp\end{DoxyCompactItemize}

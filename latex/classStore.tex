@@ -1,0 +1,163 @@
+\hypertarget{classStore}{}\doxysection{Store Class Reference}
+\label{classStore}\index{Store@{Store}}
+
+
+{\ttfamily \#include $<$Store.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classStore_a5247080901fb214804d0191681a30a83}{Initialise}} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Initialises \mbox{\hyperlink{classStore}{Store}} by reading in entries from an ASCII text file, when each line is a variable and its value in key value pairs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classStore_adb84e3fb286cae07f64e8186b7ab04e1}{Json\+Parser}} (std\+::string input)
+\begin{DoxyCompactList}\small\item\em Converts a flat JSON formatted string to \mbox{\hyperlink{classStore}{Store}} entries in the form of key value pairs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classStore_a9d2f000bd849a9f5de71c3ba62dca340}\label{classStore_a9d2f000bd849a9f5de71c3ba62dca340}} 
+void \mbox{\hyperlink{classStore_a9d2f000bd849a9f5de71c3ba62dca340}{Print}} ()
+\begin{DoxyCompactList}\small\item\em Prints the contents of the \mbox{\hyperlink{classStore}{Store}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classStore_a7fce0f8f3ec7978c5e7cd3d7053f899b}\label{classStore_a7fce0f8f3ec7978c5e7cd3d7053f899b}} 
+void \mbox{\hyperlink{classStore_a7fce0f8f3ec7978c5e7cd3d7053f899b}{Delete}} ()
+\begin{DoxyCompactList}\small\item\em Deletes all entries in the \mbox{\hyperlink{classStore}{Store}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classStore_a41eaa81c4612fb5bdbf850afb6428977}{Has}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Returns bool based on if store contains entry given by sting. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classStore_abdc0134daa34b808328070f5d6b295f3}{Get}} (std\+::string name, T \&out)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classStore_a26d26db839f734e0af5404b7dac40dae}{Get}} (std\+::string name)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classStore_af586739813ce18da6f5e3561d134a814}{Set}} (std\+::string name, T in)
+\item 
+std\+::string $\ast$ \mbox{\hyperlink{classStore_a790ca02bc7d11648edf0c8d5df3751fe}{operator\mbox{[}$\,$\mbox{]}}} (std\+::string key)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classStore_abe9b65d1308c43dc4158b00d6aed7385}{operator$>$$>$}} (T \&obj)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class Is a dynamic data storeage class and can be used to store variables of any type listed by ASCII key. The storage of the varaible is in ASCII, so is inefficent for large numbers of entries.
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/28 10\+:44\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classStore_a26d26db839f734e0af5404b7dac40dae}\label{classStore_a26d26db839f734e0af5404b7dac40dae}} 
+\index{Store@{Store}!Get@{Get}}
+\index{Get@{Get}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Templated getter function for sore content. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The ASCII key that the variable in the \mbox{\hyperlink{classStore}{Store}} is stored with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value is default copiler costructed value if not true (note\+: no checking exists) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classStore_abdc0134daa34b808328070f5d6b295f3}\label{classStore_abdc0134daa34b808328070f5d6b295f3}} 
+\index{Store@{Store}!Get@{Get}}
+\index{Get@{Get}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{T \&}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Templated getter function for sore content. Assignment is templated and via reference. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The ASCII key that the variable in the \mbox{\hyperlink{classStore}{Store}} is stored with. \\
+\hline
+{\em out} & The variable to fill with the value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value is true if varaible exists in the \mbox{\hyperlink{classStore}{Store}} and correctly assigned to out and false if not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classStore_a41eaa81c4612fb5bdbf850afb6428977}\label{classStore_a41eaa81c4612fb5bdbf850afb6428977}} 
+\index{Store@{Store}!Has@{Has}}
+\index{Has@{Has}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{Has()}{Has()}}
+{\footnotesize\ttfamily bool Store\+::\+Has (\begin{DoxyParamCaption}\item[{std\+::string}]{key }\end{DoxyParamCaption})}
+
+
+
+Returns bool based on if store contains entry given by sting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & key to comapre. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classStore_a5247080901fb214804d0191681a30a83}\label{classStore_a5247080901fb214804d0191681a30a83}} 
+\index{Store@{Store}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{Initialise()}{Initialise()}}
+{\footnotesize\ttfamily bool Store\+::\+Initialise (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Initialises \mbox{\hyperlink{classStore}{Store}} by reading in entries from an ASCII text file, when each line is a variable and its value in key value pairs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The filepath and name to the input file. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classStore_adb84e3fb286cae07f64e8186b7ab04e1}\label{classStore_adb84e3fb286cae07f64e8186b7ab04e1}} 
+\index{Store@{Store}!JsonParser@{JsonParser}}
+\index{JsonParser@{JsonParser}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{JsonParser()}{JsonParser()}}
+{\footnotesize\ttfamily void Store\+::\+Json\+Parser (\begin{DoxyParamCaption}\item[{std\+::string}]{input }\end{DoxyParamCaption})}
+
+
+
+Converts a flat JSON formatted string to \mbox{\hyperlink{classStore}{Store}} entries in the form of key value pairs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input flat JSON string. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classStore_abe9b65d1308c43dc4158b00d6aed7385}\label{classStore_abe9b65d1308c43dc4158b00d6aed7385}} 
+\index{Store@{Store}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Store\+::operator$>$$>$ (\begin{DoxyParamCaption}\item[{T \&}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Allows streaming of a flat JASON formatted string of \mbox{\hyperlink{classStore}{Store}} contents. \mbox{\Hypertarget{classStore_a790ca02bc7d11648edf0c8d5df3751fe}\label{classStore_a790ca02bc7d11648edf0c8d5df3751fe}} 
+\index{Store@{Store}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily std\+::string$\ast$ Store\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{std\+::string}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns string pointer to \mbox{\hyperlink{classStore}{Store}} element. 
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the string pointer to return. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the string version of the value within the \mbox{\hyperlink{classStore}{Store}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classStore_af586739813ce18da6f5e3561d134a814}\label{classStore_af586739813ce18da6f5e3561d134a814}} 
+\index{Store@{Store}!Set@{Set}}
+\index{Set@{Set}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Store\+::\+Set (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{T}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Templated setter function to assign vairables in the \mbox{\hyperlink{classStore}{Store}}. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The key to be used to store and reference the variable in the \mbox{\hyperlink{classStore}{Store}}. \\
+\hline
+{\em in} & the varaible to be stored. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Store/Store.\+h\item 
+src/\+Store/Store.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,74 @@
+\hypertarget{classLogging_1_1TFStreamBuf}{}\doxysection{Logging\+::TFStream\+Buf Class Reference}
+\label{classLogging_1_1TFStreamBuf}\index{Logging::TFStreamBuf@{Logging::TFStreamBuf}}
+Inheritance diagram for Logging\+::TFStream\+Buf\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLogging_1_1TFStreamBuf}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a1c73671f3b0e5dac0f4f227eb3c331d2}\label{classLogging_1_1TFStreamBuf_a1c73671f3b0e5dac0f4f227eb3c331d2}} 
+{\bfseries TFStream\+Buf} (void $\ast$null)
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a63cbc5dc23949690321b294670b46243}\label{classLogging_1_1TFStreamBuf_a63cbc5dc23949690321b294670b46243}} 
+{\bfseries TFStream\+Buf} (bool interactive=true, bool local=false, std\+::string localpath=\char`\"{}./log\char`\"{}, bool error=false, std\+::ostream $\ast$filestream=0)
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_ac0e2fd3f1ffdc0568dffe1e042d1165e}\label{classLogging_1_1TFStreamBuf_ac0e2fd3f1ffdc0568dffe1e042d1165e}} 
+virtual int {\bfseries sync} ()
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a68315b3c84362b2eec74a2052f9c54de}\label{classLogging_1_1TFStreamBuf_a68315b3c84362b2eec74a2052f9c54de}} 
+bool {\bfseries Change\+Out\+File} (std\+::string localpath)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a03e15697df1d891de57d29be815aafb8}\label{classLogging_1_1TFStreamBuf_a03e15697df1d891de57d29be815aafb8}} 
+int {\bfseries m\+\_\+messagelevel}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a94197fb9c01a5c5b3598e4568be633b6}\label{classLogging_1_1TFStreamBuf_a94197fb9c01a5c5b3598e4568be633b6}} 
+int {\bfseries m\+\_\+verbose}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a1aa0f03c8d49068b080f60d7687b3cc0}\label{classLogging_1_1TFStreamBuf_a1aa0f03c8d49068b080f60d7687b3cc0}} 
+std\+::ostream $\ast$ {\bfseries output}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_ab67414ab384650d6b90d7cc075cf5ff8}\label{classLogging_1_1TFStreamBuf_ab67414ab384650d6b90d7cc075cf5ff8}} 
+std\+::ostream $\ast$ {\bfseries fileoutput}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a8da7332a622736fc693bb753592e1093}\label{classLogging_1_1TFStreamBuf_a8da7332a622736fc693bb753592e1093}} 
+std\+::ostream $\ast$ {\bfseries tmp}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a0c76a8d5f178b710f32b0870acb63be1}\label{classLogging_1_1TFStreamBuf_a0c76a8d5f178b710f32b0870acb63be1}} 
+bool {\bfseries m\+\_\+local}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_aadc62ce994f9b3dcb2b556066d4012f6}\label{classLogging_1_1TFStreamBuf_aadc62ce994f9b3dcb2b556066d4012f6}} 
+bool {\bfseries m\+\_\+interactive}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_aba7ca93e1a4f7fb847429c430487f533}\label{classLogging_1_1TFStreamBuf_aba7ca93e1a4f7fb847429c430487f533}} 
+bool {\bfseries m\+\_\+error}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a8dc31ada39c6171f2f58f4f581960f8b}\label{classLogging_1_1TFStreamBuf_a8dc31ada39c6171f2f58f4f581960f8b}} 
+std\+::ofstream {\bfseries file}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a80abe59d315434352f0fa6b35c4173fb}\label{classLogging_1_1TFStreamBuf_a80abe59d315434352f0fa6b35c4173fb}} 
+std\+::streambuf $\ast$ {\bfseries psbuf}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a5aafb40c0124929ddc22dd3140186b23}\label{classLogging_1_1TFStreamBuf_a5aafb40c0124929ddc22dd3140186b23}} 
+std\+::streambuf $\ast$ {\bfseries backup1}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_a788a2b30acb9c1eb2a7a2d3ab6828ef9}\label{classLogging_1_1TFStreamBuf_a788a2b30acb9c1eb2a7a2d3ab6828ef9}} 
+std\+::streambuf $\ast$ {\bfseries backup2}
+\item 
+\mbox{\Hypertarget{classLogging_1_1TFStreamBuf_aaa677fac0be626aac038b528192dac35}\label{classLogging_1_1TFStreamBuf_aaa677fac0be626aac038b528192dac35}} 
+bool {\bfseries no\+\_\+delete}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Logging/Logging.\+h\item 
+src/\+Logging/Logging.\+cpp\end{DoxyCompactItemize}

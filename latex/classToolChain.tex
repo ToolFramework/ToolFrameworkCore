@@ -1,0 +1,212 @@
+\hypertarget{classToolChain}{}\doxysection{Tool\+Chain Class Reference}
+\label{classToolChain}\index{ToolChain@{ToolChain}}
+
+
+{\ttfamily \#include $<$Tool\+Chain.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolChain_a2b41199239b32f1d29b48dc355b2bab5}\label{classToolChain_a2b41199239b32f1d29b48dc355b2bab5}} 
+{\bfseries Tool\+Chain} (void $\ast$null)
+\item 
+\mbox{\hyperlink{classToolChain_a133e224899a743ee4a679396f8569bf9}{Tool\+Chain}} (std\+::string configfile, int argc=0, char $\ast$argv\mbox{[}$\,$\mbox{]}=0)
+\begin{DoxyCompactList}\small\item\em Constructor that obtains all of the configuration varaibles from an input file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classToolChain_adefb544d73c43c2621f3ccb14ad93dc7}{Tool\+Chain}} (int verbose=1, int errorlevel=0, bool log\+\_\+interactive=true, bool log\+\_\+local=false, std\+::string log\+\_\+local\+\_\+path=\char`\"{}./log\char`\"{}, bool log\+\_\+split\+\_\+files=false, \mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$in\+\_\+data\+\_\+model=0)
+\item 
+bool \mbox{\hyperlink{classToolChain_ae6859092e14be1f9538c50d7c838fe8e}{Add}} (std\+::string name, \mbox{\hyperlink{classTool}{Tool}} $\ast$tool, std\+::string configfile=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Add a \mbox{\hyperlink{classTool}{Tool}} to the \mbox{\hyperlink{classToolChain}{Tool\+Chain}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolChain_a341f343926341b82a29c586a7b9683af}\label{classToolChain_a341f343926341b82a29c586a7b9683af}} 
+int \mbox{\hyperlink{classToolChain_a341f343926341b82a29c586a7b9683af}{Initialise}} ()
+\begin{DoxyCompactList}\small\item\em Initialise all Tools in the \mbox{\hyperlink{classToolChain}{Tool\+Chain}} sequentially. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classToolChain_a303e299293fd4d3a5e91865e04898e52}{Execute}} (int repeates=1)
+\begin{DoxyCompactList}\small\item\em Execute all Tools in the \mbox{\hyperlink{classToolChain}{Tool\+Chain}} sequentially. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolChain_a3828756135773fb9ca4b361a47296dd9}\label{classToolChain_a3828756135773fb9ca4b361a47296dd9}} 
+int \mbox{\hyperlink{classToolChain_a3828756135773fb9ca4b361a47296dd9}{Finalise}} ()
+\begin{DoxyCompactList}\small\item\em Finalise all Tools in the Tool\+Cahin sequentially. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolChain_a9bb47b83b6b85c3b0fab75af0cda19bf}\label{classToolChain_a9bb47b83b6b85c3b0fab75af0cda19bf}} 
+void \mbox{\hyperlink{classToolChain_a9bb47b83b6b85c3b0fab75af0cda19bf}{Interactive}} ()
+\begin{DoxyCompactList}\small\item\em Start interactive thread to accept commands and run \mbox{\hyperlink{classToolChain}{Tool\+Chain}} in interactive mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolChain_ac1b120b81163d9e00ee778fbc40ddb23}\label{classToolChain_ac1b120b81163d9e00ee778fbc40ddb23}} 
+bool {\bfseries Load\+Tools} (std\+::string filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolChain_a29d8574ddfd60c6fee03891c1eb6848c}\label{classToolChain_a29d8574ddfd60c6fee03891c1eb6848c}} 
+\mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$ \mbox{\hyperlink{classToolChain_a29d8574ddfd60c6fee03891c1eb6848c}{m\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Direct access to transient data model class of the Tools in the \mbox{\hyperlink{classToolChain}{Tool\+Chain}}. This allows direct initialisation and copying of variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolChain_ab705c173cb72d1d35865f7435bcb9f0b}\label{classToolChain_ab705c173cb72d1d35865f7435bcb9f0b}} 
+virtual void {\bfseries Init} ()
+\item 
+\mbox{\Hypertarget{classToolChain_ac1cc0e9d9f6b2d23adb9eab2d7a58119}\label{classToolChain_ac1cc0e9d9f6b2d23adb9eab2d7a58119}} 
+void {\bfseries Inline} ()
+\item 
+\mbox{\Hypertarget{classToolChain_a6ce65465365bf2b6da10b5d28028afcb}\label{classToolChain_a6ce65465365bf2b6da10b5d28028afcb}} 
+std\+::string {\bfseries Execute\+Command} (std\+::string connand)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolChain_a7f6fcdce202336463b71aa5167758bd2}\label{classToolChain_a7f6fcdce202336463b71aa5167758bd2}} 
+static void $\ast$ {\bfseries Interactive\+Thread} (void $\ast$arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolChain_a5327190043dfcdc67affc35ddb836c68}\label{classToolChain_a5327190043dfcdc67affc35ddb836c68}} 
+std\+::vector$<$ \mbox{\hyperlink{classTool}{Tool}} $\ast$ $>$ {\bfseries m\+\_\+tools}
+\item 
+\mbox{\Hypertarget{classToolChain_ab88ccb68da6feb135c032f1356a4889f}\label{classToolChain_ab88ccb68da6feb135c032f1356a4889f}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+toolnames}
+\item 
+\mbox{\Hypertarget{classToolChain_a74cb5832ff5a41714a4da2448b87cee6}\label{classToolChain_a74cb5832ff5a41714a4da2448b87cee6}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+configfiles}
+\item 
+\mbox{\Hypertarget{classToolChain_a3e157c7148cbdb9eccd43fce185297f5}\label{classToolChain_a3e157c7148cbdb9eccd43fce185297f5}} 
+int {\bfseries m\+\_\+verbose}
+\item 
+\mbox{\Hypertarget{classToolChain_a26843fabb52f0fba5f91be3da7564e4e}\label{classToolChain_a26843fabb52f0fba5f91be3da7564e4e}} 
+int {\bfseries m\+\_\+errorlevel}
+\item 
+\mbox{\Hypertarget{classToolChain_a0c1470a33c6f3f2749230ed4b2165c5b}\label{classToolChain_a0c1470a33c6f3f2749230ed4b2165c5b}} 
+bool {\bfseries m\+\_\+log\+\_\+interactive}
+\item 
+\mbox{\Hypertarget{classToolChain_a2076a51d02b80034f523b332ddd452c3}\label{classToolChain_a2076a51d02b80034f523b332ddd452c3}} 
+bool {\bfseries m\+\_\+log\+\_\+local}
+\item 
+\mbox{\Hypertarget{classToolChain_a0aa84e0beb152870363f4c7a23466c15}\label{classToolChain_a0aa84e0beb152870363f4c7a23466c15}} 
+bool {\bfseries m\+\_\+log\+\_\+split\+\_\+files}
+\item 
+\mbox{\Hypertarget{classToolChain_a030b1214102cfb02242e2247248f6087}\label{classToolChain_a030b1214102cfb02242e2247248f6087}} 
+std\+::string {\bfseries m\+\_\+log\+\_\+local\+\_\+path}
+\item 
+\mbox{\Hypertarget{classToolChain_a1ed4e371b26c220f0018ad54dc2260fd}\label{classToolChain_a1ed4e371b26c220f0018ad54dc2260fd}} 
+bool {\bfseries m\+\_\+interactive}
+\item 
+\mbox{\Hypertarget{classToolChain_a9fc8417d6708585de3d4b96a49709a3c}\label{classToolChain_a9fc8417d6708585de3d4b96a49709a3c}} 
+int {\bfseries m\+\_\+inline}
+\item 
+\mbox{\Hypertarget{classToolChain_ace512f7eff07742d545cd9c15cf2b3c0}\label{classToolChain_ace512f7eff07742d545cd9c15cf2b3c0}} 
+bool {\bfseries m\+\_\+recover}
+\item 
+\mbox{\Hypertarget{classToolChain_a408cf3ba3c040374fa00ac4b789712cd}\label{classToolChain_a408cf3ba3c040374fa00ac4b789712cd}} 
+bool {\bfseries exeloop}
+\item 
+\mbox{\Hypertarget{classToolChain_a97ae31bc6524d2dcec465eadbde52bb1}\label{classToolChain_a97ae31bc6524d2dcec465eadbde52bb1}} 
+unsigned long {\bfseries execounter}
+\item 
+\mbox{\Hypertarget{classToolChain_a183dede9901ee79ed7c52b41f7d4b3b4}\label{classToolChain_a183dede9901ee79ed7c52b41f7d4b3b4}} 
+bool {\bfseries Initialised}
+\item 
+\mbox{\Hypertarget{classToolChain_ac52f9abf9a9df10846ad77ecd48b3065}\label{classToolChain_ac52f9abf9a9df10846ad77ecd48b3065}} 
+bool {\bfseries Finalised}
+\item 
+\mbox{\Hypertarget{classToolChain_a047c9aa0130323fd4fa7a0065e18e1f2}\label{classToolChain_a047c9aa0130323fd4fa7a0065e18e1f2}} 
+bool {\bfseries paused}
+\item 
+\mbox{\Hypertarget{classToolChain_a6454194aa230cf3fed8858fbfb20f8c6}\label{classToolChain_a6454194aa230cf3fed8858fbfb20f8c6}} 
+\mbox{\hyperlink{classLogging}{Logging}} $\ast$ {\bfseries m\+\_\+log}
+\item 
+\mbox{\Hypertarget{classToolChain_a057de33170307a943960230206bb69b2}\label{classToolChain_a057de33170307a943960230206bb69b2}} 
+pthread\+\_\+t {\bfseries thread} \mbox{[}1\mbox{]}
+\item 
+\mbox{\Hypertarget{classToolChain_a621ee785109fba1cb9def121a2ada524}\label{classToolChain_a621ee785109fba1cb9def121a2ada524}} 
+bool {\bfseries msgflag}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class holds a dynamic list of Tools which can be Initialised, Executed and Finalised to perform program operation. Large number of options in terms of run modes and setting can be assigned.
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/28 10\+:44\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classToolChain_a133e224899a743ee4a679396f8569bf9}\label{classToolChain_a133e224899a743ee4a679396f8569bf9}} 
+\index{ToolChain@{ToolChain}!ToolChain@{ToolChain}}
+\index{ToolChain@{ToolChain}!ToolChain@{ToolChain}}
+\doxysubsubsection{\texorpdfstring{ToolChain()}{ToolChain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Tool\+Chain\+::\+Tool\+Chain (\begin{DoxyParamCaption}\item[{std\+::string}]{configfile,  }\item[{int}]{argc = {\ttfamily 0},  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Constructor that obtains all of the configuration varaibles from an input file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configfile} & The path and name of the config file to read configuration values from. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolChain_adefb544d73c43c2621f3ccb14ad93dc7}\label{classToolChain_adefb544d73c43c2621f3ccb14ad93dc7}} 
+\index{ToolChain@{ToolChain}!ToolChain@{ToolChain}}
+\index{ToolChain@{ToolChain}!ToolChain@{ToolChain}}
+\doxysubsubsection{\texorpdfstring{ToolChain()}{ToolChain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Tool\+Chain\+::\+Tool\+Chain (\begin{DoxyParamCaption}\item[{int}]{verbose = {\ttfamily 1},  }\item[{int}]{errorlevel = {\ttfamily 0},  }\item[{bool}]{log\+\_\+interactive = {\ttfamily true},  }\item[{bool}]{log\+\_\+local = {\ttfamily false},  }\item[{std\+::string}]{log\+\_\+local\+\_\+path = {\ttfamily \char`\"{}./log\char`\"{}},  }\item[{bool}]{log\+\_\+split\+\_\+files = {\ttfamily false},  }\item[{\mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$}]{in\+\_\+data\+\_\+model = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Constructor with explicit configuration variables passed as arguments.
+ @param verbose The verbosity level of the ToolChain. The higher the number the more explicit the print outs. 0 = silent apart from errors.
+ @param errorlevel The behavior that occurs when the ToolChain encounters an error. 0 = do not exit for both handeled and unhandeled errors, 1 = exit on unhandeled errors only, 2 = exit on handeled and unhandeled errors.
+ @param log_interactive sets the logging class to use standard output and error to screen
+ @param log_local sets the logging class to redirect standard output and error to disk
+\end{DoxyVerb}
+ logmode Where log printouts should be forwarded too. \char`\"{}\+Interactive\char`\"{} = cout, \char`\"{}\+Remote\char`\"{} = send to a remote logging system, \char`\"{}local\char`\"{} = ouput logs to a file. 
+\begin{DoxyParams}{Parameters}
+{\em log\+\_\+local\+\_\+path} & The file path and name of where to store logs if in Local logging mode. \\
+\hline
+{\em log\+\_\+split\+\_\+files} & when loggign to local file whether to split standard output and standard error into differnt files \\
+\hline
+{\em in\+\_\+data\+\_\+model} & option to specify an external data modle for use in \mbox{\hyperlink{classToolChain}{Tool\+Chain}}. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classToolChain_ae6859092e14be1f9538c50d7c838fe8e}\label{classToolChain_ae6859092e14be1f9538c50d7c838fe8e}} 
+\index{ToolChain@{ToolChain}!Add@{Add}}
+\index{Add@{Add}!ToolChain@{ToolChain}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily bool Tool\+Chain\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{\mbox{\hyperlink{classTool}{Tool}} $\ast$}]{tool,  }\item[{std\+::string}]{configfile = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Add a \mbox{\hyperlink{classTool}{Tool}} to the \mbox{\hyperlink{classToolChain}{Tool\+Chain}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name used in logs when reffering to the \mbox{\hyperlink{classTool}{Tool}}.\\
+\hline
+{\em tool} & A pointer to the tool to be added to the \mbox{\hyperlink{classToolChain}{Tool\+Chain}}.\\
+\hline
+{\em configfile} & The configuration file path and name to be passed to the \mbox{\hyperlink{classTool}{Tool}}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolChain_a303e299293fd4d3a5e91865e04898e52}\label{classToolChain_a303e299293fd4d3a5e91865e04898e52}} 
+\index{ToolChain@{ToolChain}!Execute@{Execute}}
+\index{Execute@{Execute}!ToolChain@{ToolChain}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily int Tool\+Chain\+::\+Execute (\begin{DoxyParamCaption}\item[{int}]{repeates = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Execute all Tools in the \mbox{\hyperlink{classToolChain}{Tool\+Chain}} sequentially. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em repeates} & How many times to run sequential Execute loop. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Tool\+Chain/Tool\+Chain.\+h\item 
+src/\+Tool\+Chain/Tool\+Chain.\+cpp\end{DoxyCompactItemize}
