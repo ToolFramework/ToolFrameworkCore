@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log_134',['Log',['../classDataModel.html#aa777da4c632e4659ee5b1447ad513458',1,'DataModel']]]
+  ['kill_136',['kill',['../structThread__args.html#a298b8c85c8598ecc557e2090d90a73c3',1,'Thread_args']]]
 ];

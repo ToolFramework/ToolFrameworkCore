@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['serialisableobject_86',['SerialisableObject',['../classSerialisableObject.html',1,'']]],
-  ['store_87',['Store',['../classStore.html',1,'']]]
+  ['serialisableobject_88',['SerialisableObject',['../classSerialisableObject.html',1,'']]],
+  ['store_89',['Store',['../classStore.html',1,'']]]
 ];

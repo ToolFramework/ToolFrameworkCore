@@ -81,14 +81,22 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4baac5fe364a7a23762d70d2c2216486"><td class="memItemLeft" align="right" valign="top"><a id="a4baac5fe364a7a23762d70d2c2216486"></a>
-<a class="el" href="classStore.html">Store</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataModel.html#a4baac5fe364a7a23762d70d2c2216486">vars</a></td></tr>
-<tr class="memdesc:a4baac5fe364a7a23762d70d2c2216486"><td class="mdescLeft">&#160;</td><td class="mdescRight">This <a class="el" href="classStore.html">Store</a> can be used for any variables. It is an inefficent ascii based storage. <br /></td></tr>
-<tr class="separator:a4baac5fe364a7a23762d70d2c2216486"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa777da4c632e4659ee5b1447ad513458"><td class="memItemLeft" align="right" valign="top"><a id="aa777da4c632e4659ee5b1447ad513458"></a>
 <a class="el" href="classLogging.html">Logging</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataModel.html#aa777da4c632e4659ee5b1447ad513458">Log</a></td></tr>
 <tr class="memdesc:aa777da4c632e4659ee5b1447ad513458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log class pointer for use in Tools, it can be used to send messages which can have multiple error levels and destination end points. <br /></td></tr>
 <tr class="separator:aa777da4c632e4659ee5b1447ad513458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4baac5fe364a7a23762d70d2c2216486"><td class="memItemLeft" align="right" valign="top"><a id="a4baac5fe364a7a23762d70d2c2216486"></a>
+<a class="el" href="classStore.html">Store</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataModel.html#a4baac5fe364a7a23762d70d2c2216486">vars</a></td></tr>
+<tr class="memdesc:a4baac5fe364a7a23762d70d2c2216486"><td class="mdescLeft">&#160;</td><td class="mdescRight">This <a class="el" href="classStore.html">Store</a> can be used for any variables. It is an inefficent ascii based storage and command line arguments will be placed in here along with <a class="el" href="classToolChain.html">ToolChain</a> variables. <br /></td></tr>
+<tr class="separator:a4baac5fe364a7a23762d70d2c2216486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaeb97ea84c890b10a40bf353f722e4e"><td class="memItemLeft" align="right" valign="top"><a id="aaaeb97ea84c890b10a40bf353f722e4e"></a>
+<a class="el" href="classBStore.html">BStore</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataModel.html#aaaeb97ea84c890b10a40bf353f722e4e">CStore</a></td></tr>
+<tr class="memdesc:aaaeb97ea84c890b10a40bf353f722e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a more efficent binary <a class="el" href="classStore.html">Store</a> that can be used to store a dynamic set of inter <a class="el" href="classTool.html">Tool</a> variables, very useful for constants and and flags hence the name CStore. <br /></td></tr>
+<tr class="separator:aaaeb97ea84c890b10a40bf353f722e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaee04afd014c5339c4f3c536f6b7430b"><td class="memItemLeft" align="right" valign="top"><a id="aaee04afd014c5339c4f3c536f6b7430b"></a>
+std::map&lt; std::string, <a class="el" href="classBStore.html">BStore</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataModel.html#aaee04afd014c5339c4f3c536f6b7430b">Stores</a></td></tr>
+<tr class="memdesc:aaee04afd014c5339c4f3c536f6b7430b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a map of named <a class="el" href="classBStore.html">BStore</a> pointers which can be deffined to hold a nammed collection of any type of <a class="el" href="classBStore.html">BStore</a>. It is usefull to store data collections that needs subdividing into differnt stores. <br /></td></tr>
+<tr class="separator:aaee04afd014c5339c4f3c536f6b7430b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class Is a transient data model class for your Tools within the <a class="el" href="classToolChain.html">ToolChain</a>. If Tools need to comunicate they pass all data objects through the data model. There fore inter tool data objects should be deffined in this class.</p>

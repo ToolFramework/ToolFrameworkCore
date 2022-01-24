@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['thread_143',['thread',['../structThread__args.html#a4f71beb11e75d05269fc63ca7c19a8a9',1,'Thread_args']]],
-  ['threadname_144',['ThreadName',['../structThread__args.html#a594f831be7ce66015a7606e023b24cf4',1,'Thread_args']]],
-  ['threads_145',['Threads',['../classUtilities.html#a26ebd7308ea895452c4c1066dc5834e5',1,'Utilities']]]
+  ['running_145',['running',['../structThread__args.html#a9cb8f6b709c5687bf28531bf4d808c75',1,'Thread_args']]]
 ];
