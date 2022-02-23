@@ -115,12 +115,13 @@ class BStore: public SerialisableObject{
 	  
 	  T* tmp=new T;
 	  m_ptrs[name]=new PointerWrapper<T>(tmp);
-	  ret*=Get(name,*tmp);
 	}
 	
 	
 	PointerWrapper<T>* tmp=static_cast<PointerWrapper<T>* >(m_ptrs[name]); 
-	out=tmp->pointer;
+	T* internal = tmp->pointer;
+	ret*=Get(name,*internal);  // update internally held item based on Store contents
+	out=internal;
 	
 	return ret;
 	
