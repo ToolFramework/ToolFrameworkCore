@@ -56,45 +56,42 @@ class BinaryStream : public SerialisableObject{
 
   //operator overloads
 
-  bool operator<<(std::string& rhs){
-    if(m_mode!=READ){
-      bool ret=true;    
-      unsigned int tmp=rhs.length();
-      ret*=(*this) << tmp;
-      if(tmp) ret*=Bwrite(&(rhs[0]), tmp);
-      return ret;
-    }
-    else return false;
-  }
-  
-  bool operator>>(std::string& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      if(tmp) ret*=Bread(&(rhs[0]), tmp);
-      return ret;
-    }
-    else return false;
-  }
-  
+  bool operator<<(std::string& rhs) {
+    if (m_mode == READ) return false;
+
+    unsigned int len = rhs.length();
+    if (!(*this << len)) return false;
+
+    if (len == 0) return true;
+    return Bwrite(rhs.data(), len);
+  };
+
+  bool operator<<(const std::string& rhs) {
+    if (m_mode == READ) return false;
+
+    unsigned int len = rhs.length();
+    if (!(*this << len)) return false;
+
+    if (len == 0) return true;
+    return Bwrite(rhs.data(), len);
+  };
+
+  bool operator>>(std::string& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+
+    unsigned int len = 0;
+    if (!(*this >> len)) return false;
+
+    rhs.resize(len);
+    if (len == 0) return true;
+    return Bread(rhs.data(), len);
+  };
+
   bool operator&(std::string& rhs){
     if(m_write) return (*this) << rhs;
     else return (*this) >> rhs;
   }
 
-  bool operator<<(const std::string& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.length();
-      ret*=(*this) << tmp;
-      if(tmp) ret*=Bwrite(&(rhs[0]), tmp);
-      return ret;
-    }
-    else return false;
-  }
-   
   bool operator&(const std::string& rhs){
     if(m_write) return (*this) << rhs;
     return false;
@@ -110,9 +107,9 @@ class BinaryStream : public SerialisableObject{
       }
       else return Bwrite(&rhs, sizeof(T));
     }
-    else return false;  
+    else return false;
   }
-  
+
   
   template<typename T> bool operator>>(T& rhs){
     if(m_mode!=NEW && m_mode!=APPEND){
@@ -149,40 +146,37 @@ class BinaryStream : public SerialisableObject{
     return false;
   }
   
-  
-  template<typename T> bool operator<<(std::vector<T>& rhs){
-    
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) << (*it);
-	}
-	else ret*=Bwrite(&(rhs[0]), tmp*sizeof(T));
-      }
-      return ret; 
-    }
-    else return false;
+  template<typename T> bool operator<<(std::vector<T>& rhs) {
+    if (m_mode == READ) return false;
+
+    unsigned int size = rhs.size();
+    if (!(*this << size)) return false;
+
+    if (size == 0) return true;
+
+    if (!check_base<SerialisableObject, T>::value)
+      return Bwrite(rhs.data(), size * sizeof(T));
+
+    for (typename std::vector<T>::iterator it = rhs.begin(); it != rhs.end(); ++it)
+      if (!(*this << *it)) return false;
+    return true;
   }
-  
-  template<typename T> bool operator>>(std::vector<T>& rhs){
-    
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) >> (*it);
-	}
-	else ret*=Bread(&(rhs[0]), tmp*sizeof(T));
-      }
-      return ret;
-    }
-    else return false;
+
+  template<typename T> bool operator>>(std::vector<T>& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+
+    unsigned int size = 0;
+    if (!(*this >> size)) return false;
+
+    rhs.resize(size);
+    if (size == 0) return true;
+
+    if (!check_base<SerialisableObject, T>::value)
+      return Bread(rhs.data(), size * sizeof(T));
+
+    for (typename std::vector<T>::iterator it = rhs.begin(); it != rhs.end(); ++it)
+      if (!(*this >> *it)) return false;
+    return true;
   }
   
   template<typename T> bool operator&(std::vector<T>& rhs){
@@ -190,143 +184,135 @@ class BinaryStream : public SerialisableObject{
     if(m_write) return (*this) << rhs;
     else return (*this) >> rhs;
   }
-  
-  bool operator<<(std::vector<std::string>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) << rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
+
+  bool operator<<(std::vector<std::string>& rhs) {
+    if (m_mode == READ) return false;
+
+    unsigned int size = rhs.size();
+    if (!(*this << size)) return false;
+
+    for (unsigned int i = 0; i < size; ++i)
+      if (!(*this << rhs[i])) return false;
+    return true;
   }
-  
-  bool operator>>(std::vector<std::string>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) >> rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
+
+  bool operator>>(std::vector<std::string>& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+
+    unsigned int size = 0;
+    if (!(*this >> size)) return false;
+
+    rhs.resize(size);
+    for (unsigned int i = 0; i < size; ++i)
+      if (!(*this >> rhs[i])) return false;
+    return true;
   }
   
   bool operator&(std::vector<std::string>& rhs){   
     if(m_write) return (*this) << rhs;
     else return (*this) >> rhs;
   }
-  
-  template<typename T, typename U> bool operator<<(std::map<T,U>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      for (typename std::map<T,U>::iterator it=rhs.begin(); it!=rhs.end(); ++it){
-	T key=it->first;
-	U value=it->second;
-	ret*=(*this) << key;
-	ret*=(*this) << value;
-      }
-      return ret;
+
+  template<typename T, typename U> bool operator<<(std::map<T, U>& rhs) {
+    if (m_mode == READ) return false;
+
+    unsigned int size = rhs.size();
+    if (!(*this << size)) return false;
+
+    for (typename std::map<T, U>::iterator it = rhs.begin(); it != rhs.end(); ++it) {
+      T key = it->first;
+      U value = it->second;
+      if (!(*this << key && *this << value)) return false;
     }
-    else return false;
+    return true;
   }
-  
-  template<typename T, typename U> bool operator>>(std::map<T,U>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;      
-      ret*=(*this) >> tmp;
-      for (unsigned int i=0; i<tmp; i++){
-	T key;
-	U value;
-	ret*=(*this) >> key;
-	ret*=(*this) >> value;
-	rhs[key]=value;
-      }
-      return ret;
-    }
-    else return false;
+
+  template<typename T, typename U> bool operator>>(std::map<T, U>& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+
+    unsigned int size = 0;
+    if (!(*this >> size)) return false;
+
+    for (unsigned int i = 0; i < size; ++i) {
+      T key;
+      U value;
+      if (!(*this >> key && *this >> value)) return false;
+      rhs[key] = value;
+    };
+    return true;
   }
   
   template<typename T, typename U> bool operator&(std::map<T,U>& rhs){
     if(m_write) return (*this) << rhs;
     else return (*this) >> rhs;
   } 
-  
-  template<typename T> bool operator<<(std::deque<T>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size(); 
-      ret*=(*this) << tmp;
-      if(tmp){
-	for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++)
-	  if(check_base<SerialisableObject,T>::value)
-	    ret*=(*this) << (*it);
-	  else
-	    ret*=Bwrite(&*it, sizeof(T));
-      }
-      return ret;
-    }
-    else return false;
+
+  template<typename T> bool operator<<(std::deque<T>& rhs) {
+    if (m_mode == READ) return false;
+
+    unsigned int size = rhs.size();
+    if (!(*this << size)) return false;
+
+    if (size == 0) return true;
+
+    for (typename std::deque<T>::iterator it = rhs.begin();
+	 it != rhs.end();
+	 ++it)
+      if (check_base<SerialisableObject, T>::value) {
+	if (!(*this << *it))
+	  return false;
+      } else if (!Bwrite(&*it, sizeof(T)))
+	return false;
+    return true;
   }
-  
-  template<typename T> bool operator>>(std::deque<T>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      if(tmp){
-	for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++)
-	  if(check_base<SerialisableObject,T>::value)
-	    ret*=(*this) >> (*it);
-	  else
-	    ret*=Bread(&*it, sizeof(T));
-      }
-      return ret;
-    }
-    else return false;
+
+  template<typename T> bool operator>>(std::deque<T>& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+
+    unsigned int size = 0;
+    if (!(*this >> size)) return false;
+
+    rhs.resize(size);
+    if (size == 0) return true;
+
+    for (typename std::deque<T>::iterator it = rhs.begin();
+	 it != rhs.end();
+	 ++it)
+      if (check_base<SerialisableObject, T>::value) {
+	if (!(*this >> *it))
+	  return false;
+      } else if (!Bread(&*it, sizeof(T)))
+	return false;
+    return true;
   }
-  
+
   template<typename T> bool operator&(std::deque<T>& rhs){
     if(m_write) return(*this) << rhs;
     else return(*this) >> rhs;    
   }
-  
-  bool operator<<(std::deque<std::string>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) << rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
-  }
-   
-  bool operator>>(std::deque<std::string>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) >> rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
-  }
+
+  bool operator<<(std::deque<std::string>& rhs) {
+    if (m_mode == READ) return false;
+
+    unsigned int len = rhs.size();
+    if (!(*this << len)) return false;
+
+    for (unsigned int i = 0; i < len; ++i)
+      if (!(*this << rhs[i])) return false;
+    return true;
+  };
+
+  bool operator>>(std::deque<std::string>& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+
+    unsigned int size = 0;
+    if (!(*this >> size)) return false;
+
+    rhs.resize(size);
+    for (unsigned int i = 0; i < size; ++i)
+      if (!(*this >> rhs[i])) return false;
+    return true;
+  };
   
   bool operator&(std::deque<std::string>& rhs){
     if(m_write) return (*this) << rhs;
@@ -355,9 +341,7 @@ class BinaryStream : public SerialisableObject{
     
     static const bool value = sizeof(check(Host<B,D>(), int())) == sizeof(short);
   };
-  
-  
-  
+
   /*
 derived:
 
