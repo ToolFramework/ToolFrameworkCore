@@ -267,10 +267,11 @@ class BinaryStream : public SerialisableObject{
       unsigned int tmp=rhs.size(); 
       ret*=(*this) << tmp;
       if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) << (*it);	
-	}
-	else ret*=Bwrite(&(rhs[0]), tmp*sizeof(T));
+	for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++)
+	  if(check_base<SerialisableObject,T>::value)
+	    ret*=(*this) << (*it);
+	  else
+	    ret*=Bwrite(&*it, sizeof(T));
       }
       return ret;
     }
@@ -284,10 +285,11 @@ class BinaryStream : public SerialisableObject{
       ret*=(*this) >> tmp;
       rhs.resize(tmp);
       if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) >> (*it);
-	}
-	else ret*=Bread(&(rhs[0]), tmp*sizeof(T));
+	for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++)
+	  if(check_base<SerialisableObject,T>::value)
+	    ret*=(*this) >> (*it);
+	  else
+	    ret*=Bread(&*it, sizeof(T));
       }
       return ret;
     }
