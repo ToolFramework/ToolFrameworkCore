@@ -20,6 +20,8 @@ class SerialisableObject{
   
  public:
 
+  virtual ~SerialisableObject() {};
+
   bool SerialiseWrapper(BinaryStream &bs);
   virtual bool Serialise(BinaryStream &bs)=0;
   virtual std::string GetVersion()=0;
