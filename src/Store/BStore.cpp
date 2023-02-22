@@ -746,7 +746,7 @@ bool BStore::Serialise(BinaryStream &bs){ // do return properly
   bs & output;
   bs & m_lookup;
   GetEntry(0);
-  /*
+#if 0
   save;
 
   if(bs.m_write){
@@ -761,9 +761,9 @@ bool BStore::Serialise(BinaryStream &bs){ // do return properly
     close
       open
       }
-  */
+#endif
 
-  /* 
+#if 0
   bs & m_lookup;
 
   
@@ -789,7 +789,7 @@ bool BStore::Serialise(BinaryStream &bs){ // do return properly
 
   if(!GetHeader()) return false;
   if(!GetEntry(0)) return false;
-  */
+#endif
 
 
 
@@ -801,7 +801,7 @@ bool BStore::Serialise(BinaryStream &bs){ // do return properly
   /////
 
 
-  /*   // uncomment here to start
+#if 0   // uncomment here to start
   //writing 
   if(bs.m_write){
     if(not ram){
@@ -856,7 +856,7 @@ bool BStore::Serialise(BinaryStream &bs){ // do return properly
   }
 
 
- /*
+#if 0
    //std::cout<<"p1"<<std::endl;
     if(!(bs & m_variables)) return false;
     //std::cout<<"p2"<<std::endl;
@@ -872,7 +872,8 @@ bool BStore::Serialise(BinaryStream &bs){ // do return properly
     //std::cout<<"p6"<<std::endl;
     if(!(bs & m_lookup)) return false;
     //std::cout<<"p7"<<std::endl;
-    */
+#endif
+#endif
 
     return true;
     
