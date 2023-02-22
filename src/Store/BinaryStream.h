@@ -85,140 +85,19 @@ class BinaryStream : public SerialisableObject{
     return *this >> rhs;
   }
 
-  template <typename T>
-  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
-  operator<<(T& rhs) {
+  template <typename T> bool operator<<(const T& rhs) {
     if (m_mode == READ) return false;
-    m_write = true;
-    return rhs.SerialiseWrapper(*this);
+    return serialise(rhs);
   }
 
-  template <typename T>
-  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
-  operator>>(T& rhs) {
-    if (m_mode == NEW || m_mode == APPEND) return false;
-    m_write = false;
-    return rhs.SerialiseWrapper(*this);
-  }
-
-  template <typename T>
-  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
-  operator<<(const T& rhs) {
+  template <typename T> bool operator<<(T& rhs) {
     if (m_mode == READ) return false;
-    return Bwrite(&rhs, sizeof(T));
+    return serialise(rhs);
   }
 
-  template <typename T>
-  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
-  operator>>(T& rhs) {
+  template <typename T> bool operator>>(T& rhs) {
     if (m_mode == NEW || m_mode == APPEND) return false;
-    return Bread(&rhs, sizeof(T));
-  }
-
-  bool operator<<(const std::string& rhs) {
-    if (m_mode == READ) return false;
-
-    unsigned int len = rhs.length();
-    if (!(*this << len)) return false;
-
-    if (len == 0) return true;
-    return Bwrite(rhs.data(), len);
-  }
-
-  bool operator>>(std::string& rhs) {
-    if (m_mode == NEW || m_mode == APPEND) return false;
-
-    unsigned int len = 0;
-    if (!(*this >> len)) return false;
-
-    rhs.resize(len);
-    if (len == 0) return true;
-    return Bread(rhs.data(), len);
-  }
-
-  template <typename T>
-  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
-  operator<<(std::vector<T>& rhs) {
-    return serialise_container(rhs);
-  }
-
-  template <typename T>
-  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
-  operator>>(std::vector<T>& rhs) {
-    return deserialise_container(rhs);
-  }
-
-  template <typename T>
-  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
-  operator<<(const std::vector<T>& rhs) {
-    if (m_mode == READ) return false;
-
-    unsigned int size = rhs.size();
-    if (!(*this << size)) return false;
-
-    if (size == 0) return true;
-    return Bwrite(rhs.data(), size * sizeof(T));
-  }
-
-  template <typename T>
-  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
-  operator>>(std::vector<T>& rhs) {
-    if (m_mode == NEW || m_mode == APPEND) return false;
-
-    unsigned int size = 0;
-    if (!(*this >> size)) return false;
-
-    rhs.resize(size);
-    if (size == 0) return true;
-    return Bread(rhs.data(), size * sizeof(T));
-  }
-
-  bool operator<<(const std::vector<std::string>& rhs) {
-    return serialise_container(rhs);
-  };
-
-  bool operator>>(std::vector<std::string>& rhs) {
-    return deserialise_container(rhs);
-  };
-
-  template <typename First, typename Second>
-  bool operator<<(std::pair<First, Second>& rhs) {
-    if (m_mode == READ) return false;
-    return *this << rhs.first && *this << rhs.second;
-  }
-
-  template <typename First, typename Second>
-  bool operator>>(std::pair<First, Second>& rhs) {
-    if (m_mode == NEW || m_mode == APPEND) return false;
-    return *this >> rhs.first && *this >> rhs.second;
-  }
-
-  template <typename T, typename U> bool operator<<(std::map<T, U>& rhs) {
-    return serialise_container(rhs);
-  }
-
-  template <typename T, typename U> bool operator>>(std::map<T, U>& rhs) {
-    // std::map has no resize, so we cannot use deserialise_container
-    if (m_mode == NEW || m_mode == APPEND) return false;
-
-    unsigned int size = 0;
-    if (!(*this >> size)) return false;
-
-    for (unsigned int i = 0; i < size; ++i) {
-      T key;
-      U value;
-      if (!(*this >> key && *this >> value)) return false;
-      rhs[key] = value;
-    };
-    return true;
-  }
-
-  template <typename T> bool operator<<(std::deque<T>& rhs) {
-    return serialise_container(rhs);
-  }
-
-  template <typename T> bool operator>>(std::deque<T>& rhs) {
-    return deserialise_container(rhs);
+    return deserialise(rhs);
   }
 
  private:
@@ -227,36 +106,146 @@ class BinaryStream : public SerialisableObject{
   int inf(FILE *source, FILE *dest);
   void zerr(int ret);
 
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(T& rhs) {
+    m_write = true;
+    return rhs.SerialiseWrapper(*this);
+  }
+
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(T& rhs) {
+    m_write = false;
+    return rhs.SerialiseWrapper(*this);
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(const T& rhs) {
+    return Bwrite(&rhs, sizeof(T));
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(T& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+    return Bread(&rhs, sizeof(T));
+  }
+
+  bool serialise(const std::string& rhs) {
+    unsigned int len = rhs.length();
+    if (!serialise(len)) return false;
+    if (len == 0) return true;
+    return Bwrite(rhs.data(), len);
+  }
+
+  bool deserialise(std::string& rhs) {
+    unsigned int len = 0;
+    if (!deserialise(len)) return false;
+    rhs.resize(len);
+    if (len == 0) return true;
+    return Bread(rhs.data(), len);
+  }
+
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(std::vector<T>& rhs) {
+    return serialise_container(rhs);
+  }
+
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(std::vector<T>& rhs) {
+    return deserialise_container(rhs);
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(const std::vector<T>& rhs) {
+    unsigned int size = rhs.size();
+    if (!serialise(size)) return false;
+    if (size == 0) return true;
+    return Bwrite(rhs.data(), size * sizeof(T));
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(std::vector<T>& rhs) {
+    unsigned int size = 0;
+    if (!deserialise(size)) return false;
+    rhs.resize(size);
+    if (size == 0) return true;
+    return Bread(rhs.data(), size * sizeof(T));
+  }
+
+  bool serialise(const std::vector<std::string>& rhs) {
+    return serialise_container(rhs);
+  };
+
+  bool deserialise(std::vector<std::string>& rhs) {
+    return deserialise_container(rhs);
+  };
+
+  template <typename First, typename Second>
+  bool serialise(std::pair<First, Second>& rhs) {
+    return serialise(rhs.first) && serialise(rhs.second);
+  }
+
+  template <typename First, typename Second>
+  bool deserialise(std::pair<First, Second>& rhs) {
+    return deserialise(rhs.first) && deserialise(rhs.second);
+  }
+
+  template <typename T, typename U> bool serialise(std::map<T, U>& rhs) {
+    return serialise_container(rhs);
+  }
+
+  template <typename T, typename U> bool deserialise(std::map<T, U>& rhs) {
+    // std::map has no resize, so we cannot use deserialise_container
+    unsigned int size = 0;
+    if (!deserialise(size)) return false;
+
+    for (unsigned int i = 0; i < size; ++i) {
+      T key;
+      U value;
+      if (!(deserialise(key) && deserialise(value))) return false;
+      rhs[key] = value;
+    };
+    return true;
+  }
+
+  template <typename T> bool serialise(std::deque<T>& rhs) {
+    return serialise_container(rhs);
+  }
+
+  template <typename T> bool deserialise(std::deque<T>& rhs) {
+    return deserialise_container(rhs);
+  }
+
+
   template <typename Container>
   bool serialise_container(const Container& container) {
-    if (m_mode == READ) return false;
-
     unsigned int size = container.size();
-    if (!(*this << size)) return false;
-
+    if (!serialise(size)) return false;
     if (size == 0) return true;
-
     for (typename Container::const_iterator i = container.begin();
 	 i != container.end();
 	 ++i)
-      if (!(*this << *i)) return false;
+      if (!serialise(*i)) return false;
     return true;
   }
 
   template <typename Container>
   bool deserialise_container(Container& container) {
-    if (m_mode == NEW || m_mode == APPEND) return false;
-
     unsigned int size = 0;
-    if (!(*this >> size)) return false;
-
+    if (!deserialise(size)) return false;
     if (size == 0) return true;
-
     container.resize(size);
     for (typename Container::iterator i = container.begin();
 	 i != container.end();
 	 ++i)
-      if (!(*this >> *i)) return false;
+      if (!deserialise(*i)) return false;
     return true;
   }
 };
