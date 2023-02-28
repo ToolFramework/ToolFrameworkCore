@@ -137,7 +137,7 @@ class BinaryStream : public SerialisableObject{
     unsigned int len = rhs.length();
     if (!serialise(len)) return false;
     if (len == 0) return true;
-    return Bwrite(rhs.data(), len);
+    return Bwrite(&rhs[0], len);
   }
 
   bool deserialise(std::string& rhs) {
@@ -145,7 +145,7 @@ class BinaryStream : public SerialisableObject{
     if (!deserialise(len)) return false;
     rhs.resize(len);
     if (len == 0) return true;
-    return Bread(rhs.data(), len);
+    return Bread(&rhs[0], len);
   }
 
   template <typename T>
