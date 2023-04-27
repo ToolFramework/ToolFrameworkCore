@@ -99,3 +99,13 @@ bool Store::Has(std::string key){
   return (m_variables.count(key)!=0);
 
 }
+
+const std::map<std::string,std::string>* Store::GetMap(){
+   return &m_variables;
+}
+
+bool Store::Erase(std::string key){
+    if(not Has(key)) return false;
+    m_variables.erase(key);
+    return true;
+}

@@ -7,6 +7,9 @@
 #include <map>
 #include <iostream>
 #include <sstream>
+#include <typeinfo>
+#include <cstring>
+#include <cstdlib>
 
 /**
  * \class Store
@@ -28,6 +31,8 @@ class Store{
   void Print(); ///< Prints the contents of the Store.
   void Delete(); ///< Deletes all entries in the Store.
   bool Has(std::string key); ///<Returns bool based on if store contains entry given by sting @param string key to comapre.
+  const std::map<std::string,std::string>* GetMap();
+  bool Erase(std::string key); ///<Erase the element from the store, if it exists
 
   /**
      Templated getter function for sore content. Assignment is templated and via reference.
@@ -41,7 +46,35 @@ class Store{
 
       std::stringstream stream(m_variables[name]);
       stream>>out;
-      return !stream.fail();
+      
+       if(stream.fail()) return false;
+       // the trouble here is that if we have a string "4cds" and stream it into a numeric,
+       // then stream.fail will be false, but only the leading numeric chars will be output.
+       // c++11's std::is_arithmetic(T) would be ideal here, but without c++11 we do it the long way...
+      if(typeid(float).name()==typeid(T).name()){
+          char* pEnd;
+          float f1 = strtof(stream.str().c_str(), &pEnd);
+          if(strcmp(pEnd,"")!=0) return false;
+      } else if(typeid(double).name()==typeid(T).name()){
+          char* pEnd;
+          double d1 = strtod(stream.str().c_str(), &pEnd);
+          if(strcmp(pEnd,"")!=0) return false;
+      } else if(typeid(T).name()==typeid(short int).name() ||
+                typeid(T).name()==typeid(int).name() ||
+                typeid(T).name()==typeid(long int).name() ||
+//                typeid(T).name()==typeid(long long int).name() ||
+                typeid(T).name()==typeid(unsigned char).name() ||
+                typeid(T).name()==typeid(unsigned short int).name() ||
+                typeid(T).name()==typeid(unsigned int).name() ||
+                typeid(T).name()==typeid(unsigned long int).name()){
+//                typeid(T).name()==typeid(unsigned long long int).name()){
+          char* pEnd;
+          long l1 = strtol(stream.str().c_str(), &pEnd,10);
+          if(strcmp(pEnd,"")!=0) return false;
+      }
+      // else the data type we're streaming into is probably a string
+      // TODO check whether the held value is numeric and warn if so..?
+      return true;
     }
     
     else return false;
