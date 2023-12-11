@@ -35,11 +35,14 @@ class Tool{
   template <typename T>  void Log(T message, int messagelevel=1, int verbosity=1){m_data->Log->Log(message,messagelevel,verbosity);}
   template <typename T>  void Log(T message, int messagelevel){m_data->Log->Log(message,messagelevel,m_verbose);}  ///< Logging fuction for printouts. @param message Templated message string. @param messagelevel The verbosity level at which to show the message. Checked against internal verbosity level
   
-  
- private:
   std::string m_tool_name;
+  int get_ok;
+  static const int v_error=0;
+  static const int v_warning=1;
+  static const int v_message=2;
+  static const int v_debug=3;
   
-  
+  private:
   
   
   
