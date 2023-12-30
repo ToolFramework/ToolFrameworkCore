@@ -24,6 +24,8 @@ std\+::vector$<$ std\+::string $>$ {\bfseries Keys} ()
 \item 
 {\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classStore_abdc0134daa34b808328070f5d6b295f3}{Get}} (std\+::string name, T \&out)
 \item 
+bool \mbox{\hyperlink{classStore_ac9c263e8556970c385e2630de3a5ea29}{Get}} (std\+::string name, std\+::string \&out)
+\item 
 {\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classStore_a26d26db839f734e0af5404b7dac40dae}{Get}} (std\+::string name)
 \item 
 {\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classStore_af586739813ce18da6f5e3561d134a814}{Set}} (std\+::string name, T in)
@@ -55,7 +57,7 @@ B.\+Richards
 \mbox{\Hypertarget{classStore_a26d26db839f734e0af5404b7dac40dae}\label{classStore_a26d26db839f734e0af5404b7dac40dae}} 
 \index{Store@{Store}!Get@{Get}}
 \index{Get@{Get}!Store@{Store}}
-\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 T Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -67,10 +69,26 @@ Templated getter function for sore content.
 \begin{DoxyReturn}{Returns}
 Return value is default copiler costructed value if not true (note\+: no checking exists) 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classStore_ac9c263e8556970c385e2630de3a5ea29}\label{classStore_ac9c263e8556970c385e2630de3a5ea29}} 
+\index{Store@{Store}!Get@{Get}}
+\index{Get@{Get}!Store@{Store}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string \&}]{out }\end{DoxyParamCaption})}
+
+getter function for string content.. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The ASCII key that the variable in the \mbox{\hyperlink{classStore}{Store}} is stored with. \\
+\hline
+{\em out} & The variable to fill with the value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value is true if varaible exists in the \mbox{\hyperlink{classStore}{Store}} and correctly assigned to out and false if not. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classStore_abdc0134daa34b808328070f5d6b295f3}\label{classStore_abdc0134daa34b808328070f5d6b295f3}} 
 \index{Store@{Store}!Get@{Get}}
 \index{Get@{Get}!Store@{Store}}
-\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 bool Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{T \&}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
