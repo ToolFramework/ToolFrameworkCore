@@ -22,6 +22,25 @@ enum enum_endpoint { RAM , UNCOMPRESSED , POST_PRE_COMPRESS, COMPRESSED };
 enum enum_mode { READ , NEW , APPEND, UPDATE, READ_APPEND, NEW_READ };
 
 class BinaryStream : public SerialisableObject{ 
+ private:
+  // Equivalent to std::is_baseof<Derived, Base> in C++11
+  template<typename Derived, typename Base>
+  class is_base_of {
+    private:
+      static short check(const Base*);
+      static char  check(...);
+    public:
+      static const bool value
+	= sizeof(check(static_cast<const Derived*>(0))) == sizeof(short);
+  };
+
+  // Equivalent to std::enable_if<B, T> in C++11
+  template <bool B, typename T = void> struct enable_if {};
+
+  template <typename T>
+  struct enable_if<true, T> {
+    typedef T type;
+  };
   
  public:
   
@@ -56,329 +75,179 @@ class BinaryStream : public SerialisableObject{
 
   //operator overloads
 
-  bool operator<<(std::string& rhs){
-    if(m_mode!=READ){
-      bool ret=true;    
-      unsigned int tmp=rhs.length();
-      ret*=(*this) << tmp;
-      if(tmp) ret*=Bwrite(&(rhs[0]), tmp);
-      return ret;
-    }
-    else return false;
-  }
-  
-  bool operator>>(std::string& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      if(tmp) ret*=Bread(&(rhs[0]), tmp);
-      return ret;
-    }
-    else return false;
-  }
-  
-  bool operator&(std::string& rhs){
-    if(m_write) return (*this) << rhs;
-    else return (*this) >> rhs;
+  template <typename T> bool operator&(const T& rhs) {
+    if (!m_write) return false;
+    return *this << rhs;
   }
 
-  bool operator<<(const std::string& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.length();
-      ret*=(*this) << tmp;
-      if(tmp) ret*=Bwrite(&(rhs[0]), tmp);
-      return ret;
-    }
-    else return false;
-  }
-   
-  bool operator&(const std::string& rhs){
-    if(m_write) return (*this) << rhs;
-    return false;
+  template <typename T> bool operator&(T& rhs) {
+    if (m_write) return *this << rhs;
+    return *this >> rhs;
   }
 
- 
-  template<typename T> bool operator<<(T& rhs){
-     if(m_mode!=READ){
-      if(check_base<SerialisableObject,T>::value){
-	SerialisableObject* tmp=reinterpret_cast<SerialisableObject*>(&rhs);
-	m_write=true;
-	return tmp->SerialiseWrapper(*this);
-      }
-      else return Bwrite(&rhs, sizeof(T));
-    }
-    else return false;  
+  template <typename T> bool operator<<(const T& rhs) {
+    if (m_mode == READ) return false;
+    return serialise(rhs);
   }
-  
-  
-  template<typename T> bool operator>>(T& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      if(check_base<SerialisableObject,T>::value){
-	SerialisableObject* tmp=reinterpret_cast<SerialisableObject*>(&rhs);
-	m_write=false;
-	return tmp->SerialiseWrapper(*this);
-      }
-      else return Bread(&rhs, sizeof(T)); 
-    }
-    return false;
+
+  template <typename T> bool operator<<(T& rhs) {
+    if (m_mode == READ) return false;
+    return serialise(rhs);
   }
-  
-  
-  template<typename T> bool operator&(T& rhs){
-    if(m_write)  return (*this) << rhs;
-    else return (*this) >> rhs; 
+
+  template <typename T> bool operator>>(T& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+    return deserialise(rhs);
   }
-  
-  template<typename T> bool operator<<(const T& rhs){
-    if(m_mode!=READ){
-      if(check_base<SerialisableObject,T>::value){
-	SerialisableObject* tmp=reinterpret_cast<SerialisableObject*>(&rhs);
-	m_write=true;
-	return tmp->SerialiseWrapper(*this);
-      }
-      return Bwrite(&rhs, sizeof(T));
-    }
-    else return false;
-  }
-  
-  template<typename T> bool operator&(const T& rhs){
-    if(m_write) return (*this) << rhs;
-    return false;
-  }
-  
-  
-  template<typename T> bool operator<<(std::vector<T>& rhs){
-    
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) << (*it);
-	}
-	else ret*=Bwrite(&(rhs[0]), tmp*sizeof(T));
-      }
-      return ret; 
-    }
-    else return false;
-  }
-  
-  template<typename T> bool operator>>(std::vector<T>& rhs){
-    
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) >> (*it);
-	}
-	else ret*=Bread(&(rhs[0]), tmp*sizeof(T));
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  template<typename T> bool operator&(std::vector<T>& rhs){
-    
-    if(m_write) return (*this) << rhs;
-    else return (*this) >> rhs;
-  }
-  
-  bool operator<<(std::vector<std::string>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) << rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  bool operator>>(std::vector<std::string>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) >> rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  bool operator&(std::vector<std::string>& rhs){   
-    if(m_write) return (*this) << rhs;
-    else return (*this) >> rhs;
-  }
-  
-  template<typename T, typename U> bool operator<<(std::map<T,U>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      for (typename std::map<T,U>::iterator it=rhs.begin(); it!=rhs.end(); ++it){
-	T key=it->first;
-	U value=it->second;
-	ret*=(*this) << key;
-	ret*=(*this) << value;
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  template<typename T, typename U> bool operator>>(std::map<T,U>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;      
-      ret*=(*this) >> tmp;
-      for (unsigned int i=0; i<tmp; i++){
-	T key;
-	U value;
-	ret*=(*this) >> key;
-	ret*=(*this) >> value;
-	rhs[key]=value;
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  template<typename T, typename U> bool operator&(std::map<T,U>& rhs){
-    if(m_write) return (*this) << rhs;
-    else return (*this) >> rhs;
-  } 
-  
-  template<typename T> bool operator<<(std::deque<T>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size(); 
-      ret*=(*this) << tmp;
-      if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) << (*it);	
-	}
-	else ret*=Bwrite(&(rhs[0]), tmp*sizeof(T));
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  template<typename T> bool operator>>(std::deque<T>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      if(tmp){
-	if(check_base<SerialisableObject,T>::value){
-	  for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) >> (*it);
-	}
-	else ret*=Bread(&(rhs[0]), tmp*sizeof(T));
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  template<typename T> bool operator&(std::deque<T>& rhs){
-    if(m_write) return(*this) << rhs;
-    else return(*this) >> rhs;    
-  }
-  
-  bool operator<<(std::deque<std::string>& rhs){
-    if(m_mode!=READ){
-      bool ret=true;
-      unsigned int tmp=rhs.size();
-      ret*=(*this) << tmp;
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) << rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
-  }
-   
-  bool operator>>(std::deque<std::string>& rhs){
-    if(m_mode!=NEW && m_mode!=APPEND){
-      bool ret=true;
-      unsigned int tmp=0;
-      ret*=(*this) >> tmp;
-      rhs.resize(tmp);
-      for(unsigned int i=0; i<tmp; i++){
-	ret*=(*this) >> rhs.at(i);
-      }
-      return ret;
-    }
-    else return false;
-  }
-  
-  bool operator&(std::deque<std::string>& rhs){
-    if(m_write) return (*this) << rhs;
-    else return (*this) >> rhs;    
-  }     
-  
-  
+
  private:
 
   int def(FILE *source, FILE *dest, int level);
   int inf(FILE *source, FILE *dest);
   void zerr(int ret);
-  
-  template <typename B, typename D> struct Host{
-    
-    operator B*() const;
-    operator D*();
-    
+
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(T& rhs) {
+    m_write = true;
+    return rhs.SerialiseWrapper(*this);
+  }
+
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(T& rhs) {
+    m_write = false;
+    return rhs.SerialiseWrapper(*this);
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(const T& rhs) {
+    return Bwrite(&rhs, sizeof(T));
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(T& rhs) {
+    if (m_mode == NEW || m_mode == APPEND) return false;
+    return Bread(&rhs, sizeof(T));
+  }
+
+  bool serialise(const std::string& rhs) {
+    unsigned int len = rhs.length();
+    if (!serialise(len)) return false;
+    if (len == 0) return true;
+    return Bwrite(&rhs[0], len);
+  }
+
+  bool deserialise(std::string& rhs) {
+    unsigned int len = 0;
+    if (!deserialise(len)) return false;
+    rhs.resize(len);
+    if (len == 0) return true;
+    return Bread(&rhs[0], len);
+  }
+
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(std::vector<T>& rhs) {
+    return serialise_container(rhs);
+  }
+
+  template <typename T>
+  typename enable_if<is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(std::vector<T>& rhs) {
+    return deserialise_container(rhs);
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  serialise(const std::vector<T>& rhs) {
+    unsigned int size = rhs.size();
+    if (!serialise(size)) return false;
+    if (size == 0) return true;
+    return Bwrite(rhs.data(), size * sizeof(T));
+  }
+
+  template <typename T>
+  typename enable_if<!is_base_of<T, SerialisableObject>::value, bool>::type
+  deserialise(std::vector<T>& rhs) {
+    unsigned int size = 0;
+    if (!deserialise(size)) return false;
+    rhs.resize(size);
+    if (size == 0) return true;
+    return Bread(rhs.data(), size * sizeof(T));
+  }
+
+  bool serialise(const std::vector<std::string>& rhs) {
+    return serialise_container(rhs);
   };
-  
- 
-  template <typename B, typename D> struct check_base {
-    template <typename T> 
-    static short check(D*, T);
-    static char check(B*, int);
-    
-    static const bool value = sizeof(check(Host<B,D>(), int())) == sizeof(short);
+
+  bool deserialise(std::vector<std::string>& rhs) {
+    return deserialise_container(rhs);
   };
-  
-  
-  
-  /*
-derived:
 
-  yes D*(Host<B,D>(),T)   = D*(B* const, T);  not allowed
-                          = D*(D*, T); ----------------------------------------------------------------------------------->   preferred as D*->D* better than D*->B* : answer yes
+  template <typename First, typename Second>
+  bool serialise(std::pair<First, Second>& rhs) {
+    return serialise(rhs.first) && serialise(rhs.second);
+  }
 
-  no B*(Host<B,D>(), int) =  B*(B* const, int); 
-                          =  B*(D*, int);  preferred as not const and object called on is not const----------------------->
+  template <typename First, typename Second>
+  bool deserialise(std::pair<First, Second>& rhs) {
+    return deserialise(rhs.first) && deserialise(rhs.second);
+  }
+
+  template <typename T, typename U> bool serialise(std::map<T, U>& rhs) {
+    return serialise_container(rhs);
+  }
+
+  template <typename T, typename U> bool deserialise(std::map<T, U>& rhs) {
+    // std::map has no resize, so we cannot use deserialise_container
+    unsigned int size = 0;
+    if (!deserialise(size)) return false;
+
+    for (unsigned int i = 0; i < size; ++i) {
+      T key;
+      U value;
+      if (!(deserialise(key) && deserialise(value))) return false;
+      rhs[key] = value;
+    };
+    return true;
+  }
+
+  template <typename T> bool serialise(std::deque<T>& rhs) {
+    return serialise_container(rhs);
+  }
+
+  template <typename T> bool deserialise(std::deque<T>& rhs) {
+    return deserialise_container(rhs);
+  }
 
 
-not derrived:
+  template <typename Container>
+  bool serialise_container(const Container& container) {
+    unsigned int size = container.size();
+    if (!serialise(size)) return false;
+    if (size == 0) return true;
+    for (typename Container::const_iterator i = container.begin();
+	 i != container.end();
+	 ++i)
+      if (!serialise(*i)) return false;
+    return true;
+  }
 
-  yes D*(Host<B,D>(),T)   =  D*(B* const, T); not allowed
-                          =  D*(D*, T); ------------------------------>
-
-  no B*(Host<B,D>(), int) =  B*(B* const, int);----------------------->  preffered as not templated : answer no
-                          =  B*(D*, int); not allowed
-
-
-   */
-
-
+  template <typename Container>
+  bool deserialise_container(Container& container) {
+    unsigned int size = 0;
+    if (!deserialise(size)) return false;
+    if (size == 0) return true;
+    container.resize(size);
+    for (typename Container::iterator i = container.begin();
+	 i != container.end();
+	 ++i)
+      if (!deserialise(*i)) return false;
+    return true;
+  }
 };
-
 
 #endif
