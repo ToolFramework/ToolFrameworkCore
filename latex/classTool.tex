@@ -35,10 +35,10 @@ void {\bfseries Set\+Name} (std\+::string name)
 \mbox{\Hypertarget{classTool_ae4da557812278419f6f8b8484df08115}\label{classTool_ae4da557812278419f6f8b8484df08115}} 
 void \mbox{\hyperlink{classTool_ae4da557812278419f6f8b8484df08115}{MLC}} ()
 \begin{DoxyCompactList}\small\item\em Function for clearing logging level. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classTool_a46f7e599888302feefcf25e4f6cb4f9e}\label{classTool_a46f7e599888302feefcf25e4f6cb4f9e}} 
-{\footnotesize template$<$typename T $>$ }\\void {\bfseries Log} (T message, int messagelevel=1, int verbosity=1)
+\mbox{\Hypertarget{classTool_a26d2569a2210cf9a05dc9487a638bead}\label{classTool_a26d2569a2210cf9a05dc9487a638bead}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries Log} (T message, int messagelevel, int verbosity)
 \item 
-{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classTool_ac65a2dfa2e3531fe8e05fe4112846fcf}{Log}} (T message, int messagelevel)
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classTool_a73b465acc3acbe532d6fe0ba5087dc29}{Log}} (T message, int messagelevel=0)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classLogging}{Logging}} fuction for printouts. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -93,12 +93,12 @@ virtual Initialise function that reads in the assigned config file and optain Da
 
 Implemented in \mbox{\hyperlink{classMyToolThread_adc7ab1ab74fc1564f07e52e63383d679}{My\+Tool\+Thread}}, \mbox{\hyperlink{classMyToolMultiThread_a19dc55079a7b2da02ad9addd565b8e80}{My\+Tool\+Multi\+Thread}}, \mbox{\hyperlink{classMyToolDynamicMultiThread_ac082408d85bc3e76214e55d4f62de0da}{My\+Tool\+Dynamic\+Multi\+Thread}}, \mbox{\hyperlink{classMyTool_a3bf60061195a18542c4cfb2916b9dad9}{My\+Tool}}, and \mbox{\hyperlink{classDummyTool_a0d9cd781681a06ee3cf0cd1e7bb770a8}{Dummy\+Tool}}.
 
-\mbox{\Hypertarget{classTool_ac65a2dfa2e3531fe8e05fe4112846fcf}\label{classTool_ac65a2dfa2e3531fe8e05fe4112846fcf}} 
+\mbox{\Hypertarget{classTool_a73b465acc3acbe532d6fe0ba5087dc29}\label{classTool_a73b465acc3acbe532d6fe0ba5087dc29}} 
 \index{Tool@{Tool}!Log@{Log}}
 \index{Log@{Log}!Tool@{Tool}}
 \doxysubsubsection{\texorpdfstring{Log()}{Log()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-void Tool\+::\+Log (\begin{DoxyParamCaption}\item[{T}]{message,  }\item[{int}]{messagelevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+void Tool\+::\+Log (\begin{DoxyParamCaption}\item[{T}]{message,  }\item[{int}]{messagelevel = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 

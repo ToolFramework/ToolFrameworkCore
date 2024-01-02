@@ -222,22 +222,31 @@ $(function() {
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;   </div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; }</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classLogging.html#a7a6910152e0877000a81ec050eff9a89">  204</a></span>&#160; <a class="code" href="classLogging_1_1TFStreamBuf.html">TFStreamBuf</a>* <a class="code" href="classLogging.html#a7a6910152e0877000a81ec050eff9a89">buffer</a>; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; <a class="code" href="classLogging_1_1TFStreamBuf.html">TFStreamBuf</a>* errbuffer;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; };</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;  <a class="code" href="classLogging.html">Logging</a>&amp; operator&lt;&lt;(<span class="keyword">const</span> T &amp;a){</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;     </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;   std::cout.rdbuf(<a class="code" href="classLogging.html#a7a6910152e0877000a81ec050eff9a89">buffer</a>);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;   std::cout&lt;&lt;a;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;   <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;   </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; }</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno"><a class="line" href="classLogging.html#a7a6910152e0877000a81ec050eff9a89">  213</a></span>&#160; <a class="code" href="classLogging_1_1TFStreamBuf.html">TFStreamBuf</a>* <a class="code" href="classLogging.html#a7a6910152e0877000a81ec050eff9a89">buffer</a>; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; <a class="code" href="classLogging_1_1TFStreamBuf.html">TFStreamBuf</a>* errbuffer;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; };</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassLogging_1_1TFStreamBuf_html"><div class="ttname"><a href="classLogging_1_1TFStreamBuf.html">Logging::TFStreamBuf</a></div><div class="ttdef"><b>Definition:</b> Logging.h:78</div></div>
 <div class="ttc" id="aclassLogging_html"><div class="ttname"><a href="classLogging.html">Logging</a></div><div class="ttdef"><b>Definition:</b> Logging.h:73</div></div>
 <div class="ttc" id="aclassLogging_html_a7a0c89c152ad81fb41a849ed9d81e429"><div class="ttname"><a href="classLogging.html#a7a0c89c152ad81fb41a849ed9d81e429">Logging::ChangeOutFile</a></div><div class="ttdeci">bool ChangeOutFile(std::string localpath)</div><div class="ttdef"><b>Definition:</b> Logging.h:170</div></div>
 <div class="ttc" id="aclassLogging_html_a7a3c6bcf0b0241779e7f500e29162e5e"><div class="ttname"><a href="classLogging.html#a7a3c6bcf0b0241779e7f500e29162e5e">Logging::Logging</a></div><div class="ttdeci">Logging(bool interactive=true, bool local=false, std::string localpath=&quot;./log&quot;, bool split_output_files=false)</div><div class="ttdef"><b>Definition:</b> Logging.cpp:148</div></div>
-<div class="ttc" id="aclassLogging_html_a7a6910152e0877000a81ec050eff9a89"><div class="ttname"><a href="classLogging.html#a7a6910152e0877000a81ec050eff9a89">Logging::buffer</a></div><div class="ttdeci">TFStreamBuf * buffer</div><div class="ttdoc">Stream buffer used to replace std::cout for redirection to coustom output.</div><div class="ttdef"><b>Definition:</b> Logging.h:204</div></div>
+<div class="ttc" id="aclassLogging_html_a7a6910152e0877000a81ec050eff9a89"><div class="ttname"><a href="classLogging.html#a7a6910152e0877000a81ec050eff9a89">Logging::buffer</a></div><div class="ttdeci">TFStreamBuf * buffer</div><div class="ttdoc">Stream buffer used to replace std::cout for redirection to coustom output.</div><div class="ttdef"><b>Definition:</b> Logging.h:213</div></div>
 <div class="ttc" id="aclassLogging_html_af7839ee68729b066da269cc012b1fcc9"><div class="ttname"><a href="classLogging.html#af7839ee68729b066da269cc012b1fcc9">Logging::Log</a></div><div class="ttdeci">void Log(T message, int messagelevel=1, int verbose=1)</div><div class="ttdef"><b>Definition:</b> Logging.h:143</div></div>
 <div class="ttc" id="astructMsgL_html"><div class="ttname"><a href="structMsgL.html">MsgL</a></div><div class="ttdef"><b>Definition:</b> Logging.h:44</div></div>
 <div class="ttc" id="astructMsgL_html_a10337c60eff6573f6bf36dd6b6bfd4c6"><div class="ttname"><a href="structMsgL.html#a10337c60eff6573f6bf36dd6b6bfd4c6">MsgL::verbose</a></div><div class="ttdeci">int verbose</div><div class="ttdoc">Verbosity level pramiter.</div><div class="ttdef"><b>Definition:</b> Logging.h:56</div></div>
