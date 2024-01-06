@@ -9,7 +9,7 @@
 \item 
 \mbox{\hyperlink{classToolChain_a133e224899a743ee4a679396f8569bf9}{Tool\+Chain}} (std\+::string configfile, int argc=0, char $\ast$argv\mbox{[}$\,$\mbox{]}=0)
 \begin{DoxyCompactList}\small\item\em Constructor that obtains all of the configuration varaibles from an input file. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classToolChain_adefb544d73c43c2621f3ccb14ad93dc7}{Tool\+Chain}} (int verbose=1, int errorlevel=0, bool log\+\_\+interactive=true, bool log\+\_\+local=false, std\+::string log\+\_\+local\+\_\+path=\char`\"{}./log\char`\"{}, bool log\+\_\+split\+\_\+files=false, \mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$in\+\_\+data\+\_\+model=0)
+\mbox{\hyperlink{classToolChain_a5dc90f42dfd81bbf04b29ff426a79f9c}{Tool\+Chain}} (int verbose, int errorlevel=0, bool log\+\_\+interactive=true, bool log\+\_\+local=false, std\+::string log\+\_\+local\+\_\+path=\char`\"{}./log\char`\"{}, bool log\+\_\+split\+\_\+files=false, \mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$in\+\_\+data\+\_\+model=0)
 \item 
 bool \mbox{\hyperlink{classToolChain_ae6859092e14be1f9538c50d7c838fe8e}{Add}} (std\+::string name, \mbox{\hyperlink{classTool}{Tool}} $\ast$tool, std\+::string configfile=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Add a \mbox{\hyperlink{classTool}{Tool}} to the \mbox{\hyperlink{classToolChain}{Tool\+Chain}}. \end{DoxyCompactList}\item 
@@ -143,11 +143,11 @@ Constructor that obtains all of the configuration varaibles from an input file.
 {\em configfile} & The path and name of the config file to read configuration values from. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classToolChain_adefb544d73c43c2621f3ccb14ad93dc7}\label{classToolChain_adefb544d73c43c2621f3ccb14ad93dc7}} 
+\mbox{\Hypertarget{classToolChain_a5dc90f42dfd81bbf04b29ff426a79f9c}\label{classToolChain_a5dc90f42dfd81bbf04b29ff426a79f9c}} 
 \index{ToolChain@{ToolChain}!ToolChain@{ToolChain}}
 \index{ToolChain@{ToolChain}!ToolChain@{ToolChain}}
 \doxysubsubsection{\texorpdfstring{ToolChain()}{ToolChain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Tool\+Chain\+::\+Tool\+Chain (\begin{DoxyParamCaption}\item[{int}]{verbose = {\ttfamily 1},  }\item[{int}]{errorlevel = {\ttfamily 0},  }\item[{bool}]{log\+\_\+interactive = {\ttfamily true},  }\item[{bool}]{log\+\_\+local = {\ttfamily false},  }\item[{std\+::string}]{log\+\_\+local\+\_\+path = {\ttfamily \char`\"{}./log\char`\"{}},  }\item[{bool}]{log\+\_\+split\+\_\+files = {\ttfamily false},  }\item[{\mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$}]{in\+\_\+data\+\_\+model = {\ttfamily 0} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Tool\+Chain\+::\+Tool\+Chain (\begin{DoxyParamCaption}\item[{int}]{verbose,  }\item[{int}]{errorlevel = {\ttfamily 0},  }\item[{bool}]{log\+\_\+interactive = {\ttfamily true},  }\item[{bool}]{log\+\_\+local = {\ttfamily false},  }\item[{std\+::string}]{log\+\_\+local\+\_\+path = {\ttfamily \char`\"{}./log\char`\"{}},  }\item[{bool}]{log\+\_\+split\+\_\+files = {\ttfamily false},  }\item[{\mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$}]{in\+\_\+data\+\_\+model = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 \begin{DoxyVerb} Constructor with explicit configuration variables passed as arguments.
  @param verbose The verbosity level of the ToolChain. The higher the number the more explicit the print outs. 0 = silent apart from errors.

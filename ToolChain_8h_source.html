@@ -101,64 +101,64 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="classToolChain.html#a133e224899a743ee4a679396f8569bf9">ToolChain</a>(std::string configfile, <span class="keywordtype">int</span> argc=0, <span class="keywordtype">char</span>* argv[]=0); </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="classToolChain.html#a133e224899a743ee4a679396f8569bf9">ToolChain</a>(<span class="keywordtype">int</span> verbose=1, <span class="keywordtype">int</span> errorlevel=0, <span class="keywordtype">bool</span> log_interactive=<span class="keyword">true</span>, <span class="keywordtype">bool</span> log_local=<span class="keyword">false</span>, std::string log_local_path=<span class="stringliteral">&quot;./log&quot;</span>, <span class="keywordtype">bool</span> log_split_files=<span class="keyword">false</span>, <a class="code" href="classDataModel.html">DataModel</a>* in_data_model=0); </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">//verbosity: true= print out status messages , false= print only error messages;</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">//errorlevels: 0= do not exit; error 1= exit if unhandeled error ; exit 2= exit on handeled and unhandeled errors; </span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classToolChain.html">ToolChain</a>(); </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classToolChain.html#ae6859092e14be1f9538c50d7c838fe8e">Add</a>(std::string name, <a class="code" href="classTool.html">Tool</a> *tool,std::string configfile=<span class="stringliteral">&quot;&quot;</span>); </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classToolChain.html#a341f343926341b82a29c586a7b9683af">Initialise</a>(); </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classToolChain.html#a303e299293fd4d3a5e91865e04898e52">Execute</a>(<span class="keywordtype">int</span> repeates=1); </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classToolChain.html#a3828756135773fb9ca4b361a47296dd9">Finalise</a>(); </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classToolChain.html#a9bb47b83b6b85c3b0fab75af0cda19bf">Interactive</a>(); </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">bool</span> LoadTools(std::string filename);</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classToolChain.html#a29d8574ddfd60c6fee03891c1eb6848c">   74</a></span>&#160;  <a class="code" href="classDataModel.html">DataModel</a>* <a class="code" href="classToolChain.html#a29d8574ddfd60c6fee03891c1eb6848c">m_data</a>; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Init();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordtype">void</span> Inline();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keyword">static</span>  <span class="keywordtype">void</span> *InteractiveThread(<span class="keywordtype">void</span>* arg);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  std::string ExecuteCommand(std::string connand);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">//Tools configs and data</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  std::vector&lt;Tool*&gt; m_tools;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  std::vector&lt;std::string&gt; m_toolnames;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  std::vector&lt;std::string&gt; m_configfiles;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">//conf variables</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordtype">int</span> m_verbose;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordtype">int</span> m_errorlevel;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">bool</span> m_log_interactive;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">bool</span> m_log_local;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">bool</span> m_log_split_files;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  std::string m_log_local_path;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordtype">bool</span> m_interactive;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordtype">int</span> m_inline;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordtype">bool</span> m_recover;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">//status variables</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">bool</span> exeloop;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> execounter;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordtype">bool</span> Initialised;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordtype">bool</span> Finalised;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordtype">bool</span> paused;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="classLogging.html">Logging</a>* m_log;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="comment">//socket coms and threading variables</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  pthread_t thread[1];</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordtype">bool</span> msgflag;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="classToolChain.html">ToolChain</a>(){};</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="classToolChain.html">ToolChain</a>(std::string configfile, <span class="keywordtype">int</span> argc=0, <span class="keywordtype">char</span>* argv[]=0); </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classToolChain.html">ToolChain</a>(<span class="keywordtype">int</span> verbose, <span class="keywordtype">int</span> errorlevel=0, <span class="keywordtype">bool</span> log_interactive=<span class="keyword">true</span>, <span class="keywordtype">bool</span> log_local=<span class="keyword">false</span>, std::string log_local_path=<span class="stringliteral">&quot;./log&quot;</span>, <span class="keywordtype">bool</span> log_split_files=<span class="keyword">false</span>, <a class="code" href="classDataModel.html">DataModel</a>* in_data_model=0); </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">//verbosity: true= print out status messages , false= print only error messages;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="comment">//errorlevels: 0= do not exit; error 1= exit if unhandeled error ; exit 2= exit on handeled and unhandeled errors; </span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classToolChain.html">ToolChain</a>(); </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classToolChain.html#ae6859092e14be1f9538c50d7c838fe8e">Add</a>(std::string name, <a class="code" href="classTool.html">Tool</a> *tool,std::string configfile=<span class="stringliteral">&quot;&quot;</span>); </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classToolChain.html#a341f343926341b82a29c586a7b9683af">Initialise</a>(); </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classToolChain.html#a303e299293fd4d3a5e91865e04898e52">Execute</a>(<span class="keywordtype">int</span> repeates=1); </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classToolChain.html#a3828756135773fb9ca4b361a47296dd9">Finalise</a>(); </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classToolChain.html#a9bb47b83b6b85c3b0fab75af0cda19bf">Interactive</a>(); </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">bool</span> LoadTools(std::string filename);</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classToolChain.html#a29d8574ddfd60c6fee03891c1eb6848c">   75</a></span>&#160;  <a class="code" href="classDataModel.html">DataModel</a>* <a class="code" href="classToolChain.html#a29d8574ddfd60c6fee03891c1eb6848c">m_data</a>; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Init();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordtype">void</span> Inline();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">static</span>  <span class="keywordtype">void</span> *InteractiveThread(<span class="keywordtype">void</span>* arg);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  std::string ExecuteCommand(std::string connand);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">//Tools configs and data</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  std::vector&lt;Tool*&gt; m_tools;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  std::vector&lt;std::string&gt; m_toolnames;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  std::vector&lt;std::string&gt; m_configfiles;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">//conf variables</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordtype">int</span> m_verbose;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">int</span> m_errorlevel;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">bool</span> m_log_interactive;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">bool</span> m_log_local;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">bool</span> m_log_split_files;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  std::string m_log_local_path;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordtype">bool</span> m_interactive;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordtype">int</span> m_inline;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordtype">bool</span> m_recover;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="comment">//status variables</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordtype">bool</span> exeloop;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> execounter;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordtype">bool</span> Initialised;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordtype">bool</span> Finalised;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordtype">bool</span> paused;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <a class="code" href="classLogging.html">Logging</a>* m_log;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="comment">//socket coms and threading variables</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  pthread_t thread[1];</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordtype">bool</span> msgflag;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassDataModel_html"><div class="ttname"><a href="classDataModel.html">DataModel</a></div><div class="ttdef"><b>Definition:</b> DataModel.h:26</div></div>
 <div class="ttc" id="aclassLogging_html"><div class="ttname"><a href="classLogging.html">Logging</a></div><div class="ttdef"><b>Definition:</b> Logging.h:73</div></div>
 <div class="ttc" id="aclassToolChain_html"><div class="ttname"><a href="classToolChain.html">ToolChain</a></div><div class="ttdef"><b>Definition:</b> ToolChain.h:47</div></div>
-<div class="ttc" id="aclassToolChain_html_a133e224899a743ee4a679396f8569bf9"><div class="ttname"><a href="classToolChain.html#a133e224899a743ee4a679396f8569bf9">ToolChain::ToolChain</a></div><div class="ttdeci">ToolChain(std::string configfile, int argc=0, char *argv[]=0)</div><div class="ttdoc">Constructor that obtains all of the configuration varaibles from an input file.</div><div class="ttdef"><b>Definition:</b> ToolChain.cpp:3</div></div>
-<div class="ttc" id="aclassToolChain_html_a29d8574ddfd60c6fee03891c1eb6848c"><div class="ttname"><a href="classToolChain.html#a29d8574ddfd60c6fee03891c1eb6848c">ToolChain::m_data</a></div><div class="ttdeci">DataModel * m_data</div><div class="ttdoc">Direct access to transient data model class of the Tools in the ToolChain. This allows direct initial...</div><div class="ttdef"><b>Definition:</b> ToolChain.h:74</div></div>
+<div class="ttc" id="aclassToolChain_html_a29d8574ddfd60c6fee03891c1eb6848c"><div class="ttname"><a href="classToolChain.html#a29d8574ddfd60c6fee03891c1eb6848c">ToolChain::m_data</a></div><div class="ttdeci">DataModel * m_data</div><div class="ttdoc">Direct access to transient data model class of the Tools in the ToolChain. This allows direct initial...</div><div class="ttdef"><b>Definition:</b> ToolChain.h:75</div></div>
 <div class="ttc" id="aclassToolChain_html_a303e299293fd4d3a5e91865e04898e52"><div class="ttname"><a href="classToolChain.html#a303e299293fd4d3a5e91865e04898e52">ToolChain::Execute</a></div><div class="ttdeci">int Execute(int repeates=1)</div><div class="ttdoc">Execute all Tools in the ToolChain sequentially.</div><div class="ttdef"><b>Definition:</b> ToolChain.cpp:172</div></div>
 <div class="ttc" id="aclassToolChain_html_a341f343926341b82a29c586a7b9683af"><div class="ttname"><a href="classToolChain.html#a341f343926341b82a29c586a7b9683af">ToolChain::Initialise</a></div><div class="ttdeci">int Initialise()</div><div class="ttdoc">Initialise all Tools in the ToolChain sequentially.</div><div class="ttdef"><b>Definition:</b> ToolChain.cpp:115</div></div>
 <div class="ttc" id="aclassToolChain_html_a3828756135773fb9ca4b361a47296dd9"><div class="ttname"><a href="classToolChain.html#a3828756135773fb9ca4b361a47296dd9">ToolChain::Finalise</a></div><div class="ttdeci">int Finalise()</div><div class="ttdoc">Finalise all Tools in the ToolCahin sequentially.</div><div class="ttdef"><b>Definition:</b> ToolChain.cpp:257</div></div>
