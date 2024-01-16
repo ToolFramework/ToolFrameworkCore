@@ -1,98 +1,94 @@
-CXXFLAGS=  -fPIC -O3 -Wpedantic -Wall
+SOURCEDIR=/host/Dependencies/ToolFrameworkCore
+
+CXXFLAGS=  -fPIC -O3 -Wpedantic -Wall -std=c++11 -Wno-comment -Wno-unused -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept  -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef #-Werror -Wold-style-cast 
+
 
 ifeq ($(MAKECMDGOALS),debug)
 CXXFLAGS+= -O0 -g -lSegFault -rdynamic -DDEBUG
 endif
 
+TempDataModelInclude =
+TempDataModelLib =
 
-DataModelInclude =
-DataModelLib =
+TempToolsInclude =
+TempToolsLib =
 
-MyToolsInclude =
-MyToolsLib =
 
+Includes=-I $(SOURCEDIR)/include/
+Libs=-L $(SOURCEDIR)/lib/ -lStore -lLogging -lToolchain -lTempDataModelBase -lTempDataModel -lTempTools -lpthread
+LIBRARIES=lib/libStore.so lib/libLogging.so lib/libToolChain.so lib/libTempDataModelbase.so lib/libTempDataModel.so lib/libTempTools.so
+HEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(patsubst src/%.h, include/%.h, $(wildcard src/*/*.h) ))))
+TempDataModelHEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(patsubst src/%.h, include/%.h, $(wildcard DataModel/*.h)))))
+MyToolHEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(patsubst src/%.h, include/%.h, $(wildcard UserTools/*/*.h) $(wildcard UserTools/*.h)))))
+SOURCEFILES:=$(patsubst %.cpp, %.o, $(wildcard */*.cpp) $(wildcard */*/*.cpp))
+
+#.SECONDARY: $(%.o)
+
+
+all: $(HEADERS) $(TempDataModelHEADERS) $(MyToolHEADERS) $(SOURCEFILES) $(LIBRARIES) main
 
 debug: all
 
-all: lib/libMyTools.so lib/libToolChain.so lib/libStore.so include/Tool.h lib/libDataModel.so lib/libLogging.so main
+main: src/main.o $(LIBRARIES) $(HEADERS) $(TempDataModelHEADERS) $(MyToolHEADERS) | $(SOURCEFILES)
+	@echo -e "\e[38;5;11m\n*************** Making " $@ " ****************\e[0m"
+	g++  $(CXXFLAGS) $< -o $@ $(Includes) $(Libs) $(TempDataModelInclude) $(TempDataModellib) $(TempToolsInclude) $(TempToolslib) 
 
-main: src/main.cpp lib/libStore.so lib/libLogging.so lib/libToolChain.so | lib/libMyTools.so  lib/libDataModel.so 
+include/%.h:
+	@echo -e "\e[38;5;87m\n*************** sym linking headers ****************\e[0m"
+	ln -s  `pwd`/$(filter %$(strip $(patsubst include/%.h, /%.h, $@)), $(wildcard src/*/*.h) $(wildcard DataModel/*.h) $(wildcard UserTools/*/*.h) $(wildcard UserTools/*.h)) $@
+
+src/%.o :  src/%.cpp $(HEADERS)  
 	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	g++ $(CXXFLAGS) src/main.cpp -o main -I include -L lib -lStore -lMyTools -lToolChain -lDataModel -lLogging  -lpthread $(DataModelInclude) $(MyToolsInclude) $(MyToolsLib) $(DataModelLib) 
+	g++ $(CXXFLAGS) -c $< -o $@ $(Includes)
 
-
-lib/libStore.so: src/Store/*
-
+UnitTests/%.o : UnitTests/%.cpp $(HEADERS) 
 	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	cp src/Store/*.h include/
-	g++ $(CXXFLAGS) -shared -I include src/Store/*.cpp -o lib/libStore.so
+	g++ $(CXXFLAGS) -c $< -o $@ $(Includes)
 
-
-include/Tool.h: src/Tool/Tool.h
-
+UserTools/%.o :  UserTools/%.cpp $(HEADERS) $(TempDataModelHEADERS) UserTools/%.h
 	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	cp src/Tool/Tool.h include/
+	g++ $(CXXFLAGS) -c $< -o $@ $(Includes) $(TempDataModelInclude) $(TempToolsInclude)
 
-
-lib/libToolChain.so: src/ToolChain/* lib/libStore.so include/Tool.h lib/libLogging.so |  lib/libDataModel.so lib/libMyTools.so 
-
+DataModel/%.o : DataModel/%.cpp DataModel/%.h $(HEADERS) $(TempDataModelHEADERS)
 	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	cp src/ToolChain/ToolChain.h include/
-	g++ $(CXXFLAGS) -shared src/ToolChain/ToolChain.cpp -I include -lpthread -L lib -lStore -lDataModel -lMyTools -lLogging -o lib/libToolChain.so $(DataModelInclude) $(MyToolsInclude) $(MyToolsLib) $(DataModelLib)
+	g++ $(CXXFLAGS) -c $< -o $@ $(Includes) $(TempDataModelInclude)
 
+lib/libStore.so: $(patsubst %.cpp, %.o , $(wildcard src/Store/*.cpp)) | $(HEADERS) 
+	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
+	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes)
 
-clean: 
+lib/libLogging.so: $(patsubst %.cpp, %.o , $(wildcard src/Logging/*.cpp)) | $(HEADERS) 
+	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
+	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes)
 
+lib/libTempDataModelbase.so: $(patsubst %.cpp, %.o , $(wildcard src/DataModelBase/*.cpp)) | $(HEADERS)
+	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
+	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes) 
+
+lib/libToolChain.so: $(patsubst %.cpp, %.o , $(wildcard src/ToolChain/*.cpp)) | $(HEADERS)
+	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
+	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes)
+
+lib/libTempDataModel.so: $(patsubst %.cpp, %.o , $(wildcard DataModel/*.cpp)) | $(HEADERS) $(TempDataModelInclude)
+	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
+	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes) $(TempDataModelInclude)
+
+lib/libTempTools.so: $(patsubst %.cpp, %.o , $(wildcard UserTools/*/*.cpp)) | $(HEADERS) $(TempDataModelInclude) $(TempToolsInclude)
+	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
+	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes) $(TempDataModelInclude) $(TempToolsInclude)
+
+clean:
 	@echo -e "\e[38;5;201m\n*************** Cleaning up ****************\e[0m"
+	rm -f */*/*.o
+	rm -f */*.o
 	rm -f include/*.h
 	rm -f lib/*.so
-	rm -f main
-	rm -f UserTools/*/*.o
-	rm -f DataModel/*.o
-
-lib/libDataModel.so: DataModel/* lib/libLogging.so lib/libStore.so  $(patsubst DataModel/%.cpp, DataModel/%.o, $(wildcard DataModel/*.cpp))
-
-	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	g++ $(CXXFLAGS) -shared DataModel/*.o -I include -L lib -lStore -lLogging -o lib/libDataModel.so $(DataModelInclude) $(DataModelLib)
-
-
-lib/libMyTools.so: UserTools/*/* UserTools/* lib/libStore.so include/Tool.h lib/libLogging.so UserTools/Factory/Factory.o | lib/libDataModel.so 
-
-	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	g++ $(CXXFLAGS) -shared UserTools/*/*.o -I include -L lib -lStore -lDataModel -lLogging -o lib/libMyTools.so $(MyToolsInclude) $(DataModelInclude) $(MyToolsLib) $(DataModelLib)
-
-
-lib/libLogging.so: src/Logging/*  lib/libStore.so 
-	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	cp src/Logging/Logging.h include/
-	g++ $(CXXFLAGS) -shared -I include src/Logging/Logging.cpp -o lib/libLogging.so -L lib/ -lStore
-
-
-UserTools/Factory/Factory.o: UserTools/Factory/Factory.cpp lib/libStore.so include/Tool.h lib/libLogging.so lib/libDataModel.so $(patsubst UserTools/%.cpp, UserTools/%.o, $(wildcard UserTools/*/*.cpp)) | include/Tool.h
-	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	cp UserTools/Factory/Factory.h include
-	cp UserTools/Unity.h include
-	-g++ $(CXXFLAGS) -c -o $@ $< -I include -L lib -lStore -lDataModel -lLogging $(MyToolsInclude) $(MyToolsLib) $(DataModelInclude) $(DataModelLib)
-
-
-UserTools/%.o: UserTools/%.cpp lib/libStore.so include/Tool.h lib/libLogging.so lib/libDataModel.so | include/Tool.h
-	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	cp $(shell dirname $<)/*.h include
-	-g++ $(CXXFLAGS) -c -o $@ $< -I include -L lib -lStore -lDataModel -lLogging $(MyToolsInclude) $(MyToolsLib) $(DataModelInclude) $(DataModelLib)
-
-
-target: remove $(patsubst %.cpp, %.o, $(wildcard UserTools/$(TOOL)/*.cpp))
-
-remove:
-	@echo -e "removing"
-	-rm UserTools/$(TOOL)/*.o
-	-rm include/$(TOOL).h
-
-
-DataModel/%.o: DataModel/%.cpp lib/libLogging.so lib/libStore.so  
-	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
-	cp $(shell dirname $<)/*.h include
-	-g++ $(CXXFLAGS) -c -o $@ $< -I include -L lib -lStore -lLogging  $(DataModelInclude) $(DataModelLib)
 
 Docs:
 	doxygen Doxyfile
+
+
+test: $(patsubst %.cpp, %.o, $(wildcard */*.cpp) $(wildcard */*/*.cpp)) 
+	echo 
+	echo  $(patsubst %.cpp, %.o, $(wildcard */*.cpp) $(wildcard */*/*.cpp)) 
+#	echo $(patsubst %, lib/Lib%.so, $(filter-out %.o %.cpp src, $(subst /, , $(wildcard src/*))))

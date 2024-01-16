@@ -1,5 +1,7 @@
 #include <BStore.h>
 
+using namespace ToolFramework;
+
 ////////////////////////
 //Notes for Ben
 ///////////////////////////////

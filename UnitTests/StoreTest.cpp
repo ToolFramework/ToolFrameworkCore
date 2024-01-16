@@ -1,6 +1,8 @@
 #include <iostream>
 #include <Store.h>
 
+using namespace ToolFramework;
+
 int test_counter=0;
 
 template <typename T> int Test(T &a, T &b, std::string message=""){

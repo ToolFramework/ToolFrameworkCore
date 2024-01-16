@@ -1,5 +1,7 @@
 #include "ToolChain.h"
 
+using namespace ToolFramework;
+
 ToolChain::ToolChain(std::string configfile, DataModel* data_model,  int argc, char* argv[]){
  
   m_data=reinterpret_cast<DataModelBase*>(data_model);

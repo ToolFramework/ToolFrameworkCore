@@ -1,5 +1,6 @@
 #include "Logging.h"
 
+using namespace ToolFramework;
 
 Logging::TFStreamBuf::~TFStreamBuf(){
   

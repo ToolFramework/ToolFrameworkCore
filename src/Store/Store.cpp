@@ -1,5 +1,6 @@
 #include "Store.h"
 
+using namespace ToolFramework;
 
 Store::Store(){}
 

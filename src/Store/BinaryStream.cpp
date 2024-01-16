@@ -1,5 +1,7 @@
 #include <BinaryStream.h>
 
+using namespace ToolFramework;
+
 BinaryStream::BinaryStream(enum_endpoint endpoint){
 
   m_endpoint=endpoint;

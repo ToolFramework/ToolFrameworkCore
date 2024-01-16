@@ -13,6 +13,8 @@
 #include "Logging.h"
 #include "DataModelBase.h"
 
+using namespace ToolFramework;
+
 /**
  * \class DataModel
  *
@@ -23,7 +25,6 @@
  * $Date: 2019/05/26 18:34:00 $
  *
  */
-
 
 class DataModel: public DataModelBase {
 
