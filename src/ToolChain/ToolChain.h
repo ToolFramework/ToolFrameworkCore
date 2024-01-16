@@ -12,10 +12,12 @@
 #include <unistd.h>
 
 #include "Tool.h"
-#include "DataModel.h"
+#include "DataModelBase.h"
 #include "Logging.h"
 #include "Factory.h"
 #include "Store.h"
+
+class DataModel;
 
 /**
  * \struct ToolChainargs
@@ -49,7 +51,7 @@ class ToolChain{
  public:
 
   ToolChain(){};
-  ToolChain(std::string configfile, int argc=0, char* argv[]=0); ///< Constructor that obtains all of the configuration varaibles from an input file. @param configfile The path and name of the config file to read configuration values from.
+  ToolChain(std::string configfile, DataModel* data_model, int argc=0, char* argv[]=0); ///< Constructor that obtains all of the configuration varaibles from an input file. @param configfile The path and name of the config file to read configuration values from.
 
   /**
      Constructor with explicit configuration variables passed as arguments.
@@ -72,7 +74,7 @@ logmode Where log printouts should be forwarded too. "Interactive" = cout, "Remo
   int Finalise(); ///< Finalise all Tools in the ToolCahin sequentially.
   void Interactive(); ///< Start interactive thread to accept commands and run ToolChain in interactive mode.
   bool LoadTools(std::string filename);
-  DataModel* m_data; ///< Direct access to transient data model class of the Tools in the ToolChain. This allows direct initialisation and copying of variables.
+  DataModelBase* m_data; ///< Direct access to transient data model class of the Tools in the ToolChain. This allows direct initialisation and copying of variables.
 
   protected:
 

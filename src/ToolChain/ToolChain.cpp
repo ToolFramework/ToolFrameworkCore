@@ -1,8 +1,8 @@
 #include "ToolChain.h"
 
-ToolChain::ToolChain(std::string configfile,  int argc, char* argv[]){
+ToolChain::ToolChain(std::string configfile, DataModel* data_model,  int argc, char* argv[]){
  
-  m_data=new DataModel();
+  m_data=reinterpret_cast<DataModelBase*>(data_model);
   
   if(!m_data->vars.Initialise(configfile)){
     std::clog<<"\033[38;5;196m ERROR!!!: No valid config file quitting \033[0m"<<std::endl;
@@ -64,8 +64,8 @@ ToolChain::ToolChain(int verbose, int errorlevel, bool log_interactive, bool log
   m_log_split_files=log_split_files;
   m_log_local_path=log_local_path;
 
-  if(in_data_model==0) m_data=new DataModel;
-  else m_data=in_data_model;
+  if(in_data_model==0) m_data=new DataModelBase;
+  else m_data=reinterpret_cast<DataModelBase*>(in_data_model);
 
   Init();
 
@@ -128,7 +128,7 @@ int ToolChain::Initialise(){
       try{ 
 #endif   
 
-	if(m_tools.at(i)->Initialise(m_configfiles.at(i), *m_data))  *m_log<<MsgL(2,m_verbose)<<green<<m_toolnames.at(i)<<" initialised successfully\n"<<std::endl;
+	if(m_tools.at(i)->Initialise(m_configfiles.at(i), *(reinterpret_cast<DataModel*>(m_data))))  *m_log<<MsgL(2,m_verbose)<<green<<m_toolnames.at(i)<<" initialised successfully\n"<<std::endl;
 	else{
 	  *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!! "<<m_toolnames.at(i)<<" Failed to initialise (exit error code)\n"<<std::endl;
 	  result=1;

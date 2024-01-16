@@ -1,5 +1,6 @@
 #include <string>
 #include "ToolChain.h"
+#include "DataModel.h"
 //#include "DummyTool.h"
 
 int main(int argc, char* argv[]){
@@ -8,7 +9,8 @@ int main(int argc, char* argv[]){
   if (argc==1)config_file="configfiles/Dummy/ToolChainConfig";
   else config_file=argv[1];
 
-  ToolChain tools(config_file, argc, argv);
+DataModel* data_model = new DataModel();
+  ToolChain tools(config_file, data_model, argc, argv);
 
 
   //DummyTool dummytool;    

@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "Tool.h"
-
+#include "DataModel.h"
 
 /**
  * \class MyTool
