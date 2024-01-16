@@ -15,8 +15,8 @@ TempToolsLib =
 
 
 Includes=-I $(SOURCEDIR)/include/
-Libs=-L $(SOURCEDIR)/lib/ -lStore -lLogging -lToolchain -lTempDataModelBase -lTempDataModel -lTempTools -lpthread
-LIBRARIES=lib/libStore.so lib/libLogging.so lib/libToolChain.so lib/libTempDataModelbase.so lib/libTempDataModel.so lib/libTempTools.so
+Libs=-L $(SOURCEDIR)/lib/ -lStore -lLogging -lToolchain -lDataModelBase -lTempDataModel -lTempTools -lpthread
+LIBRARIES=lib/libStore.so lib/libLogging.so lib/libToolChain.so lib/libDataModelBase.so lib/libTempDataModel.so lib/libTempTools.so
 HEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(patsubst src/%.h, include/%.h, $(wildcard src/*/*.h) ))))
 TempDataModelHEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(patsubst src/%.h, include/%.h, $(wildcard DataModel/*.h)))))
 MyToolHEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(patsubst src/%.h, include/%.h, $(wildcard UserTools/*/*.h) $(wildcard UserTools/*.h)))))
@@ -61,7 +61,7 @@ lib/libLogging.so: $(patsubst %.cpp, %.o , $(wildcard src/Logging/*.cpp)) | $(HE
 	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
 	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes)
 
-lib/libTempDataModelbase.so: $(patsubst %.cpp, %.o , $(wildcard src/DataModelBase/*.cpp)) | $(HEADERS)
+lib/libDataModelBase.so: $(patsubst %.cpp, %.o , $(wildcard src/DataModelBase/*.cpp)) | $(HEADERS)
 	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
 	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes) 
 
