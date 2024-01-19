@@ -17,7 +17,7 @@ TempToolsLib =
 Includes=-I $(SOURCEDIR)/include/ -I $(SOURCEDIR)/tempinclude/
 Libs=-L $(SOURCEDIR)/lib/ -lStore -lLogging -lToolchain -lDataModelBase -lTempDataModel -lTempTools -lpthread
 LIBRARIES=lib/libStore.so lib/libLogging.so lib/libToolChain.so lib/libDataModelBase.so lib/libTempDataModel.so lib/libTempTools.so
-HEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(wildcard src/*/*.h) ))) include/Factory.h
+HEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(wildcard src/*/*.h) )))
 TempDataModelHEADERS:=$(patsubst %.h, tempinclude/%.h, $(filter %.h, $(subst /, ,$(wildcard DataModel/*.h))))
 TempMyToolHEADERS:=$(patsubst %.h, tempinclude/%.h, $(filter %.h, $(subst /, ,$(wildcard UserTools/*/*.h) $(wildcard UserTools/*.h))))
 SOURCEFILES:=$(patsubst %.cpp, %.o, $(wildcard */*.cpp) $(wildcard */*/*.cpp))
@@ -48,6 +48,10 @@ src/%.o :  src/%.cpp $(HEADERS)
 UnitTests/%.o : UnitTests/%.cpp $(HEADERS) 
 	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
 	g++ $(CXXFLAGS) -c $< -o $@ $(Includes)
+
+UserTools/Factory/Factory.o :  UserTools/Factory/Factory.cpp $(HEADERS) $(TempDataModelHEADERS)
+	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
+	g++ $(CXXFLAGS) -c $< -o $@ $(Includes) $(TempDataModelInclude) $(TempToolsInclude)
 
 UserTools/%.o :  UserTools/%.cpp $(HEADERS) $(TempDataModelHEADERS) UserTools/%.h
 	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
