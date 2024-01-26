@@ -13,25 +13,25 @@
 
 namespace ToolFramework{
   
-#define red "\033[38;5;196m"
-#define darkred "\033[38;5;88m"
-#define green "\033[38;5;46m"
-#define darkgreen "\033[38;5;22m"
-#define blue "\033[38;5;21m"
-#define darkblue "\033[38;5;18m"
-#define yellow "\033[38;5;226m"
-#define darkyellow "\033[38;5;142m"
-#define orange "\033[38;5;208m"
-#define darkorange "\033[38;5;130m"
-#define pink "\033[38;5;201m"
-#define darkpink "\033[38;5;129m"
-#define purple "\033[38;5;57m"
-#define darkpurple "\033[38;5;54m"
-#define cyan  "\033[38;5;51m"
-#define darkcyan  "\033[38;5;39m" 
-#define white "\033[38;5;255m"
-#define gray "\033[38;5;243m"
-#define plain "\033[0m"
+  const char red[] = "\033[31m"; //"\033[38;5;88m"
+  const char lightred[] = "\033[91m"; //"\033[38;5;196m"
+  const char green[] = "\033[32m"; //"\033[38;5;22m"
+  const char lightgreen[] = "\033[92m"; //"\033[38;5;46m"
+  const char blue[] = "\033[34m"; //"\033[38;5;18m"
+  const char lightblue[] = "\033[94m"; //"\033[38;5;21m"
+  const char yellow[] = "\033[33m";  //"\033[38;5;142m"
+  const char lightyellow[] = "\033[93m"; //"\033[38;5;226m"
+  const char orange[] = "\033[38;5;130m";
+  const char lightorange[] = "\033[38;5;208m";
+  const char pink[] = "\033[35m";  //"\033[38;5;129m"
+  const char lightpink[] = "\033[95m";  //"\033[38;5;201m"
+  const char purple[] = "\033[38;5;54m";
+  const char lightpurple[] = "\033[38;5;57m";
+  const char cyan[] = "\033[36m";   //"\033[38;5;39m"
+  const char lightcyan[] = "\033[96m";  //"\033[38;5;51m" 
+  const char white[] = "\033[97m"; //"\033[38;5;255m"
+  const char gray[] = "\033[37m"; //"\033[38;5;243m"
+  const char plain[] ="\033[39m";  //"\033[0m"
 
   /**
    * \struct MsgL
