@@ -66,10 +66,10 @@ ToolChain::ToolChain(int verbose, int errorlevel, bool log_interactive, bool log
   m_log_split_files=log_split_files;
   m_log_local_path=log_local_path;
 
-  if(in_data_model==0) m_data=new DataModelBase;
-  else m_data=reinterpret_cast<DataModelBase*>(in_data_model);
+  if(in_data_model==0) m_data=new DataModelBase;  
+  else m_data=reinterpret_cast<DataModelBase*>(in_data_model); // need to set a flag that you dont own the data model for sue during deletion.  (check this for other constructor roo.
 
-  Init();
+  Init(); //need to check if loging already made incase passing a datamodel for subtoolcahin
 
 }
 
