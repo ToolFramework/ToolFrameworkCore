@@ -189,7 +189,7 @@ class Logging: virtual public std::ostream {
    return *this;
  }
  
- template<typename T>  Logging& operator<<(T &a){
+ template<typename T>  Logging& operator<<(const T &a){
      
    std::cout.rdbuf(buffer);
    std::cout<<a;
