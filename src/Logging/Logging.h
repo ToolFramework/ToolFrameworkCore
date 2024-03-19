@@ -10,9 +10,12 @@
 
 #include <pthread.h>
 #include <time.h>
+#include <mutex>
+#include <unistd.h>
 
 namespace ToolFramework{
-  
+
+  #ifndef NO_COLOUR
   const char red[] = "\033[31m"; //"\033[38;5;88m"
   const char lightred[] = "\033[91m"; //"\033[38;5;196m"
   const char green[] = "\033[32m"; //"\033[38;5;22m"
@@ -33,6 +36,31 @@ namespace ToolFramework{
   const char gray[] = "\033[37m"; //"\033[38;5;243m"
   const char plain[] ="\033[39m";  //"\033[0m"
 
+  #else
+
+  const char red[] = ""; 
+  const char lightred[] = "";
+  const char green[] = ""; 
+  const char lightgreen[] = ""; 
+  const char blue[] = ""; 
+  const char lightblue[] = ""; 
+  const char yellow[] = ""; 
+  const char lightyellow[] = ""; 
+  const char orange[] = ""; 
+  const char lightorange[] = ""; 
+  const char pink[] = ""; 
+  const char lightpink[] = ""; 
+  const char purple[] = ""; 
+  const char lightpurple[] = ""; 
+  const char cyan[] = ""; 
+  const char lightcyan[] = "";  
+  const char white[] = ""; 
+  const char gray[] = ""; 
+  const char plain[] = ""; 
+  
+#endif
+
+  
   /**
    * \struct MsgL
    *
@@ -95,7 +123,10 @@ namespace ToolFramework{
       
       std::ostream*   output;
       std::ostream*   fileoutput;
-      
+
+      std::mutex lock1;
+      std::mutex lock2;
+
     protected:
       
       std::ostream* tmp;
@@ -108,6 +139,7 @@ namespace ToolFramework{
       std::streambuf *psbuf, *backup1, *backup2;
       
       bool no_delete;
+
     }; 
   
   
@@ -142,26 +174,35 @@ namespace ToolFramework{
      
   */
   
-  template <typename T>  void Log(T message, int messagelevel=1, int verbose=1){
+    template <typename T>  void Log(T message, int messagelevel=1, int verbose=1){
+      //printf("logmessage\n");
+      if(messagelevel<=verbose){
+	
+	buffer->lock1.lock();
+	while(!buffer->lock2.try_lock()){
+	    buffer->lock1.unlock();
+	    usleep(100);
+	    buffer->lock1.lock();
+	  }	    
+	//printf("locg message locked\n");
+	int previous_messagelevel = buffer->m_messagelevel;
+	int previous_verbosity = buffer->m_verbose;
+	
+	buffer->m_messagelevel=messagelevel;
+	buffer->m_verbose=verbose;
+	//printf("log about to sync\n");
+	std::cout.rdbuf(buffer);
+	std::cout<<message<<plain<<std::endl;
+	//printf("log synced\n");
+	buffer->m_messagelevel=previous_messagelevel;
+	buffer->m_verbose=previous_verbosity;
+	buffer->lock2.unlock();
+	buffer->lock1.unlock();
+      } 
+      
+    }
     
     
-    if(messagelevel<=verbose){    
-      int previous_messagelevel = buffer->m_messagelevel;
-      int previous_verbosity = buffer->m_verbose;
-      
-      buffer->m_messagelevel=messagelevel;
-      buffer->m_verbose=verbose;
-      
-      std::cout.rdbuf(buffer);
-      std::cout<<message<<plain<<std::endl;
-      
-      buffer->m_messagelevel=previous_messagelevel;
-      buffer->m_verbose=previous_verbosity;
-    } 
-    
-  }
-  
-  
   /**
      Functionn to change the logs out file if set to a local path.
      
@@ -175,35 +216,62 @@ namespace ToolFramework{
   
   
   Logging& operator<<(MsgL a){
+
+    buffer->lock1.lock();
+    buffer->lock2.try_lock();
     
     buffer->m_messagelevel=a.messagelevel;
     buffer->m_verbose=a.verbose;
+    
+    buffer->lock2.unlock();
+    buffer->lock1.unlock();
     
     return *this;
   }
   
   
-  Logging& operator<<(std::ostream& (*foo)(std::ostream&)) { 
+  Logging& operator<<(std::ostream& (*foo)(std::ostream&)) {
+    //printf("special stream tying to lock\n");
+    buffer->lock1.lock();
+    buffer->lock2.try_lock();
+    
+    //printf("special stream unlocking and about to sync\n");
     
     std::cout.rdbuf(buffer);
     std::cout<<plain<<foo;//std::endl;
+    //printf("special stream synced\n");
+    buffer->lock2.unlock();
+    buffer->lock1.unlock();
     
     return *this;
   }
   
   template<typename T>  Logging& operator<<(T &a){
+    //printf("stream locking\n");
+    buffer->lock1.lock();
+    buffer->lock2.try_lock();
+    //printf("stream locked\n");
     
     std::cout.rdbuf(buffer);
     std::cout<<a;
     
+    buffer->lock1.unlock();
+    //printf("stream unlocked\n");
     return *this;
     
   }
   
   template<typename T>  Logging& operator<<(const T &a){
+    //printf("stream locking\n");
+    buffer->lock1.lock();
+    buffer->lock2.try_lock();
+    //printf("stream locked\n");
     
     std::cout.rdbuf(buffer);
     std::cout<<a;
+    
+    buffer->lock1.unlock();
+    //printf("stream unlocked\n");
     
     return *this;
     

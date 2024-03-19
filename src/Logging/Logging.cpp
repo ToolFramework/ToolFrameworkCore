@@ -37,6 +37,7 @@ Logging::TFStreamBuf::TFStreamBuf ( bool interactive, bool local, std::string lo
   m_interactive=interactive;
   m_error=error;
 
+
   if(m_error){
     m_messagelevel=0;
     m_verbose=0;
@@ -79,7 +80,6 @@ Logging::TFStreamBuf::TFStreamBuf ( bool interactive, bool local, std::string lo
 
 int Logging::TFStreamBuf::sync ( )
 {
- 
   if( (( m_interactive || m_local) && (m_messagelevel <= m_verbose)) && str()!=""){
     
     time_t rawtime;
@@ -122,12 +122,14 @@ int Logging::TFStreamBuf::sync ( )
       (*output)<<"[";
       if(m_error) (*output)<<"ERROR";
       else (*output)<<m_messagelevel;
-      (*output)<<"]: " << str();
+      (*output)<<"]: "<< str();
       if(m_error) (*output)<<plain;      
       output->flush(); 
     }
   }
   str("");
+
+  
   
   return 0;
 }

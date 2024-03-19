@@ -1,10 +1,14 @@
 SOURCEDIR=`pwd`
 
-CXXFLAGS=  -fPIC -O3 -Wpedantic -Wall -std=c++11 -Wno-comment -Wno-unused -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept  -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef #-Werror -Wold-style-cast 
+CXXFLAGS= -fPIC -O3 -Wpedantic -Wall -std=c++11 -Wno-comment -Wno-unused -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept  -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef #-Werror -Wold-style-cast 
 
 
 ifeq ($(MAKECMDGOALS),debug)
 CXXFLAGS+= -O0 -g -lSegFault -rdynamic -DDEBUG
+endif
+
+ifeq ($(MAKECMDGOALS),no_colour)
+CXXFLAGS+= -DNO_COLOUR
 endif
 
 TempDataModelInclude =
@@ -27,6 +31,8 @@ SOURCEFILES:=$(patsubst %.cpp, %.o, $(wildcard */*.cpp) $(wildcard */*/*.cpp))
 
 all: $(HEADERS) $(TempDataModelHEADERS) $(TempMyToolHEADERS) $(SOURCEFILES) $(LIBRARIES) main
 
+
+no_colour: all
 debug: all
 
 main: src/main.o $(LIBRARIES) $(HEADERS) $(TempDataModelHEADERS) $(TempMyToolHEADERS) | $(SOURCEFILES)
