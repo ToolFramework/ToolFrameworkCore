@@ -26,8 +26,13 @@ bool DummyTool::Execute(){
   // Therefore a message level of 0 is always printed so should be used for high priority messages e.g. errors
   // and a message level or 9 would be for minor messgaes rarely printed
 
- Log("test 2a"); // defualt log function message level is 0 
- *m_log<<"test 2b"<<std::endl; // defualt stream message level is 0 
+ Log("test 2a"); // defualt log function message level is 0. 
+	//Note: calls to the Log function are thread safe.
+	//Note: tool name is appended to log message ustomatically
+
+ *m_log<<"test 2b"<<std::endl; // defualt stream message level is 0.  
+	//Note: streamers are not thread safe.
+	//Note: tool name is not appened automatically but can be added manually via *m_log<<GetName()
 
  *m_log<<"m_verbose = "<<m_verbose<<std::endl; // Prints current verbosity level
 
@@ -59,7 +64,7 @@ bool DummyTool::Execute(){
 
 bool DummyTool::Finalise(){
 
-  Log("test 11",1);
+  Log("test 7",1);
 
   return true;
 }
