@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['log_112',['Log',['../classLogging.html#af7839ee68729b066da269cc012b1fcc9',1,'Logging::Log()'],['../classTool.html#a73b465acc3acbe532d6fe0ba5087dc29',1,'Tool::Log()']]],
-  ['logging_113',['Logging',['../classLogging.html#ae1d1dbc6e252f4b56a6d185578faef27',1,'Logging']]]
+  ['log_115',['Log',['../classToolFramework_1_1Logging.html#a93120bba04170076629ae3a9bdc45e15',1,'ToolFramework::Logging::Log()'],['../classToolFramework_1_1Tool.html#a33d26fe6c6ceb153f06a544e77646378',1,'ToolFramework::Tool::Log()']]],
+  ['logging_116',['Logging',['../classToolFramework_1_1Logging.html#ae1d1dbc6e252f4b56a6d185578faef27',1,'ToolFramework::Logging']]]
 ];

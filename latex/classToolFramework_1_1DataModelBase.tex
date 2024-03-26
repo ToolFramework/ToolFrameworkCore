@@ -1,0 +1,50 @@
+\hypertarget{classToolFramework_1_1DataModelBase}{}\doxysection{Tool\+Framework\+::Data\+Model\+Base Class Reference}
+\label{classToolFramework_1_1DataModelBase}\index{ToolFramework::DataModelBase@{ToolFramework::DataModelBase}}
+
+
+{\ttfamily \#include $<$Data\+Model\+Base.\+h$>$}
+
+Inheritance diagram for Tool\+Framework\+::Data\+Model\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classToolFramework_1_1DataModelBase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1DataModelBase_a36b75174d88a96823aa1e650b9033fa6}\label{classToolFramework_1_1DataModelBase_a36b75174d88a96823aa1e650b9033fa6}} 
+\mbox{\hyperlink{classToolFramework_1_1DataModelBase_a36b75174d88a96823aa1e650b9033fa6}{Data\+Model\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Simple constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1DataModelBase_ab5c1fd8f36f4959e1e5bd672edb0e1cc}\label{classToolFramework_1_1DataModelBase_ab5c1fd8f36f4959e1e5bd672edb0e1cc}} 
+\mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1DataModelBase_ab5c1fd8f36f4959e1e5bd672edb0e1cc}{Log}}
+\begin{DoxyCompactList}\small\item\em Log class pointer for use in Tools, it can be used to send messages which can have multiple error levels and destination end points. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1DataModelBase_a5bb1cd4f9cec3012a584732e371158e4}\label{classToolFramework_1_1DataModelBase_a5bb1cd4f9cec3012a584732e371158e4}} 
+\mbox{\hyperlink{classToolFramework_1_1Store}{Store}} \mbox{\hyperlink{classToolFramework_1_1DataModelBase_a5bb1cd4f9cec3012a584732e371158e4}{vars}}
+\begin{DoxyCompactList}\small\item\em This \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} can be used for any variables. It is an inefficent ascii based storage and command line arguments will be placed in here along with \mbox{\hyperlink{classToolFramework_1_1ToolChain}{Tool\+Chain}} variables. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1DataModelBase_aba7a4dbaab652eecefdd474218802a24}\label{classToolFramework_1_1DataModelBase_aba7a4dbaab652eecefdd474218802a24}} 
+\mbox{\hyperlink{classToolFramework_1_1BStore}{BStore}} \mbox{\hyperlink{classToolFramework_1_1DataModelBase_aba7a4dbaab652eecefdd474218802a24}{CStore}}
+\begin{DoxyCompactList}\small\item\em This is a more efficent binary \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} that can be used to store a dynamic set of inter \mbox{\hyperlink{classToolFramework_1_1Tool}{Tool}} variables, very useful for constants and and flags hence the name CStore. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1DataModelBase_ae6dcda92cb7872e42b696c9afaf5f7f5}\label{classToolFramework_1_1DataModelBase_ae6dcda92cb7872e42b696c9afaf5f7f5}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{classToolFramework_1_1BStore}{BStore}} $\ast$ $>$ \mbox{\hyperlink{classToolFramework_1_1DataModelBase_ae6dcda92cb7872e42b696c9afaf5f7f5}{Stores}}
+\begin{DoxyCompactList}\small\item\em This is a map of named \mbox{\hyperlink{classToolFramework_1_1BStore}{BStore}} pointers which can be deffined to hold a nammed collection of any type of \mbox{\hyperlink{classToolFramework_1_1BStore}{BStore}}. It is usefull to store data collections that needs subdividing into differnt stores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class Is a transient data model class for your Tools within the \mbox{\hyperlink{classToolFramework_1_1ToolChain}{Tool\+Chain}}. If Tools need to comunicate they pass all data objects through the data model. There fore inter tool data objects should be deffined in this class.
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/26 18\+:34\+:00 
+\end{DoxyParagraph}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Data\+Model\+Base.\+h\item 
+src/\+Data\+Model\+Base/Data\+Model\+Base.\+cpp\end{DoxyCompactItemize}

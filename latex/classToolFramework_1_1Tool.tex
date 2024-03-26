@@ -1,0 +1,133 @@
+\hypertarget{classToolFramework_1_1Tool}{}\doxysection{Tool\+Framework\+::Tool Class Reference}
+\label{classToolFramework_1_1Tool}\index{ToolFramework::Tool@{ToolFramework::Tool}}
+
+
+{\ttfamily \#include $<$Tool.\+h$>$}
+
+Inheritance diagram for Tool\+Framework\+::Tool\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.258427cm]{classToolFramework_1_1Tool}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{classToolFramework_1_1Tool_acd45ac0abe3bf8b2cfbdd78802e2c648}{Initialise}} (std\+::string configfile, \mbox{\hyperlink{classDataModel}{Data\+Model}} \&data)=0
+\begin{DoxyCompactList}\small\item\em virtual Initialise function that reads in the assigned config file and optain Data\+Moodel reference \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_af2b703640b55cba3147a1a8172442cca}\label{classToolFramework_1_1Tool_af2b703640b55cba3147a1a8172442cca}} 
+virtual bool \mbox{\hyperlink{classToolFramework_1_1Tool_af2b703640b55cba3147a1a8172442cca}{Execute}} ()=0
+\begin{DoxyCompactList}\small\item\em Virtual Execute function. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_a7396101d3af22a3f2227cd7c78a90093}\label{classToolFramework_1_1Tool_a7396101d3af22a3f2227cd7c78a90093}} 
+virtual bool \mbox{\hyperlink{classToolFramework_1_1Tool_a7396101d3af22a3f2227cd7c78a90093}{Finalise}} ()=0
+\begin{DoxyCompactList}\small\item\em Virtual Finalise function. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_ad140b347f1a40c87d0ea7bd69ecd3f4f}\label{classToolFramework_1_1Tool_ad140b347f1a40c87d0ea7bd69ecd3f4f}} 
+std\+::string \mbox{\hyperlink{classToolFramework_1_1Tool_ad140b347f1a40c87d0ea7bd69ecd3f4f}{Get\+Name}} ()
+\begin{DoxyCompactList}\small\item\em virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_af0b5f1240a1fd83428f0b2921e9844d1}\label{classToolFramework_1_1Tool_af0b5f1240a1fd83428f0b2921e9844d1}} 
+void {\bfseries Set\+Name} (std\+::string name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structToolFramework_1_1MsgL}{MsgL}} \mbox{\hyperlink{classToolFramework_1_1Tool_a0253e18cae6bcf541c9930cf9acb3d17}{ML}} (int messagelevel)
+\begin{DoxyCompactList}\small\item\em Function for setting logging level instream. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_aafcc67dab81dba1428cb89ed1f7dd0bb}\label{classToolFramework_1_1Tool_aafcc67dab81dba1428cb89ed1f7dd0bb}} 
+void \mbox{\hyperlink{classToolFramework_1_1Tool_aafcc67dab81dba1428cb89ed1f7dd0bb}{MLC}} ()
+\begin{DoxyCompactList}\small\item\em Function for clearing logging level. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_ab2c73ac499d029011b9d2ac7a6eee8fb}\label{classToolFramework_1_1Tool_ab2c73ac499d029011b9d2ac7a6eee8fb}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries Log} (T message, int messagelevel, int verbosity)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classToolFramework_1_1Tool_a33d26fe6c6ceb153f06a544e77646378}{Log}} (T message, int messagelevel=0)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} fuction for printouts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_ad5ea400e3bfc7772db271730c78b7cef}\label{classToolFramework_1_1Tool_ad5ea400e3bfc7772db271730c78b7cef}} 
+std\+::string {\bfseries m\+\_\+tool\+\_\+name}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_a05d9b2078257793e8a2d408a2f5252f1}\label{classToolFramework_1_1Tool_a05d9b2078257793e8a2d408a2f5252f1}} 
+\mbox{\hyperlink{classToolFramework_1_1Store}{Store}} \mbox{\hyperlink{classToolFramework_1_1Tool_a05d9b2078257793e8a2d408a2f5252f1}{m\+\_\+variables}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} used to store configuration varaibles. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_a384274054dc234c18fb0e5e267948774}\label{classToolFramework_1_1Tool_a384274054dc234c18fb0e5e267948774}} 
+\mbox{\hyperlink{classDataModel}{Data\+Model}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1Tool_a384274054dc234c18fb0e5e267948774}{m\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Pointer to transiant \mbox{\hyperlink{classDataModel}{Data\+Model}} class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_ae0d12e25dcfa7aeedbc49a6d87d63ed8}\label{classToolFramework_1_1Tool_ae0d12e25dcfa7aeedbc49a6d87d63ed8}} 
+\mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1Tool_ae0d12e25dcfa7aeedbc49a6d87d63ed8}{m\+\_\+log}}
+\begin{DoxyCompactList}\small\item\em Pointer to logging class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_accffd2998e04c8a346761082194cf2b0}\label{classToolFramework_1_1Tool_accffd2998e04c8a346761082194cf2b0}} 
+int \mbox{\hyperlink{classToolFramework_1_1Tool_accffd2998e04c8a346761082194cf2b0}{m\+\_\+verbose}}
+\begin{DoxyCompactList}\small\item\em verbosity variable for direct logging level \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for Tools to inherit from. This allows a polymphic interface for the factor to use.
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/28 10\+:44\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classToolFramework_1_1Tool_acd45ac0abe3bf8b2cfbdd78802e2c648}\label{classToolFramework_1_1Tool_acd45ac0abe3bf8b2cfbdd78802e2c648}} 
+\index{ToolFramework::Tool@{ToolFramework::Tool}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!ToolFramework::Tool@{ToolFramework::Tool}}
+\doxysubsubsection{\texorpdfstring{Initialise()}{Initialise()}}
+{\footnotesize\ttfamily virtual bool Tool\+Framework\+::\+Tool\+::\+Initialise (\begin{DoxyParamCaption}\item[{std\+::string}]{configfile,  }\item[{\mbox{\hyperlink{classDataModel}{Data\+Model}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+virtual Initialise function that reads in the assigned config file and optain Data\+Moodel reference 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configfile} & Path and name of config file to read in.\\
+\hline
+{\em data} & Reference to \mbox{\hyperlink{classDataModel}{Data\+Model}}. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classMyToolThread_adc7ab1ab74fc1564f07e52e63383d679}{My\+Tool\+Thread}}, \mbox{\hyperlink{classMyToolMultiThread_a19dc55079a7b2da02ad9addd565b8e80}{My\+Tool\+Multi\+Thread}}, \mbox{\hyperlink{classMyToolDynamicMultiThread_ac082408d85bc3e76214e55d4f62de0da}{My\+Tool\+Dynamic\+Multi\+Thread}}, \mbox{\hyperlink{classMyTool_a3bf60061195a18542c4cfb2916b9dad9}{My\+Tool}}, and \mbox{\hyperlink{classDummyTool_a0d9cd781681a06ee3cf0cd1e7bb770a8}{Dummy\+Tool}}.
+
+\mbox{\Hypertarget{classToolFramework_1_1Tool_a33d26fe6c6ceb153f06a544e77646378}\label{classToolFramework_1_1Tool_a33d26fe6c6ceb153f06a544e77646378}} 
+\index{ToolFramework::Tool@{ToolFramework::Tool}!Log@{Log}}
+\index{Log@{Log}!ToolFramework::Tool@{ToolFramework::Tool}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Tool\+Framework\+::\+Tool\+::\+Log (\begin{DoxyParamCaption}\item[{T}]{message,  }\item[{int}]{messagelevel = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} fuction for printouts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Templated message string.\\
+\hline
+{\em messagelevel} & The verbosity level at which to show the message. Checked against internal verbosity level \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1Tool_a0253e18cae6bcf541c9930cf9acb3d17}\label{classToolFramework_1_1Tool_a0253e18cae6bcf541c9930cf9acb3d17}} 
+\index{ToolFramework::Tool@{ToolFramework::Tool}!ML@{ML}}
+\index{ML@{ML}!ToolFramework::Tool@{ToolFramework::Tool}}
+\doxysubsubsection{\texorpdfstring{ML()}{ML()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structToolFramework_1_1MsgL}{MsgL}} Tool\+Framework\+::\+Tool\+::\+ML (\begin{DoxyParamCaption}\item[{int}]{messagelevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function for setting logging level instream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em messagelevel} & the verboisty level at which to show the message. Checked against internal verbosity level. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Tool/Tool.\+h\end{DoxyCompactItemize}

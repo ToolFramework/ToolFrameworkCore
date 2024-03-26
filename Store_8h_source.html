@@ -79,96 +79,98 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span> </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classStore.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classStore.html">Store</a>{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <a class="code" href="classStore.html">Store</a>(); </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classStore.html#a5247080901fb214804d0191681a30a83">Initialise</a>(std::string filename); </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classStore.html#adb84e3fb286cae07f64e8186b7ab04e1">JsonParser</a>(std::string input); </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classStore.html#a9d2f000bd849a9f5de71c3ba62dca340">Print</a>(); </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classStore.html#a7fce0f8f3ec7978c5e7cd3d7053f899b">Delete</a>(); </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classStore.html#a41eaa81c4612fb5bdbf850afb6428977">Has</a>(std::string key); </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  std::vector&lt;std::string&gt; Keys(); <span class="comment">//returns a vector of the keys</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classStore.html#abdc0134daa34b808328070f5d6b295f3">   40</a></span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">bool</span> <a class="code" href="classStore.html#abdc0134daa34b808328070f5d6b295f3">Get</a>(std::string name,T &amp;out){</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span>(m_variables.count(name)&gt;0){</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      std::stringstream stream(m_variables[name]);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      stream&gt;&gt;out;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordflow">return</span> !stream.fail();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classStore.html#abdc0134daa34b808328070f5d6b295f3">Get</a>(std::string name, std::string &amp;out);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classStore.html#a26d26db839f734e0af5404b7dac40dae">   67</a></span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T <a class="code" href="classStore.html#a26d26db839f734e0af5404b7dac40dae">Get</a>(std::string name){</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    T tmp;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="classStore.html#abdc0134daa34b808328070f5d6b295f3">Get</a>(name,tmp)) std::cout&lt;&lt;<span class="stringliteral">&quot;\033[38;5;196mERROR: Store doesnt hold value \&quot;&quot;</span>&lt;&lt;name&lt;&lt;<span class="stringliteral">&quot;\&quot; default returned\033[0m&quot;</span>&lt;&lt;std::endl;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> tmp;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classStore.html#af586739813ce18da6f5e3561d134a814">   82</a></span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classStore.html#af586739813ce18da6f5e3561d134a814">Set</a>(std::string name,T in){</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    std::stringstream stream;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    stream&lt;&lt;in;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    m_variables[name]=stream.str();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classStore.html#a790ca02bc7d11648edf0c8d5df3751fe">   93</a></span>&#160;  std::string* <a class="code" href="classStore.html#a790ca02bc7d11648edf0c8d5df3751fe">operator[]</a>(std::string key){</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> &amp;m_variables[key];</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  </div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classStore.html#abe9b65d1308c43dc4158b00d6aed7385">  100</a></span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classStore.html#abe9b65d1308c43dc4158b00d6aed7385">operator&gt;&gt;</a>(T&amp; obj){</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    std::stringstream stream;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    stream&lt;&lt;<span class="stringliteral">&quot;{&quot;</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">bool</span> first=<span class="keyword">true</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">for</span> (std::map&lt;std::string,std::string&gt;::iterator it=m_variables.begin(); it!=m_variables.end(); ++it){ </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keywordflow">if</span> (!first) stream&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      stream&lt;&lt;<span class="stringliteral">&quot;\&quot;&quot;</span>&lt;&lt;it-&gt;first&lt;&lt;<span class="stringliteral">&quot;\&quot;:\&quot;&quot;</span>&lt;&lt; it-&gt;second&lt;&lt;<span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      first=<span class="keyword">false</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    stream&lt;&lt;<span class="stringliteral">&quot;}&quot;</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    obj=stream.str();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;   </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  } </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  std::map&lt;std::string, std::string&gt;::const_iterator begin() { <span class="keywordflow">return</span> m_variables.begin(); }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  std::map&lt;std::string, std::string&gt;::const_iterator end()   { <span class="keywordflow">return</span> m_variables.end(); }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  std::map&lt;std::string,std::string&gt; m_variables;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;};</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassStore_html"><div class="ttname"><a href="classStore.html">Store</a></div><div class="ttdef"><b>Definition:</b> Store.h:21</div></div>
-<div class="ttc" id="aclassStore_html_a26d26db839f734e0af5404b7dac40dae"><div class="ttname"><a href="classStore.html#a26d26db839f734e0af5404b7dac40dae">Store::Get</a></div><div class="ttdeci">T Get(std::string name)</div><div class="ttdef"><b>Definition:</b> Store.h:67</div></div>
-<div class="ttc" id="aclassStore_html_a41eaa81c4612fb5bdbf850afb6428977"><div class="ttname"><a href="classStore.html#a41eaa81c4612fb5bdbf850afb6428977">Store::Has</a></div><div class="ttdeci">bool Has(std::string key)</div><div class="ttdoc">Returns bool based on if store contains entry given by sting.</div><div class="ttdef"><b>Definition:</b> Store.cpp:97</div></div>
-<div class="ttc" id="aclassStore_html_a5247080901fb214804d0191681a30a83"><div class="ttname"><a href="classStore.html#a5247080901fb214804d0191681a30a83">Store::Initialise</a></div><div class="ttdeci">bool Initialise(std::string filename)</div><div class="ttdoc">Initialises Store by reading in entries from an ASCII text file, when each line is a variable and its...</div><div class="ttdef"><b>Definition:</b> Store.cpp:7</div></div>
-<div class="ttc" id="aclassStore_html_a790ca02bc7d11648edf0c8d5df3751fe"><div class="ttname"><a href="classStore.html#a790ca02bc7d11648edf0c8d5df3751fe">Store::operator[]</a></div><div class="ttdeci">std::string * operator[](std::string key)</div><div class="ttdef"><b>Definition:</b> Store.h:93</div></div>
-<div class="ttc" id="aclassStore_html_a7fce0f8f3ec7978c5e7cd3d7053f899b"><div class="ttname"><a href="classStore.html#a7fce0f8f3ec7978c5e7cd3d7053f899b">Store::Delete</a></div><div class="ttdeci">void Delete()</div><div class="ttdoc">Deletes all entries in the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:45</div></div>
-<div class="ttc" id="aclassStore_html_a9d2f000bd849a9f5de71c3ba62dca340"><div class="ttname"><a href="classStore.html#a9d2f000bd849a9f5de71c3ba62dca340">Store::Print</a></div><div class="ttdeci">void Print()</div><div class="ttdoc">Prints the contents of the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:34</div></div>
-<div class="ttc" id="aclassStore_html_abdc0134daa34b808328070f5d6b295f3"><div class="ttname"><a href="classStore.html#abdc0134daa34b808328070f5d6b295f3">Store::Get</a></div><div class="ttdeci">bool Get(std::string name, T &amp;out)</div><div class="ttdef"><b>Definition:</b> Store.h:40</div></div>
-<div class="ttc" id="aclassStore_html_abe9b65d1308c43dc4158b00d6aed7385"><div class="ttname"><a href="classStore.html#abe9b65d1308c43dc4158b00d6aed7385">Store::operator&gt;&gt;</a></div><div class="ttdeci">void operator&gt;&gt;(T &amp;obj)</div><div class="ttdef"><b>Definition:</b> Store.h:100</div></div>
-<div class="ttc" id="aclassStore_html_adb84e3fb286cae07f64e8186b7ab04e1"><div class="ttname"><a href="classStore.html#adb84e3fb286cae07f64e8186b7ab04e1">Store::JsonParser</a></div><div class="ttdeci">void JsonParser(std::string input)</div><div class="ttdoc">Converts a flat JSON formatted string to Store entries in the form of key value pairs.</div><div class="ttdef"><b>Definition:</b> Store.cpp:53</div></div>
-<div class="ttc" id="aclassStore_html_af586739813ce18da6f5e3561d134a814"><div class="ttname"><a href="classStore.html#af586739813ce18da6f5e3561d134a814">Store::Set</a></div><div class="ttdeci">void Set(std::string name, T in)</div><div class="ttdef"><b>Definition:</b> Store.h:82</div></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>ToolFramework{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classToolFramework_1_1Store.html">   22</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classToolFramework_1_1Store.html">Store</a>{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classToolFramework_1_1Store.html">Store</a>(); </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#a5247080901fb214804d0191681a30a83">Initialise</a>(std::string filename); </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#adb84e3fb286cae07f64e8186b7ab04e1">JsonParser</a>(std::string input); </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#a9d2f000bd849a9f5de71c3ba62dca340">Print</a>(); </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#a7fce0f8f3ec7978c5e7cd3d7053f899b">Delete</a>(); </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#a41eaa81c4612fb5bdbf850afb6428977">Has</a>(std::string key); </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::vector&lt;std::string&gt; Keys(); <span class="comment">//returns a vector of the keys</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classToolFramework_1_1Store.html#abcacd494094eb4e7df4b1cb2db3d557e">   41</a></span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#abcacd494094eb4e7df4b1cb2db3d557e">Get</a>(std::string name,T &amp;out){</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      <span class="keywordflow">if</span>(m_variables.count(name)&gt;0){</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    std::stringstream stream(m_variables[name]);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    stream&gt;&gt;out;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> !stream.fail();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#abcacd494094eb4e7df4b1cb2db3d557e">Get</a>(std::string name, std::string &amp;out);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classToolFramework_1_1Store.html#a03156c69d81940a1edb716d81336332f">   68</a></span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T <a class="code" href="classToolFramework_1_1Store.html#a03156c69d81940a1edb716d81336332f">Get</a>(std::string name){</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      T tmp;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keywordflow">if</span>(!<a class="code" href="classToolFramework_1_1Store.html#abcacd494094eb4e7df4b1cb2db3d557e">Get</a>(name,tmp)) std::cout&lt;&lt;<span class="stringliteral">&quot;\033[38;5;196mERROR: Store doesnt hold value \&quot;&quot;</span>&lt;&lt;name&lt;&lt;<span class="stringliteral">&quot;\&quot; default returned\033[0m&quot;</span>&lt;&lt;std::endl;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="keywordflow">return</span> tmp;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classToolFramework_1_1Store.html#acbdc2f9391b5a9ce57d7126b45ffb200">   83</a></span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#acbdc2f9391b5a9ce57d7126b45ffb200">Set</a>(std::string name,T in){</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      std::stringstream stream;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      stream&lt;&lt;in;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      m_variables[name]=stream.str();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classToolFramework_1_1Store.html#a83f771d0447f39599fadf2da95b40907">   94</a></span>&#160;    std::string* <a class="code" href="classToolFramework_1_1Store.html#a83f771d0447f39599fadf2da95b40907">operator[]</a>(std::string key){</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">return</span> &amp;m_variables[key];</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    </div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classToolFramework_1_1Store.html#a0aab0b149dc1445df8395d91f1660507">  101</a></span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#a0aab0b149dc1445df8395d91f1660507">operator&gt;&gt;</a>(T&amp; obj){</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      std::stringstream stream;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      stream&lt;&lt;<span class="stringliteral">&quot;{&quot;</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="keywordtype">bool</span> first=<span class="keyword">true</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keywordflow">for</span> (std::map&lt;std::string,std::string&gt;::iterator it=m_variables.begin(); it!=m_variables.end(); ++it){ </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> (!first) stream&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    stream&lt;&lt;<span class="stringliteral">&quot;\&quot;&quot;</span>&lt;&lt;it-&gt;first&lt;&lt;<span class="stringliteral">&quot;\&quot;:\&quot;&quot;</span>&lt;&lt; it-&gt;second&lt;&lt;<span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    first=<span class="keyword">false</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      stream&lt;&lt;<span class="stringliteral">&quot;}&quot;</span>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      obj=stream.str();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    } </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    std::map&lt;std::string, std::string&gt;::const_iterator begin() { <span class="keywordflow">return</span> m_variables.begin(); }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    std::map&lt;std::string, std::string&gt;::const_iterator end()   { <span class="keywordflow">return</span> m_variables.end(); }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    std::map&lt;std::string,std::string&gt; m_variables;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  };</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html"><div class="ttname"><a href="classToolFramework_1_1Store.html">ToolFramework::Store</a></div><div class="ttdef"><b>Definition:</b> Store.h:22</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a03156c69d81940a1edb716d81336332f"><div class="ttname"><a href="classToolFramework_1_1Store.html#a03156c69d81940a1edb716d81336332f">ToolFramework::Store::Get</a></div><div class="ttdeci">T Get(std::string name)</div><div class="ttdef"><b>Definition:</b> Store.h:68</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a0aab0b149dc1445df8395d91f1660507"><div class="ttname"><a href="classToolFramework_1_1Store.html#a0aab0b149dc1445df8395d91f1660507">ToolFramework::Store::operator&gt;&gt;</a></div><div class="ttdeci">void operator&gt;&gt;(T &amp;obj)</div><div class="ttdef"><b>Definition:</b> Store.h:101</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a41eaa81c4612fb5bdbf850afb6428977"><div class="ttname"><a href="classToolFramework_1_1Store.html#a41eaa81c4612fb5bdbf850afb6428977">ToolFramework::Store::Has</a></div><div class="ttdeci">bool Has(std::string key)</div><div class="ttdoc">Returns bool based on if store contains entry given by sting.</div><div class="ttdef"><b>Definition:</b> Store.cpp:98</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a5247080901fb214804d0191681a30a83"><div class="ttname"><a href="classToolFramework_1_1Store.html#a5247080901fb214804d0191681a30a83">ToolFramework::Store::Initialise</a></div><div class="ttdeci">bool Initialise(std::string filename)</div><div class="ttdoc">Initialises Store by reading in entries from an ASCII text file, when each line is a variable and its...</div><div class="ttdef"><b>Definition:</b> Store.cpp:8</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a7fce0f8f3ec7978c5e7cd3d7053f899b"><div class="ttname"><a href="classToolFramework_1_1Store.html#a7fce0f8f3ec7978c5e7cd3d7053f899b">ToolFramework::Store::Delete</a></div><div class="ttdeci">void Delete()</div><div class="ttdoc">Deletes all entries in the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:46</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a83f771d0447f39599fadf2da95b40907"><div class="ttname"><a href="classToolFramework_1_1Store.html#a83f771d0447f39599fadf2da95b40907">ToolFramework::Store::operator[]</a></div><div class="ttdeci">std::string * operator[](std::string key)</div><div class="ttdef"><b>Definition:</b> Store.h:94</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a9d2f000bd849a9f5de71c3ba62dca340"><div class="ttname"><a href="classToolFramework_1_1Store.html#a9d2f000bd849a9f5de71c3ba62dca340">ToolFramework::Store::Print</a></div><div class="ttdeci">void Print()</div><div class="ttdoc">Prints the contents of the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:35</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_abcacd494094eb4e7df4b1cb2db3d557e"><div class="ttname"><a href="classToolFramework_1_1Store.html#abcacd494094eb4e7df4b1cb2db3d557e">ToolFramework::Store::Get</a></div><div class="ttdeci">bool Get(std::string name, T &amp;out)</div><div class="ttdef"><b>Definition:</b> Store.h:41</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_acbdc2f9391b5a9ce57d7126b45ffb200"><div class="ttname"><a href="classToolFramework_1_1Store.html#acbdc2f9391b5a9ce57d7126b45ffb200">ToolFramework::Store::Set</a></div><div class="ttdeci">void Set(std::string name, T in)</div><div class="ttdef"><b>Definition:</b> Store.h:83</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_adb84e3fb286cae07f64e8186b7ab04e1"><div class="ttname"><a href="classToolFramework_1_1Store.html#adb84e3fb286cae07f64e8186b7ab04e1">ToolFramework::Store::JsonParser</a></div><div class="ttdeci">void JsonParser(std::string input)</div><div class="ttdoc">Converts a flat JSON formatted string to Store entries in the form of key value pairs.</div><div class="ttdef"><b>Definition:</b> Store.cpp:54</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

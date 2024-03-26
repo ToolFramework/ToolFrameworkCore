@@ -1,0 +1,124 @@
+\hypertarget{classToolFramework_1_1Logging}{}\doxysection{Tool\+Framework\+::Logging Class Reference}
+\label{classToolFramework_1_1Logging}\index{ToolFramework::Logging@{ToolFramework::Logging}}
+
+
+{\ttfamily \#include $<$Logging.\+h$>$}
+
+Inheritance diagram for Tool\+Framework\+::Logging\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classToolFramework_1_1Logging}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classToolFramework_1_1Logging_1_1TFStreamBuf}{TFStream\+Buf}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classToolFramework_1_1Logging_ae1d1dbc6e252f4b56a6d185578faef27}{Logging}} (bool interactive, bool local=false, std\+::string localpath=\char`\"{}./log\char`\"{}, bool split\+\_\+output\+\_\+files=false)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classToolFramework_1_1Logging_a93120bba04170076629ae3a9bdc45e15}{Log}} (T message, int messagelevel=1, int verbose=1)
+\item 
+bool \mbox{\hyperlink{classToolFramework_1_1Logging_ae9f4797f7a58e450fa378dd34166331a}{Change\+Out\+File}} (std\+::string localpath)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Logging_aa424f3b6c7920bc7bb49234eb473422a}\label{classToolFramework_1_1Logging_aa424f3b6c7920bc7bb49234eb473422a}} 
+\mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} \& {\bfseries operator$<$$<$} (\mbox{\hyperlink{structToolFramework_1_1MsgL}{MsgL}} a)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Logging_a49142329d5570f563971c40545a703d4}\label{classToolFramework_1_1Logging_a49142329d5570f563971c40545a703d4}} 
+\mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} \& {\bfseries operator$<$$<$} (std\+::ostream \&($\ast$foo)(std\+::ostream \&))
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Logging_a48550fe4339b9bb75d48d3a8efa85f18}\label{classToolFramework_1_1Logging_a48550fe4339b9bb75d48d3a8efa85f18}} 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} \& {\bfseries operator$<$$<$} (T \&a)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Logging_a621ea7b21f1d22b57187d0f5b8932930}\label{classToolFramework_1_1Logging_a621ea7b21f1d22b57187d0f5b8932930}} 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} \& {\bfseries operator$<$$<$} (const T \&a)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Logging_ae01d63aa43ef0fdd7bb93ebd617a77d7}\label{classToolFramework_1_1Logging_ae01d63aa43ef0fdd7bb93ebd617a77d7}} 
+\mbox{\hyperlink{classToolFramework_1_1Logging_1_1TFStreamBuf}{TFStream\+Buf}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1Logging_ae01d63aa43ef0fdd7bb93ebd617a77d7}{buffer}}
+\begin{DoxyCompactList}\small\item\em Stream buffer used to replace std\+::cout for redirection to coustom output. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Logging_a9eb9f8d9dbe884c88bcc7986275aa92c}\label{classToolFramework_1_1Logging_a9eb9f8d9dbe884c88bcc7986275aa92c}} 
+\mbox{\hyperlink{classToolFramework_1_1Logging_1_1TFStreamBuf}{TFStream\+Buf}} $\ast$ {\bfseries errbuffer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class handels the logging, which can be directed to screen or file or over the via the \mbox{\hyperlink{classToolFramework_1_1ToolChain}{Tool\+Chain}} Config file
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/27 18\+:34\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classToolFramework_1_1Logging_ae1d1dbc6e252f4b56a6d185578faef27}\label{classToolFramework_1_1Logging_ae1d1dbc6e252f4b56a6d185578faef27}} 
+\index{ToolFramework::Logging@{ToolFramework::Logging}!Logging@{Logging}}
+\index{Logging@{Logging}!ToolFramework::Logging@{ToolFramework::Logging}}
+\doxysubsubsection{\texorpdfstring{Logging()}{Logging()}}
+{\footnotesize\ttfamily Logging\+::\+Logging (\begin{DoxyParamCaption}\item[{bool}]{interactive,  }\item[{bool}]{local = {\ttfamily false},  }\item[{std\+::string}]{localpath = {\ttfamily \char`\"{}./log\char`\"{}},  }\item[{bool}]{split\+\_\+output\+\_\+files = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Constructor for \mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} class
+
+
+\begin{DoxyParams}{Parameters}
+{\em interactive} & if loging class prints log output to screen \\
+\hline
+{\em local} & if loggign class prints log output to file \\
+\hline
+{\em localpath} & Local path for log output file \\
+\hline
+{\em split\+\_\+output\+\_\+files} & if log is directed to disk then whether or nto to use sperate files for standard output and standard error \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classToolFramework_1_1Logging_ae9f4797f7a58e450fa378dd34166331a}\label{classToolFramework_1_1Logging_ae9f4797f7a58e450fa378dd34166331a}} 
+\index{ToolFramework::Logging@{ToolFramework::Logging}!ChangeOutFile@{ChangeOutFile}}
+\index{ChangeOutFile@{ChangeOutFile}!ToolFramework::Logging@{ToolFramework::Logging}}
+\doxysubsubsection{\texorpdfstring{ChangeOutFile()}{ChangeOutFile()}}
+{\footnotesize\ttfamily bool Tool\+Framework\+::\+Logging\+::\+Change\+Out\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{localpath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Functionn to change the logs out file if set to a local path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em localpath} & path to new log file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value is bool success of opening new logfile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classToolFramework_1_1Logging_a93120bba04170076629ae3a9bdc45e15}\label{classToolFramework_1_1Logging_a93120bba04170076629ae3a9bdc45e15}} 
+\index{ToolFramework::Logging@{ToolFramework::Logging}!Log@{Log}}
+\index{Log@{Log}!ToolFramework::Logging@{ToolFramework::Logging}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Tool\+Framework\+::\+Logging\+::\+Log (\begin{DoxyParamCaption}\item[{T}]{message,  }\item[{int}]{messagelevel = {\ttfamily 1},  }\item[{int}]{verbose = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to create a log messages.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & templated log message text. \\
+\hline
+{\em messagelevel} & message verbosity level of the message being sent (e.\+g. if \textquotesingle{}messagelevel$>$= verbose\textquotesingle{} Then message is sent). \\
+\hline
+{\em verbose} & verbosity level of the current \mbox{\hyperlink{classToolFramework_1_1Tool}{Tool}}. ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Logging/Logging.\+h\item 
+src/\+Logging/Logging.\+cpp\end{DoxyCompactItemize}

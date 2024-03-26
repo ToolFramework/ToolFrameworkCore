@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['binarystream_72',['BinaryStream',['../classBinaryStream.html',1,'']]],
-  ['bstore_73',['BStore',['../classBStore.html',1,'']]]
+  ['binarystream_73',['BinaryStream',['../classToolFramework_1_1BinaryStream.html',1,'ToolFramework']]],
+  ['bstore_74',['BStore',['../classToolFramework_1_1BStore.html',1,'ToolFramework']]]
 ];

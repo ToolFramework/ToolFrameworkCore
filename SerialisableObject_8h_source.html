@@ -74,43 +74,46 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//class archive;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">class </span><a class="code" href="classBinaryStream.html">BinaryStream</a>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classSerialisableObject.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSerialisableObject.html">SerialisableObject</a>{</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>ToolFramework{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="comment">//class archive;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">class </span>BinaryStream;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classSerialisableObject.html">SerialisableObject</a>(){};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">bool</span> SerialiseWrapper(<a class="code" href="classBinaryStream.html">BinaryStream</a> &amp;bs);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> Serialise(<a class="code" href="classBinaryStream.html">BinaryStream</a> &amp;bs)=0;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">virtual</span> std::string GetVersion()=0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classSerialisableObject.html#a9055c98969917d4c652eefdc924b6b75">   26</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classSerialisableObject.html#a9055c98969917d4c652eefdc924b6b75">Print</a>()=0; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="comment">// virtual ~SerialisableObject(){}; ///&lt; Destructor</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="comment">//bool m_serialise; ///&lt; Denotes if the calss should be serialised or not when added to a BoostStore. </span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="comment">//protected:</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">//std::string type; ///&lt; String to store type of Tool</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">//  std::string m_version; ///&lt; String to store version of Tool</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">/*    template&lt;class Archive&gt; void serialize(Archive &amp; ar, const unsigned int version){  </span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    if(serialise){</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">      ar &amp; type;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">      ar &amp; version;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">  }</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">  */</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassBinaryStream_html"><div class="ttname"><a href="classBinaryStream.html">BinaryStream</a></div><div class="ttdef"><b>Definition:</b> BinaryStream.h:24</div></div>
-<div class="ttc" id="aclassSerialisableObject_html"><div class="ttname"><a href="classSerialisableObject.html">SerialisableObject</a></div><div class="ttdef"><b>Definition:</b> SerialisableObject.h:18</div></div>
-<div class="ttc" id="aclassSerialisableObject_html_a9055c98969917d4c652eefdc924b6b75"><div class="ttname"><a href="classSerialisableObject.html#a9055c98969917d4c652eefdc924b6b75">SerialisableObject::Print</a></div><div class="ttdeci">virtual bool Print()=0</div><div class="ttdoc">Simple virtual Pritn function to ensure inhereted classes have one.</div></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classToolFramework_1_1SerialisableObject.html">   20</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classToolFramework_1_1SerialisableObject.html">SerialisableObject</a>{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classToolFramework_1_1SerialisableObject.html">SerialisableObject</a>(){};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">bool</span> SerialiseWrapper(<a class="code" href="classToolFramework_1_1BinaryStream.html">BinaryStream</a> &amp;bs);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> Serialise(<a class="code" href="classToolFramework_1_1BinaryStream.html">BinaryStream</a> &amp;bs)=0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">virtual</span> std::string GetVersion()=0;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classToolFramework_1_1SerialisableObject.html#a1737da811092053db6f7136f6e161138">   28</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1SerialisableObject.html#a1737da811092053db6f7136f6e161138">Print</a>()=0; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// virtual ~SerialisableObject(){}; ///&lt; Destructor</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">//bool m_serialise; ///&lt; Denotes if the calss should be serialised or not when added to a BoostStore. </span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">//protected:</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//std::string type; ///&lt; String to store type of Tool</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">//  std::string m_version; ///&lt; String to store version of Tool</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">/*    template&lt;class Archive&gt; void serialize(Archive &amp; ar, const unsigned int version){  </span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">      if(serialise){</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">      ar &amp; type;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">      ar &amp; version;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">      }</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">      }</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  };</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassToolFramework_1_1BinaryStream_html"><div class="ttname"><a href="classToolFramework_1_1BinaryStream.html">ToolFramework::BinaryStream</a></div><div class="ttdef"><b>Definition:</b> BinaryStream.h:27</div></div>
+<div class="ttc" id="aclassToolFramework_1_1SerialisableObject_html"><div class="ttname"><a href="classToolFramework_1_1SerialisableObject.html">ToolFramework::SerialisableObject</a></div><div class="ttdef"><b>Definition:</b> SerialisableObject.h:20</div></div>
+<div class="ttc" id="aclassToolFramework_1_1SerialisableObject_html_a1737da811092053db6f7136f6e161138"><div class="ttname"><a href="classToolFramework_1_1SerialisableObject.html#a1737da811092053db6f7136f6e161138">ToolFramework::SerialisableObject::Print</a></div><div class="ttdeci">virtual bool Print()=0</div><div class="ttdoc">Simple virtual Pritn function to ensure inhereted classes have one.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

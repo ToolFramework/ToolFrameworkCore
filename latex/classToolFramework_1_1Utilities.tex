@@ -1,0 +1,53 @@
+\hypertarget{classToolFramework_1_1Utilities}{}\doxysection{Tool\+Framework\+::Utilities Class Reference}
+\label{classToolFramework_1_1Utilities}\index{ToolFramework::Utilities@{ToolFramework::Utilities}}
+
+
+{\ttfamily \#include $<$Utilities.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Utilities_ab1676c9ce35cf347a73d16f1094e1271}\label{classToolFramework_1_1Utilities_ab1676c9ce35cf347a73d16f1094e1271}} 
+\mbox{\hyperlink{classToolFramework_1_1Utilities_ab1676c9ce35cf347a73d16f1094e1271}{Utilities}} ()
+\begin{DoxyCompactList}\small\item\em Simple constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Utilities_ae52d1dd16b34518b2ef4de01660cb8b2}\label{classToolFramework_1_1Utilities_ae52d1dd16b34518b2ef4de01660cb8b2}} 
+\mbox{\hyperlink{structToolFramework_1_1Thread__args}{Thread\+\_\+args}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1Utilities_ae52d1dd16b34518b2ef4de01660cb8b2}{Create\+Thread}} (std\+::string Thread\+Name, void($\ast$func)(\mbox{\hyperlink{structToolFramework_1_1Thread__args}{Thread\+\_\+args}} $\ast$), \mbox{\hyperlink{structToolFramework_1_1Thread__args}{Thread\+\_\+args}} $\ast$args)
+\begin{DoxyCompactList}\small\item\em Create a thread with more complicated data exchange definned by arguments. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Utilities_a6f1c1d53b9ce59bb26c56a3bebdbb255}\label{classToolFramework_1_1Utilities_a6f1c1d53b9ce59bb26c56a3bebdbb255}} 
+bool \mbox{\hyperlink{classToolFramework_1_1Utilities_a6f1c1d53b9ce59bb26c56a3bebdbb255}{Kill\+Thread}} (\mbox{\hyperlink{structToolFramework_1_1Thread__args}{Thread\+\_\+args}} $\ast$\&args)
+\begin{DoxyCompactList}\small\item\em Kill a thread assosiated to args. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Utilities_a8c17a46ce33b0b647797f24bc859bd7a}\label{classToolFramework_1_1Utilities_a8c17a46ce33b0b647797f24bc859bd7a}} 
+bool \mbox{\hyperlink{classToolFramework_1_1Utilities_a8c17a46ce33b0b647797f24bc859bd7a}{Kill\+Thread}} (std\+::string Thread\+Name)
+\begin{DoxyCompactList}\small\item\em Kill a thread by name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Utilities_af0941d6f8682af577ba02c1e6ef77e95}\label{classToolFramework_1_1Utilities_af0941d6f8682af577ba02c1e6ef77e95}} 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classToolFramework_1_1Utilities_af0941d6f8682af577ba02c1e6ef77e95}{Kill\+Thread}} (T $\ast$pointer)
+\begin{DoxyCompactList}\small\item\em Kill a thread with args that inheirt form base \mbox{\hyperlink{structToolFramework_1_1Thread__args}{Thread\+\_\+args}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Utilities_a29b7f99dcb44ddb9a519c3e441a7fa2b}\label{classToolFramework_1_1Utilities_a29b7f99dcb44ddb9a519c3e441a7fa2b}} 
+static void $\ast$ \mbox{\hyperlink{classToolFramework_1_1Utilities_a29b7f99dcb44ddb9a519c3e441a7fa2b}{Thread}} (void $\ast$arg)
+\begin{DoxyCompactList}\small\item\em Thread with args. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Utilities_a2614a2c261741be20ac6d35b7a8e7abe}\label{classToolFramework_1_1Utilities_a2614a2c261741be20ac6d35b7a8e7abe}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{structToolFramework_1_1Thread__args}{Thread\+\_\+args}} $\ast$ $>$ \mbox{\hyperlink{classToolFramework_1_1Utilities_a2614a2c261741be20ac6d35b7a8e7abe}{Threads}}
+\begin{DoxyCompactList}\small\item\em Map of threads managed by the utilities class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class can be instansiated in a \mbox{\hyperlink{classToolFramework_1_1Tool}{Tool}} and provides some helpful threading, dynamic socket descovery and promotion functionality
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/26 18\+:34\+:00 
+\end{DoxyParagraph}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Utilities.\+h\item 
+src/\+Data\+Model\+Base/Utilities.\+cpp\end{DoxyCompactItemize}

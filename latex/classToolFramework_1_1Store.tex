@@ -1,0 +1,190 @@
+\hypertarget{classToolFramework_1_1Store}{}\doxysection{Tool\+Framework\+::Store Class Reference}
+\label{classToolFramework_1_1Store}\index{ToolFramework::Store@{ToolFramework::Store}}
+
+
+{\ttfamily \#include $<$Store.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classToolFramework_1_1Store_a5247080901fb214804d0191681a30a83}{Initialise}} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Initialises \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} by reading in entries from an ASCII text file, when each line is a variable and its value in key value pairs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classToolFramework_1_1Store_adb84e3fb286cae07f64e8186b7ab04e1}{Json\+Parser}} (std\+::string input)
+\begin{DoxyCompactList}\small\item\em Converts a flat JSON formatted string to \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} entries in the form of key value pairs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Store_a9d2f000bd849a9f5de71c3ba62dca340}\label{classToolFramework_1_1Store_a9d2f000bd849a9f5de71c3ba62dca340}} 
+void \mbox{\hyperlink{classToolFramework_1_1Store_a9d2f000bd849a9f5de71c3ba62dca340}{Print}} ()
+\begin{DoxyCompactList}\small\item\em Prints the contents of the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Store_a7fce0f8f3ec7978c5e7cd3d7053f899b}\label{classToolFramework_1_1Store_a7fce0f8f3ec7978c5e7cd3d7053f899b}} 
+void \mbox{\hyperlink{classToolFramework_1_1Store_a7fce0f8f3ec7978c5e7cd3d7053f899b}{Delete}} ()
+\begin{DoxyCompactList}\small\item\em Deletes all entries in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classToolFramework_1_1Store_a41eaa81c4612fb5bdbf850afb6428977}{Has}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Returns bool based on if store contains entry given by sting. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Store_a002824916990f01593ac6806841179c2}\label{classToolFramework_1_1Store_a002824916990f01593ac6806841179c2}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries Keys} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classToolFramework_1_1Store_abcacd494094eb4e7df4b1cb2db3d557e}{Get}} (std\+::string name, T \&out)
+\item 
+bool \mbox{\hyperlink{classToolFramework_1_1Store_ac9c263e8556970c385e2630de3a5ea29}{Get}} (std\+::string name, std\+::string \&out)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classToolFramework_1_1Store_a03156c69d81940a1edb716d81336332f}{Get}} (std\+::string name)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classToolFramework_1_1Store_acbdc2f9391b5a9ce57d7126b45ffb200}{Set}} (std\+::string name, T in)
+\item 
+std\+::string $\ast$ \mbox{\hyperlink{classToolFramework_1_1Store_a83f771d0447f39599fadf2da95b40907}{operator\mbox{[}$\,$\mbox{]}}} (std\+::string key)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classToolFramework_1_1Store_a0aab0b149dc1445df8395d91f1660507}{operator$>$$>$}} (T \&obj)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Store_a0a8533060159852c3a1919f94676482c}\label{classToolFramework_1_1Store_a0a8533060159852c3a1919f94676482c}} 
+std\+::map$<$ std\+::string, std\+::string $>$\+::const\+\_\+iterator {\bfseries begin} ()
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Store_a6e689d13adb179d188471ea74126e878}\label{classToolFramework_1_1Store_a6e689d13adb179d188471ea74126e878}} 
+std\+::map$<$ std\+::string, std\+::string $>$\+::const\+\_\+iterator {\bfseries end} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class Is a dynamic data storeage class and can be used to store variables of any type listed by ASCII key. The storage of the varaible is in ASCII, so is inefficent for large numbers of entries.
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2019/05/28 10\+:44\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classToolFramework_1_1Store_a03156c69d81940a1edb716d81336332f}\label{classToolFramework_1_1Store_a03156c69d81940a1edb716d81336332f}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Get@{Get}}
+\index{Get@{Get}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T Tool\+Framework\+::\+Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Templated getter function for sore content. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The ASCII key that the variable in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} is stored with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value is default copiler costructed value if not true (note\+: no checking exists) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classToolFramework_1_1Store_ac9c263e8556970c385e2630de3a5ea29}\label{classToolFramework_1_1Store_ac9c263e8556970c385e2630de3a5ea29}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Get@{Get}}
+\index{Get@{Get}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string \&}]{out }\end{DoxyParamCaption})}
+
+getter function for string content.. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The ASCII key that the variable in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} is stored with. \\
+\hline
+{\em out} & The variable to fill with the value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value is true if varaible exists in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} and correctly assigned to out and false if not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classToolFramework_1_1Store_abcacd494094eb4e7df4b1cb2db3d557e}\label{classToolFramework_1_1Store_abcacd494094eb4e7df4b1cb2db3d557e}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Get@{Get}}
+\index{Get@{Get}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool Tool\+Framework\+::\+Store\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{T \&}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Templated getter function for sore content. Assignment is templated and via reference. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The ASCII key that the variable in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} is stored with. \\
+\hline
+{\em out} & The variable to fill with the value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return value is true if varaible exists in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} and correctly assigned to out and false if not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classToolFramework_1_1Store_a41eaa81c4612fb5bdbf850afb6428977}\label{classToolFramework_1_1Store_a41eaa81c4612fb5bdbf850afb6428977}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Has@{Has}}
+\index{Has@{Has}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Has()}{Has()}}
+{\footnotesize\ttfamily bool Store\+::\+Has (\begin{DoxyParamCaption}\item[{std\+::string}]{key }\end{DoxyParamCaption})}
+
+
+
+Returns bool based on if store contains entry given by sting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & key to comapre. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1Store_a5247080901fb214804d0191681a30a83}\label{classToolFramework_1_1Store_a5247080901fb214804d0191681a30a83}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Initialise()}{Initialise()}}
+{\footnotesize\ttfamily bool Store\+::\+Initialise (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Initialises \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} by reading in entries from an ASCII text file, when each line is a variable and its value in key value pairs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The filepath and name to the input file. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1Store_adb84e3fb286cae07f64e8186b7ab04e1}\label{classToolFramework_1_1Store_adb84e3fb286cae07f64e8186b7ab04e1}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!JsonParser@{JsonParser}}
+\index{JsonParser@{JsonParser}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{JsonParser()}{JsonParser()}}
+{\footnotesize\ttfamily void Store\+::\+Json\+Parser (\begin{DoxyParamCaption}\item[{std\+::string}]{input }\end{DoxyParamCaption})}
+
+
+
+Converts a flat JSON formatted string to \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} entries in the form of key value pairs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input flat JSON string. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1Store_a0aab0b149dc1445df8395d91f1660507}\label{classToolFramework_1_1Store_a0aab0b149dc1445df8395d91f1660507}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Tool\+Framework\+::\+Store\+::operator$>$$>$ (\begin{DoxyParamCaption}\item[{T \&}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Allows streaming of a flat JASON formatted string of \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} contents. \mbox{\Hypertarget{classToolFramework_1_1Store_a83f771d0447f39599fadf2da95b40907}\label{classToolFramework_1_1Store_a83f771d0447f39599fadf2da95b40907}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily std\+::string$\ast$ Tool\+Framework\+::\+Store\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{std\+::string}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns string pointer to \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} element. 
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the string pointer to return. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the string version of the value within the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classToolFramework_1_1Store_acbdc2f9391b5a9ce57d7126b45ffb200}\label{classToolFramework_1_1Store_acbdc2f9391b5a9ce57d7126b45ffb200}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Set@{Set}}
+\index{Set@{Set}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Tool\+Framework\+::\+Store\+::\+Set (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{T}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Templated setter function to assign vairables in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The key to be used to store and reference the variable in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. \\
+\hline
+{\em in} & the varaible to be stored. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Store/Store.\+h\item 
+src/\+Store/Store.\+cpp\end{DoxyCompactItemize}

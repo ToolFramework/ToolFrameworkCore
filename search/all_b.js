@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['log_24',['Log',['../classDataModel.html#aa777da4c632e4659ee5b1447ad513458',1,'DataModel::Log()'],['../classLogging.html#af7839ee68729b066da269cc012b1fcc9',1,'Logging::Log()'],['../classTool.html#a73b465acc3acbe532d6fe0ba5087dc29',1,'Tool::Log()']]],
-  ['logging_25',['Logging',['../classLogging.html',1,'Logging'],['../classLogging.html#ae1d1dbc6e252f4b56a6d185578faef27',1,'Logging::Logging()']]]
+  ['log_25',['Log',['../classToolFramework_1_1DataModelBase.html#ab5c1fd8f36f4959e1e5bd672edb0e1cc',1,'ToolFramework::DataModelBase::Log()'],['../classToolFramework_1_1Logging.html#a93120bba04170076629ae3a9bdc45e15',1,'ToolFramework::Logging::Log()'],['../classToolFramework_1_1Tool.html#a33d26fe6c6ceb153f06a544e77646378',1,'ToolFramework::Tool::Log()']]],
+  ['logging_26',['Logging',['../classToolFramework_1_1Logging.html#ae1d1dbc6e252f4b56a6d185578faef27',1,'ToolFramework::Logging::Logging()'],['../classToolFramework_1_1Logging.html',1,'ToolFramework::Logging']]]
 ];

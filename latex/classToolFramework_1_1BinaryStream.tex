@@ -1,0 +1,146 @@
+\hypertarget{classToolFramework_1_1BinaryStream}{}\doxysection{Tool\+Framework\+::Binary\+Stream Class Reference}
+\label{classToolFramework_1_1BinaryStream}\index{ToolFramework::BinaryStream@{ToolFramework::BinaryStream}}
+Inheritance diagram for Tool\+Framework\+::Binary\+Stream\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classToolFramework_1_1BinaryStream}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_af65088798a6f0808f30f906e59902007}\label{classToolFramework_1_1BinaryStream_af65088798a6f0808f30f906e59902007}} 
+{\bfseries Binary\+Stream} (enum\+\_\+endpoint endpoint=RAM)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a275275e82cf87833f1f1b053d65774f2}\label{classToolFramework_1_1BinaryStream_a275275e82cf87833f1f1b053d65774f2}} 
+bool {\bfseries Bopen} (std\+::string filename, enum\+\_\+mode method=UPDATE, enum\+\_\+endpoint endpoint=POST\+\_\+\+PRE\+\_\+\+COMPRESS)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a05975e038070b0fc7796c807bf42813d}\label{classToolFramework_1_1BinaryStream_a05975e038070b0fc7796c807bf42813d}} 
+bool {\bfseries Bclose} (bool Ignore\+\_\+\+Post\+\_\+\+Pre\+\_\+compress=false)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a7fde80b6a974f1eb31e89fb5b36a90ab}\label{classToolFramework_1_1BinaryStream_a7fde80b6a974f1eb31e89fb5b36a90ab}} 
+bool {\bfseries Bwrite} (const void $\ast$in, unsigned int size)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_aed80ea557babddcc56c6b22ad58cbd3b}\label{classToolFramework_1_1BinaryStream_aed80ea557babddcc56c6b22ad58cbd3b}} 
+bool {\bfseries Bread} (void $\ast$out, unsigned int size)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a61a5b2d18ff276a3fee5388e4eea6229}\label{classToolFramework_1_1BinaryStream_a61a5b2d18ff276a3fee5388e4eea6229}} 
+unsigned long int {\bfseries Btell} ()
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a9f4620b1b7d964bd4ef41bf7afbc7c84}\label{classToolFramework_1_1BinaryStream_a9f4620b1b7d964bd4ef41bf7afbc7c84}} 
+bool {\bfseries Bseek} (unsigned int pos, int whence)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a87160fadec72bf15857bd995134b2109}\label{classToolFramework_1_1BinaryStream_a87160fadec72bf15857bd995134b2109}} 
+bool \mbox{\hyperlink{classToolFramework_1_1BinaryStream_a87160fadec72bf15857bd995134b2109}{Print}} ()
+\begin{DoxyCompactList}\small\item\em Simple virtual Pritn function to ensure inhereted classes have one. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a4f5fe9de799575950baba7d9a5ab68b9}\label{classToolFramework_1_1BinaryStream_a4f5fe9de799575950baba7d9a5ab68b9}} 
+bool {\bfseries Serialise} (\mbox{\hyperlink{classToolFramework_1_1BinaryStream}{Binary\+Stream}} \&bs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a855fa4cf9563eab19c5ac69b447da912}\label{classToolFramework_1_1BinaryStream_a855fa4cf9563eab19c5ac69b447da912}} 
+std\+::string {\bfseries Get\+Version} ()
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ab4f29756b42b76808451ddd1db25611e}\label{classToolFramework_1_1BinaryStream_ab4f29756b42b76808451ddd1db25611e}} 
+bool {\bfseries operator$<$$<$} (std\+::string \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ae0acc7db5da53991d282e6c5ddf581b4}\label{classToolFramework_1_1BinaryStream_ae0acc7db5da53991d282e6c5ddf581b4}} 
+bool {\bfseries operator$>$$>$} (std\+::string \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ab9c512f367b6d1b02fdceafba5c75bf5}\label{classToolFramework_1_1BinaryStream_ab9c512f367b6d1b02fdceafba5c75bf5}} 
+bool {\bfseries operator\&} (std\+::string \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_af1306c5bcf0e53231ea63f48dbf73986}\label{classToolFramework_1_1BinaryStream_af1306c5bcf0e53231ea63f48dbf73986}} 
+bool {\bfseries operator$<$$<$} (const std\+::string \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_adfb57c0eebf283f6e062b02c35cd0273}\label{classToolFramework_1_1BinaryStream_adfb57c0eebf283f6e062b02c35cd0273}} 
+bool {\bfseries operator\&} (const std\+::string \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a96657108591c871075d3e339dd1a6a8c}\label{classToolFramework_1_1BinaryStream_a96657108591c871075d3e339dd1a6a8c}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator$<$$<$} (T \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ac5d9edb2f10d1db3950b4dc85fae832d}\label{classToolFramework_1_1BinaryStream_ac5d9edb2f10d1db3950b4dc85fae832d}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator$>$$>$} (T \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a93596671eed51108918a2a668a1fdd4a}\label{classToolFramework_1_1BinaryStream_a93596671eed51108918a2a668a1fdd4a}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator\&} (T \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ac8c5a37e086da6be683ee153f2f820a9}\label{classToolFramework_1_1BinaryStream_ac8c5a37e086da6be683ee153f2f820a9}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator$<$$<$} (const T \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ad572e6f440b6208ac0ac1f7be05922eb}\label{classToolFramework_1_1BinaryStream_ad572e6f440b6208ac0ac1f7be05922eb}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator\&} (const T \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_afa3117e61b85359c951469f43c5dde1c}\label{classToolFramework_1_1BinaryStream_afa3117e61b85359c951469f43c5dde1c}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator$<$$<$} (std\+::vector$<$ T $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a379ee81cb582fc3fdfd3ffdf813084d6}\label{classToolFramework_1_1BinaryStream_a379ee81cb582fc3fdfd3ffdf813084d6}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator$>$$>$} (std\+::vector$<$ T $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a2430d8003db8f148cbfa056ef4ab2032}\label{classToolFramework_1_1BinaryStream_a2430d8003db8f148cbfa056ef4ab2032}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator\&} (std\+::vector$<$ T $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_adf841320baa7e1b7f992ae8a5330a8ec}\label{classToolFramework_1_1BinaryStream_adf841320baa7e1b7f992ae8a5330a8ec}} 
+bool {\bfseries operator$<$$<$} (std\+::vector$<$ std\+::string $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_aec5f76e2bb413f7aece4ae13bdf8d75a}\label{classToolFramework_1_1BinaryStream_aec5f76e2bb413f7aece4ae13bdf8d75a}} 
+bool {\bfseries operator$>$$>$} (std\+::vector$<$ std\+::string $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_abae0f14ca60ecee1b314ffe3b059d55b}\label{classToolFramework_1_1BinaryStream_abae0f14ca60ecee1b314ffe3b059d55b}} 
+bool {\bfseries operator\&} (std\+::vector$<$ std\+::string $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_adad3fc298d1362cfd43b5907689f60f8}\label{classToolFramework_1_1BinaryStream_adad3fc298d1362cfd43b5907689f60f8}} 
+{\footnotesize template$<$typename T , typename U $>$ }\\bool {\bfseries operator$<$$<$} (std\+::map$<$ T, U $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ad07165b5541f7dc8d3171287a90356e4}\label{classToolFramework_1_1BinaryStream_ad07165b5541f7dc8d3171287a90356e4}} 
+{\footnotesize template$<$typename T , typename U $>$ }\\bool {\bfseries operator$>$$>$} (std\+::map$<$ T, U $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ab9c4553426e80d90c4bb4e3a2a9ec683}\label{classToolFramework_1_1BinaryStream_ab9c4553426e80d90c4bb4e3a2a9ec683}} 
+{\footnotesize template$<$typename T , typename U $>$ }\\bool {\bfseries operator\&} (std\+::map$<$ T, U $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a56db93589257be31bbc0cc8515e3edaf}\label{classToolFramework_1_1BinaryStream_a56db93589257be31bbc0cc8515e3edaf}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator$<$$<$} (std\+::deque$<$ T $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a853beedfe2042a06ffb3924c8bc9a392}\label{classToolFramework_1_1BinaryStream_a853beedfe2042a06ffb3924c8bc9a392}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator$>$$>$} (std\+::deque$<$ T $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a29df8ade74bc94e397ecb7d82eacd2a7}\label{classToolFramework_1_1BinaryStream_a29df8ade74bc94e397ecb7d82eacd2a7}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries operator\&} (std\+::deque$<$ T $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a2ddf58d0babd12f21bf3e2a2d86fd069}\label{classToolFramework_1_1BinaryStream_a2ddf58d0babd12f21bf3e2a2d86fd069}} 
+bool {\bfseries operator$<$$<$} (std\+::deque$<$ std\+::string $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ac5030a1de80a4d0bd3ec74eca1172d7a}\label{classToolFramework_1_1BinaryStream_ac5030a1de80a4d0bd3ec74eca1172d7a}} 
+bool {\bfseries operator$>$$>$} (std\+::deque$<$ std\+::string $>$ \&rhs)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a3e628e9d08be57b89c458530e1fdefaf}\label{classToolFramework_1_1BinaryStream_a3e628e9d08be57b89c458530e1fdefaf}} 
+bool {\bfseries operator\&} (std\+::deque$<$ std\+::string $>$ \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a2322ffd266bc0a81f12f953e09bbe9d1}\label{classToolFramework_1_1BinaryStream_a2322ffd266bc0a81f12f953e09bbe9d1}} 
+enum\+\_\+endpoint {\bfseries m\+\_\+endpoint}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_addcf7d45a3e0a2fbe634c733ab913ec1}\label{classToolFramework_1_1BinaryStream_addcf7d45a3e0a2fbe634c733ab913ec1}} 
+FILE $\ast$ {\bfseries pfile}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a2b93016125e13841d5c12e4c65238e03}\label{classToolFramework_1_1BinaryStream_a2b93016125e13841d5c12e4c65238e03}} 
+std\+::string {\bfseries buffer}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_adb6668e7b873411a18ad8d405cbd6b9c}\label{classToolFramework_1_1BinaryStream_adb6668e7b873411a18ad8d405cbd6b9c}} 
+bool {\bfseries m\+\_\+write}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a45e8f3bec426aa0379414d5271844803}\label{classToolFramework_1_1BinaryStream_a45e8f3bec426aa0379414d5271844803}} 
+std\+::string {\bfseries m\+\_\+file\+\_\+name}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_ac57b1123fd2af7d21fec50c13f591d51}\label{classToolFramework_1_1BinaryStream_ac57b1123fd2af7d21fec50c13f591d51}} 
+unsigned long int {\bfseries m\+\_\+pos}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BinaryStream_a9cf32f33069f2e5f4c96a3552d803fd7}\label{classToolFramework_1_1BinaryStream_a9cf32f33069f2e5f4c96a3552d803fd7}} 
+enum\+\_\+mode {\bfseries m\+\_\+mode}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Store/Binary\+Stream.\+h\item 
+src/\+Store/Binary\+Stream.\+cpp\end{DoxyCompactItemize}

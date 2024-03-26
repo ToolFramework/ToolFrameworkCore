@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buffer_135',['buffer',['../classLogging.html#a7a6910152e0877000a81ec050eff9a89',1,'Logging']]]
+  ['buffer_138',['buffer',['../classToolFramework_1_1Logging.html#ae01d63aa43ef0fdd7bb93ebd617a77d7',1,'ToolFramework::Logging']]]
 ];
