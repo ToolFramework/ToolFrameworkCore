@@ -19,7 +19,7 @@ TempToolsLib =
 
 
 Includes=-I $(SOURCEDIR)/include/ -I $(SOURCEDIR)/tempinclude/
-Libs=-L $(SOURCEDIR)/lib/ -lStore -lLogging -lToolChain -lDataModelBase -lTempDataModel -lTempTools -lpthread
+Libs=-L $(SOURCEDIR)/lib/  -lToolChain  -lTempDataModel -lTempTools -lDataModelBase -lLogging -lStore -lpthread
 LIBRARIES=lib/libStore.so lib/libLogging.so lib/libToolChain.so lib/libDataModelBase.so lib/libTempDataModel.so lib/libTempTools.so
 HEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(wildcard src/*/*.h) )))
 TempDataModelHEADERS:=$(patsubst %.h, tempinclude/%.h, $(filter %.h, $(subst /, ,$(wildcard DataModel/*.h))))
