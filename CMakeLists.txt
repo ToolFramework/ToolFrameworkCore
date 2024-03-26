@@ -37,14 +37,17 @@ add_library(Store SHARED ${STORE_SRC})
 file(GLOB_RECURSE LOGGING_SRC RELATIVE ${CMAKE_SOURCE_DIR} "src/Logging/*.cpp")
 add_library(Logging SHARED ${LOGGING_SRC})
 
-file(GLOB_RECURSE DATAMODEL_SRC RELATIVE ${CMAKE_SOURCE_DIR} "DataModel/*.cpp")
-add_library(DataModel SHARED ${DATAMODEL_SRC})
+file(GLOB_RECURSE DATAMODELBASE_SRC RELATIVE ${CMAKE_SOURCE_DIR} "src/DataModelBase/*.cpp")
+add_library(DataModelBase SHARED ${DATAMODELBASE_SRC})
 
-file(GLOB_RECURSE MYTOOLS_SRC RELATIVE ${CMAKE_SOURCE_DIR} "UserTools/*.cpp")
-add_library(MyTools SHARED ${MYTOOLS_SRC})
+file(GLOB_RECURSE TEMPDATAMODEL_SRC RELATIVE ${CMAKE_SOURCE_DIR} "DataModel/*.cpp")
+add_library(TempDataModel SHARED ${TEMPDATAMODEL_SRC})
+
+file(GLOB_RECURSE TEMPTOOLS_SRC RELATIVE ${CMAKE_SOURCE_DIR} "UserTools/*.cpp")
+add_library(TempTools SHARED ${TEMPTOOLS_SRC})
 
 file(GLOB_RECURSE TOOLCHAIN_SRC RELATIVE ${CMAKE_SOURCE_DIR} "src/ToolChain/*.cpp")
 add_library(ToolChain SHARED ${TOOLCHAIN_SRC})
 
 add_executable (main ${PROJECT_SOURCE_DIR}/src/main.cpp)
-target_link_libraries (main Store Logging ToolChain MyTools DataModel pthread ${DATAMODEL_LIBS} ${MYTOOLS_LIBS})
+target_link_libraries (main Store Logging DataModelBase ToolChain TempTools TempDataModel pthread ${DATAMODEL_LIBS} ${MYTOOLS_LIBS})

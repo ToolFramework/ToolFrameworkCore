@@ -63,8 +63,8 @@ namespace ToolFramework{
       if(m_mode!=READ){
 	bool ret=true;    
 	unsigned int tmp=rhs.length();
-	ret*=(*this) << tmp;
-	if(tmp) ret*=Bwrite(&(rhs[0]), tmp);
+	ret= ret && ((*this) << tmp);
+	if(tmp) ret= ret && (Bwrite(&(rhs[0]), tmp));
 	return ret;
       }
       else return false;
@@ -74,9 +74,9 @@ namespace ToolFramework{
       if(m_mode!=NEW && m_mode!=APPEND){
 	bool ret=true;
 	unsigned int tmp=0;
-	ret*=(*this) >> tmp;
+	ret= ret && ((*this) >> tmp);
 	rhs.resize(tmp);
-	if(tmp) ret*=Bread(&(rhs[0]), tmp);
+	if(tmp) ret= ret && (Bread(&(rhs[0]), tmp));
 	return ret;
       }
       else return false;
@@ -91,8 +91,8 @@ namespace ToolFramework{
       if(m_mode!=READ){
 	bool ret=true;
 	unsigned int tmp=rhs.length();
-	ret*=(*this) << tmp;
-	if(tmp) ret*=Bwrite(&(rhs[0]), tmp);
+	ret= ret && ((*this) << tmp);
+	if(tmp) ret= ret && (Bwrite(&(rhs[0]), tmp));
 	return ret;
       }
       else return false;
@@ -158,12 +158,12 @@ namespace ToolFramework{
       if(m_mode!=READ){
 	bool ret=true;
 	unsigned int tmp=rhs.size();
-	ret*=(*this) << tmp;
+	ret= ret && ((*this) << tmp);
 	if(tmp){
 	  if(check_base<SerialisableObject,T>::value){
-	    for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) << (*it);
+	    for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret= ret && ((*this) << (*it));
 	  }
-	  else ret*=Bwrite(&(rhs[0]), tmp*sizeof(T));
+	  else ret= ret && (Bwrite(&(rhs[0]), tmp*sizeof(T)));
 	}
 	return ret; 
       }
@@ -175,13 +175,13 @@ namespace ToolFramework{
       if(m_mode!=NEW && m_mode!=APPEND){
 	bool ret=true;
 	unsigned int tmp=0;
-	ret*=(*this) >> tmp;
+	ret= ret && ((*this) >> tmp);
 	rhs.resize(tmp);
 	if(tmp){
 	  if(check_base<SerialisableObject,T>::value){
-	    for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) >> (*it);
+	    for(typename std::vector<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret= ret && ((*this) >> (*it));
 	  }
-	  else ret*=Bread(&(rhs[0]), tmp*sizeof(T));
+	  else ret= ret && (Bread(&(rhs[0]), tmp*sizeof(T)));
 	}
 	return ret;
       }
@@ -198,9 +198,9 @@ namespace ToolFramework{
       if(m_mode!=READ){
 	bool ret=true;
 	unsigned int tmp=rhs.size();
-	ret*=(*this) << tmp;
+	ret= ret && ((*this) << tmp);
 	for(unsigned int i=0; i<tmp; i++){
-	  ret*=(*this) << rhs.at(i);
+	  ret= ret && ((*this) << rhs.at(i));
 	}
 	return ret;
       }
@@ -211,10 +211,10 @@ namespace ToolFramework{
       if(m_mode!=NEW && m_mode!=APPEND){
 	bool ret=true;
 	unsigned int tmp=0;
-	ret*=(*this) >> tmp;
+	ret= ret && ((*this) >> tmp);
 	rhs.resize(tmp);
 	for(unsigned int i=0; i<tmp; i++){
-	  ret*=(*this) >> rhs.at(i);
+	  ret= ret && ((*this) >> rhs.at(i));
 	}
 	return ret;
       }
@@ -230,12 +230,12 @@ namespace ToolFramework{
       if(m_mode!=READ){
 	bool ret=true;
 	unsigned int tmp=rhs.size();
-	ret*=(*this) << tmp;
+	ret= ret && ((*this) << tmp);
 	for (typename std::map<T,U>::iterator it=rhs.begin(); it!=rhs.end(); ++it){
 	  T key=it->first;
 	  U value=it->second;
-	  ret*=(*this) << key;
-	  ret*=(*this) << value;
+	  ret= ret && ((*this) << key);
+	  ret= ret && ((*this) << value);
 	}
 	return ret;
       }
@@ -246,12 +246,12 @@ namespace ToolFramework{
       if(m_mode!=NEW && m_mode!=APPEND){
 	bool ret=true;
 	unsigned int tmp=0;      
-	ret*=(*this) >> tmp;
+	ret= ret && ((*this) >> tmp);
 	for (unsigned int i=0; i<tmp; i++){
 	  T key;
 	  U value;
-	  ret*=(*this) >> key;
-	  ret*=(*this) >> value;
+	  ret= ret && ((*this) >> key);
+	  ret= ret && ((*this) >> value);
 	  rhs[key]=value;
 	}
 	return ret;
@@ -268,12 +268,12 @@ namespace ToolFramework{
       if(m_mode!=READ){
 	bool ret=true;
 	unsigned int tmp=rhs.size(); 
-	ret*=(*this) << tmp;
+	ret= ret && ((*this) << tmp);
 	if(tmp){
 	  if(check_base<SerialisableObject,T>::value){
-	    for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) << (*it);	
+	    for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret= ret && ((*this) << (*it));	
 	  }
-	  else ret*=Bwrite(&(rhs[0]), tmp*sizeof(T));
+	  else ret= ret && (Bwrite(&(rhs[0]), tmp*sizeof(T)));
 	}
 	return ret;
       }
@@ -284,13 +284,13 @@ namespace ToolFramework{
       if(m_mode!=NEW && m_mode!=APPEND){
 	bool ret=true;
 	unsigned int tmp=0;
-	ret*=(*this) >> tmp;
+	ret= ret && ((*this) >> tmp);
 	rhs.resize(tmp);
 	if(tmp){
 	  if(check_base<SerialisableObject,T>::value){
-	    for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret*=(*this) >> (*it);
+	    for(typename std::deque<T>::iterator it=rhs.begin(); it!=rhs.end(); it++) ret= ret && ((*this) >> (*it));
 	  }
-	  else ret*=Bread(&(rhs[0]), tmp*sizeof(T));
+	  else ret= ret && (Bread(&(rhs[0]), tmp*sizeof(T)));
 	}
 	return ret;
       }
@@ -306,9 +306,9 @@ namespace ToolFramework{
       if(m_mode!=READ){
 	bool ret=true;
 	unsigned int tmp=rhs.size();
-	ret*=(*this) << tmp;
+	ret= ret && ((*this) << tmp);
 	for(unsigned int i=0; i<tmp; i++){
-	  ret*=(*this) << rhs.at(i);
+	  ret= ret && ((*this) << rhs.at(i));
 	}
 	return ret;
       }
@@ -319,10 +319,10 @@ namespace ToolFramework{
       if(m_mode!=NEW && m_mode!=APPEND){
 	bool ret=true;
 	unsigned int tmp=0;
-	ret*=(*this) >> tmp;
+	ret= ret && ((*this) >> tmp);
 	rhs.resize(tmp);
 	for(unsigned int i=0; i<tmp; i++){
-	  ret*=(*this) >> rhs.at(i);
+	  ret= ret && ((*this) >> rhs.at(i));
 	}
 	return ret;
       }

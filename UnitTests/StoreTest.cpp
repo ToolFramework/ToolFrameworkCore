@@ -67,20 +67,20 @@ float m2=0;
 bool n2=false;
 
 
-pass*=store.Get("a",a2);
-pass*=store.Get("b",b2);
-pass*=store.Get("c",c2);
-pass*=store.Get("d",d2);
-pass*=store.Get("e",e2);
-pass*=store.Get("f",f2);
-pass*=store.Get("g",g2);
-pass*=store.Get("h",h2);
-pass*=store.Get("i",i2);
-const int j2=store.Get<int>("j");
-pass*=store.Get("k",k2);
-pass*=store.Get("l",l2);
-pass*=store.Get("m",m2);
-pass*=store.Get("n",n2);
+ pass= pass && (store.Get("a",a2));
+ pass= pass && (store.Get("b",b2));
+ pass= pass && (store.Get("c",c2));
+ pass= pass && (store.Get("d",d2));
+ pass= pass && (store.Get("e",e2));
+ pass= pass && (store.Get("f",f2));
+ pass= pass && (store.Get("g",g2));
+ pass= pass && (store.Get("h",h2));
+ pass= pass && (store.Get("i",i2));
+ const int j2=store.Get<int>("j");
+ pass= pass && (store.Get("k",k2));
+ pass= pass && (store.Get("l",l2));
+ pass= pass && (store.Get("m",m2));
+ pass= pass && (store.Get("n",n2));
 
 
 bool tmp=true;

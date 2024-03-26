@@ -15,16 +15,18 @@ DataModelLib =
 MyToolsInclude =
 MyToolsLib =
 
-
 Includes=-I $(ToolFrameworkCore)/include/ -I $(SOURCEDIR)/include/
-Libs=-L $(SOURCEDIR)/lib/ -lMyTools -lDataModel -L $(ToolFrameworkCore)/lib/ -lStore -lLogging -lToolChain -lDataModelBase -lpthread
-LIBRARIES=lib/libDataModel.so lib/libMyTools.so
+ToolLibraries = $(patsubst %, lib/%, $(filter lib%, $(subst /, , $(wildcard UserTools/*/*.so))))
+LIBRARIES=lib/libDataModel.so lib/libMyTools.so $(ToolLibraries)
 DataModelHEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(wildcard DataModel/*.h))))
 MyToolHEADERS:=$(patsubst %.h, include/%.h, $(filter %.h, $(subst /, ,$(wildcard UserTools/*/*.h) $(wildcard UserTools/*.h))))
-SOURCEFILES:=$(patsubst %.cpp, %.o, $(wildcard */*.cpp) $(wildcard */*/*.cpp))
+ToolLibs = $(patsubst %.so, %, $(patsubst lib%, -l%,$(filter lib%, $(subst /, , $(wildcard UserTools/*/*.so)))))
+AlreadyCompiled = $(wildcard UserTools/$(filter-out %.so UserTools , $(subst /, ,$(wildcard UserTools/*/*.so)))/*.cpp)
+SOURCEFILES:=$(patsubst %.cpp, %.o,  $(filter-out $(AlreadyCompiled), $(wildcard */*.cpp) $(wildcard */*/*.cpp)))
+Libs=-L $(SOURCEDIR)/lib/ -lMyTools -lDataModel -L $(ToolFrameworkCore)/lib/ -lStore -lLogging -lToolChain -lDataModelBase -lpthread  $(ToolLibs)
+
 
 #.SECONDARY: $(%.o)
-
 
 all: $(DataModelHEADERS) $(MyToolHEADERS) $(SOURCEFILES) $(LIBRARIES) main
 
@@ -58,9 +60,13 @@ lib/libDataModel.so: $(patsubst %.cpp, %.o , $(wildcard DataModel/*.cpp)) |  $(D
 	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
 	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes) $(DataModelInclude)
 
-lib/libMyTools.so: $(patsubst %.cpp, %.o , $(wildcard UserTools/*/*.cpp)) |  $(DataModelInclude) $(MyToolsInclude)
+lib/libMyTools.so: $(patsubst %.cpp, %.o , $(filter-out $(AlreadyCompiled), $(wildcard UserTools/*/*.cpp))) |  $(DataModelInclude) $(MyToolsInclude)
 	@echo -e "\e[38;5;201m\n*************** Making " $@ "****************\e[0m"
 	g++ $(CXXFLAGS) --shared $^ -o $@ $(Includes) $(DataModelInclude) $(MyToolsInclude)
+
+lib/%.so:
+	@echo -e "\e[38;5;87m\n*************** sym linking Tool libs ****************\e[0m"
+	ln -s `pwd`/$(filter %$(strip $(patsubst lib/%.so, /%.so ,$@)), $(wildcard UserTools/*/*.so)) $@
 
 clean:
 	@echo -e "\e[38;5;201m\n*************** Cleaning up ****************\e[0m"
