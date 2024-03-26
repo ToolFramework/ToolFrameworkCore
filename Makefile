@@ -1,4 +1,4 @@
-SOURCEDIR=`pwd`
+SOURCEDIR !=pwd
 
 CXXFLAGS= -fPIC -O3 -Wpedantic -Wall -std=c++11 -Wno-comment -Wno-unused -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept  -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef #-Werror -Wold-style-cast 
 
@@ -41,11 +41,11 @@ main: src/main.o $(LIBRARIES) $(HEADERS) $(TempDataModelHEADERS) $(TempMyToolHEA
 
 include/%.h:
 	@echo -e "\e[38;5;87m\n*************** sym linking headers ****************\e[0m"
-	ln -s  `pwd`/$(filter %$(strip $(patsubst include/%.h, /%.h, $@)), $(wildcard src/*/*.h) $(wildcard UserTools/*/*.h)) $@
+	ln -s  $(SOURCEDIR)/$(filter %$(strip $(patsubst include/%.h, /%.h, $@)), $(wildcard src/*/*.h) $(wildcard UserTools/*/*.h)) $@
 
 tempinclude/%.h:
 	@echo -e "\e[38;5;87m\n*************** sym linking headers ****************\e[0m"
-	ln -s  `pwd`/$(filter %$(strip $(patsubst tempinclude/%.h, /%.h, $@)), $(wildcard DataModel/*.h) $(wildcard UserTools/*/*.h) $(wildcard UserTools/*.h)) $@
+	ln -s  $(SOURCEDIR)/$(filter %$(strip $(patsubst tempinclude/%.h, /%.h, $@)), $(wildcard DataModel/*.h) $(wildcard UserTools/*/*.h) $(wildcard UserTools/*.h)) $@
 
 src/%.o :  src/%.cpp $(HEADERS)  
 	@echo -e "\e[38;5;214m\n*************** Making " $@ "****************\e[0m"
