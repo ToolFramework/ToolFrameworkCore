@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_7epointerwrapperbase_71',['~PointerWrapperBase',['../classToolFramework_1_1PointerWrapperBase.html#acab0e30163d939c8e95a66f3fe49369d',1,'ToolFramework::PointerWrapperBase']]],
-  ['_7ethread_5fargs_72',['~Thread_args',['../structToolFramework_1_1Thread__args.html#ab31fabdcc974033b0bce2122305160c5',1,'ToolFramework::Thread_args']]]
+  ['vars_90',['vars',['../classToolFramework_1_1DataModelBase.html#a5bb1cd4f9cec3012a584732e371158e4',1,'ToolFramework::DataModelBase']]],
+  ['verbose_91',['verbose',['../structToolFramework_1_1MsgL.html#a37b86063010fbd8474fb3f2f350bbfe8',1,'ToolFramework::MsgL']]]
 ];

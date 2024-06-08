@@ -1,0 +1,61 @@
+\hypertarget{classToolFramework_1_1JobQueue}{}\doxysection{Tool\+Framework\+::Job\+Queue Class Reference}
+\label{classToolFramework_1_1JobQueue}\index{ToolFramework::JobQueue@{ToolFramework::JobQueue}}
+
+
+{\ttfamily \#include $<$Job\+Queue.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobQueue_aed770e1578fe6cf644cc707755d2a0c1}\label{classToolFramework_1_1JobQueue_aed770e1578fe6cf644cc707755d2a0c1}} 
+\mbox{\hyperlink{classToolFramework_1_1JobQueue_aed770e1578fe6cf644cc707755d2a0c1}{Job\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em simple constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobQueue_a73698d50e973c6f01b7219c61aa0f6d8}\label{classToolFramework_1_1JobQueue_a73698d50e973c6f01b7219c61aa0f6d8}} 
+\mbox{\hyperlink{classToolFramework_1_1JobQueue_a73698d50e973c6f01b7219c61aa0f6d8}{$\sim$\+Job\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em simple destructor \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classToolFramework_1_1JobQueue_ad95a4c88702d1f9dcb9beaa9e8aef676}{Add\+Job}} (\mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$job)
+\begin{DoxyCompactList}\small\item\em fucntion to adda job to the queue \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobQueue_a21c27cb3ff30e220fb14322396ee8a3f}\label{classToolFramework_1_1JobQueue_a21c27cb3ff30e220fb14322396ee8a3f}} 
+\mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1JobQueue_a21c27cb3ff30e220fb14322396ee8a3f}{Get\+Job}} ()
+\begin{DoxyCompactList}\small\item\em function to get job from the front of the queue, the function pops the job off the queue \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobQueue_a68c7792abc8be78764c0eade74dc4f2c}\label{classToolFramework_1_1JobQueue_a68c7792abc8be78764c0eade74dc4f2c}} 
+bool \mbox{\hyperlink{classToolFramework_1_1JobQueue_a68c7792abc8be78764c0eade74dc4f2c}{pop}} ()
+\begin{DoxyCompactList}\small\item\em function to pop a job off the front of the queue \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobQueue_a7207aac41499172fb2255f03eb1bde5e}\label{classToolFramework_1_1JobQueue_a7207aac41499172fb2255f03eb1bde5e}} 
+unsigned int \mbox{\hyperlink{classToolFramework_1_1JobQueue_a7207aac41499172fb2255f03eb1bde5e}{size}} ()
+\begin{DoxyCompactList}\small\item\em function to return number of jobs in the queue \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that is a queue of jobs for worker threads
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2024/06/08 1\+:17\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classToolFramework_1_1JobQueue_ad95a4c88702d1f9dcb9beaa9e8aef676}\label{classToolFramework_1_1JobQueue_ad95a4c88702d1f9dcb9beaa9e8aef676}} 
+\index{ToolFramework::JobQueue@{ToolFramework::JobQueue}!AddJob@{AddJob}}
+\index{AddJob@{AddJob}!ToolFramework::JobQueue@{ToolFramework::JobQueue}}
+\doxysubsubsection{\texorpdfstring{AddJob()}{AddJob()}}
+{\footnotesize\ttfamily bool Job\+Queue\+::\+Add\+Job (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$}]{job }\end{DoxyParamCaption})}
+
+
+
+fucntion to adda job to the queue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em job} & pointer to the job to add \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Job\+Queue.\+h\item 
+src/\+Data\+Model\+Base/Job\+Queue.\+cpp\end{DoxyCompactItemize}

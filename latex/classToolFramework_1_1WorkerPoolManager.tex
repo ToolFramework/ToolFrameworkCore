@@ -1,0 +1,69 @@
+\hypertarget{classToolFramework_1_1WorkerPoolManager}{}\doxysection{Tool\+Framework\+::Worker\+Pool\+Manager Class Reference}
+\label{classToolFramework_1_1WorkerPoolManager}\index{ToolFramework::WorkerPoolManager@{ToolFramework::WorkerPoolManager}}
+
+
+{\ttfamily \#include $<$Worker\+Pool\+Manager.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classToolFramework_1_1WorkerPoolManager_aeb5aef7e558bece6dd34da09fe0ae8a2}{Worker\+Pool\+Manager}} (\mbox{\hyperlink{classToolFramework_1_1JobQueue}{Job\+Queue}} \&job\+\_\+queue, unsigned int thread\+\_\+cap=4, unsigned int $\ast$global\+\_\+thread\+\_\+cap=0, unsigned int $\ast$global\+\_\+thread\+\_\+num=0, \mbox{\hyperlink{classToolFramework_1_1JobDeque}{Job\+Deque}} $\ast$job\+\_\+out\+\_\+deque=0, bool self\+\_\+serving=false, bool threaded=true, unsigned int thread\+\_\+sleep\+\_\+us=100, unsigned int thread\+\_\+management\+\_\+period\+\_\+us=10000, unsigned int job\+\_\+assignment\+\_\+period\+\_\+us=1000)
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1WorkerPoolManager_a17aa193db3671cbe7b447e09d5419cd3}\label{classToolFramework_1_1WorkerPoolManager_a17aa193db3671cbe7b447e09d5419cd3}} 
+\mbox{\hyperlink{classToolFramework_1_1WorkerPoolManager_a17aa193db3671cbe7b447e09d5419cd3}{$\sim$\+Worker\+Pool\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Simple Destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1WorkerPoolManager_a7a09436b607afd43938c538916897602}\label{classToolFramework_1_1WorkerPoolManager_a7a09436b607afd43938c538916897602}} 
+void \mbox{\hyperlink{classToolFramework_1_1WorkerPoolManager_a7a09436b607afd43938c538916897602}{Manage\+Workers}} ()
+\begin{DoxyCompactList}\small\item\em Function to manage workers and distribute jobs to be run when unthreaded if you choose to not have the managment run on a thread. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1WorkerPoolManager_acbc7d485f504ae364fcc31073568dba3}\label{classToolFramework_1_1WorkerPoolManager_acbc7d485f504ae364fcc31073568dba3}} 
+unsigned int \mbox{\hyperlink{classToolFramework_1_1WorkerPoolManager_acbc7d485f504ae364fcc31073568dba3}{Num\+Threads}} ()
+\begin{DoxyCompactList}\small\item\em Function to return the number of current worker threads. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is a template for a \mbox{\hyperlink{classToolFramework_1_1Tool}{Tool}} that dynamically more or less threads, such that there is always 1 available thread.\+This can therefore be used to scale to your worklaod, however be carefull when using more than one of these tools and to apply upperlimits if necessary both locally within this tool and globally so that more threads than is practical are created causing massive inefficency. Please fill out the descripton and author information.
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2024/06/08 1\+:17\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classToolFramework_1_1WorkerPoolManager_aeb5aef7e558bece6dd34da09fe0ae8a2}\label{classToolFramework_1_1WorkerPoolManager_aeb5aef7e558bece6dd34da09fe0ae8a2}} 
+\index{ToolFramework::WorkerPoolManager@{ToolFramework::WorkerPoolManager}!WorkerPoolManager@{WorkerPoolManager}}
+\index{WorkerPoolManager@{WorkerPoolManager}!ToolFramework::WorkerPoolManager@{ToolFramework::WorkerPoolManager}}
+\doxysubsubsection{\texorpdfstring{WorkerPoolManager()}{WorkerPoolManager()}}
+{\footnotesize\ttfamily Worker\+Pool\+Manager\+::\+Worker\+Pool\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classToolFramework_1_1JobQueue}{Job\+Queue}} \&}]{job\+\_\+queue,  }\item[{unsigned int}]{thread\+\_\+cap = {\ttfamily 4},  }\item[{unsigned int $\ast$}]{global\+\_\+thread\+\_\+cap = {\ttfamily 0},  }\item[{unsigned int $\ast$}]{global\+\_\+thread\+\_\+num = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classToolFramework_1_1JobDeque}{Job\+Deque}} $\ast$}]{job\+\_\+out\+\_\+deque = {\ttfamily 0},  }\item[{bool}]{self\+\_\+serving = {\ttfamily false},  }\item[{bool}]{threaded = {\ttfamily true},  }\item[{unsigned int}]{thread\+\_\+sleep\+\_\+us = {\ttfamily 100},  }\item[{unsigned int}]{thread\+\_\+management\+\_\+period\+\_\+us = {\ttfamily 10000},  }\item[{unsigned int}]{job\+\_\+assignment\+\_\+period\+\_\+us = {\ttfamily 1000} }\end{DoxyParamCaption})}
+
+Cconstructor for the Worker Pool Manager 
+\begin{DoxyParams}{Parameters}
+{\em job\+\_\+queue} & is the input job queue \\
+\hline
+{\em thread\+\_\+cap} & is the maximum number of worker threads that will be spawned \\
+\hline
+{\em global\+\_\+thread\+\_\+cap} & pointer to an external global thread cap \\
+\hline
+{\em global\+\_\+thread\+\_\+num} & pointer to external global thread counter to incriment \\
+\hline
+{\em job\+\_\+out\+\_\+deque} & optional completed job deque if you want an output list structure \\
+\hline
+{\em self\+\_\+serving} & whether threads help them selves to jobs or alternativly the manager will distribute jobs \\
+\hline
+{\em threaded} & if the manager runs on a thread. if not it can be executed manually multiple times \\
+\hline
+{\em thread\+\_\+sleep\+\_\+us} & how long threds will sleep for in us if no job is available \\
+\hline
+{\em thrad\+\_\+management\+\_\+period\+\_\+us} & how long between evaluating the number of worker threads to avoid rapid killing and recreating \\
+\hline
+{\em job\+\_\+assignment\+\_\+period} & how long the managers sleeps between checking if there are free workers to assign them new jobs \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Worker\+Pool\+Manager.\+h\item 
+src/\+Data\+Model\+Base/Worker\+Pool\+Manager.\+cpp\end{DoxyCompactItemize}

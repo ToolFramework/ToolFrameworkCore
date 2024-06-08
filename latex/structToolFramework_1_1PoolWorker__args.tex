@@ -1,0 +1,51 @@
+\hypertarget{structToolFramework_1_1PoolWorker__args}{}\doxysection{Tool\+Framework\+::Pool\+Worker\+\_\+args Struct Reference}
+\label{structToolFramework_1_1PoolWorker__args}\index{ToolFramework::PoolWorker\_args@{ToolFramework::PoolWorker\_args}}
+
+
+{\ttfamily \#include $<$Worker\+Pool\+Manager.\+h$>$}
+
+Inheritance diagram for Tool\+Framework\+::Pool\+Worker\+\_\+args\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structToolFramework_1_1PoolWorker__args}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolWorker__args_a3b509d298a1508b86dd4c70b26b58a10}\label{structToolFramework_1_1PoolWorker__args_a3b509d298a1508b86dd4c70b26b58a10}} 
+bool {\bfseries busy}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolWorker__args_a14ed2acb62483b0deaa7b9653ed0b624}\label{structToolFramework_1_1PoolWorker__args_a14ed2acb62483b0deaa7b9653ed0b624}} 
+unsigned int {\bfseries thread\+\_\+sleep\+\_\+us}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolWorker__args_a397285b5fd40b32761d14fd9bed32559}\label{structToolFramework_1_1PoolWorker__args_a397285b5fd40b32761d14fd9bed32559}} 
+bool {\bfseries self\+\_\+serving}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolWorker__args_ae0db65683a7098b1cb90c37735c0c561}\label{structToolFramework_1_1PoolWorker__args_ae0db65683a7098b1cb90c37735c0c561}} 
+\mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$ {\bfseries job}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolWorker__args_a682dd8256815b7c5cd82012b7cc6cfed}\label{structToolFramework_1_1PoolWorker__args_a682dd8256815b7c5cd82012b7cc6cfed}} 
+\mbox{\hyperlink{classToolFramework_1_1JobQueue}{Job\+Queue}} $\ast$ {\bfseries job\+\_\+queue}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolWorker__args_ab9dafc73be78bfae03c889c9995b3bd7}\label{structToolFramework_1_1PoolWorker__args_ab9dafc73be78bfae03c889c9995b3bd7}} 
+\mbox{\hyperlink{classToolFramework_1_1JobDeque}{Job\+Deque}} $\ast$ {\bfseries job\+\_\+out\+\_\+deque}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is a struct to place data you want your thread to acess or exchange with it. The idea is the data inside is only used by the thread and so will be thread safe
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2024/06/08 1\+:17\+:00 
+\end{DoxyParagraph}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Worker\+Pool\+Manager.\+h\item 
+src/\+Data\+Model\+Base/Worker\+Pool\+Manager.\+cpp\end{DoxyCompactItemize}

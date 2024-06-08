@@ -1,0 +1,72 @@
+\hypertarget{classToolFramework_1_1JobDeque}{}\doxysection{Tool\+Framework\+::Job\+Deque Class Reference}
+\label{classToolFramework_1_1JobDeque}\index{ToolFramework::JobDeque@{ToolFramework::JobDeque}}
+
+
+{\ttfamily \#include $<$Job\+Deque.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobDeque_a81e4a098723bc34e58e8e6673fef0ec4}\label{classToolFramework_1_1JobDeque_a81e4a098723bc34e58e8e6673fef0ec4}} 
+\mbox{\hyperlink{classToolFramework_1_1JobDeque_a81e4a098723bc34e58e8e6673fef0ec4}{Job\+Deque}} ()
+\begin{DoxyCompactList}\small\item\em simple constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobDeque_a779dbe5cd9f814e28b735b2d608a8eaa}\label{classToolFramework_1_1JobDeque_a779dbe5cd9f814e28b735b2d608a8eaa}} 
+\mbox{\hyperlink{classToolFramework_1_1JobDeque_a779dbe5cd9f814e28b735b2d608a8eaa}{$\sim$\+Job\+Deque}} ()
+\begin{DoxyCompactList}\small\item\em simple destructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1JobDeque_af5110187af6896cb41bc9e1573b0b5d4}\label{classToolFramework_1_1JobDeque_af5110187af6896cb41bc9e1573b0b5d4}} 
+unsigned int \mbox{\hyperlink{classToolFramework_1_1JobDeque_af5110187af6896cb41bc9e1573b0b5d4}{size}} ()
+\begin{DoxyCompactList}\small\item\em return the number of jobs in the deque \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classToolFramework_1_1JobDeque_afa22a5d552ea19af1c6233de0a58468d}{push\+\_\+back}} (\mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$job)
+\begin{DoxyCompactList}\small\item\em add a job to the deque. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1JobDeque_a6aabcff4ee06f1cb631419d46f6a314a}{Get\+Job}} (std\+::string id)
+\begin{DoxyCompactList}\small\item\em function to pop a job off the queue. it returns the first job with the matching id \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that is a deque of jobs that have been completed
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2024/06/08 1\+:17\+:00 
+\end{DoxyParagraph}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classToolFramework_1_1JobDeque_a6aabcff4ee06f1cb631419d46f6a314a}\label{classToolFramework_1_1JobDeque_a6aabcff4ee06f1cb631419d46f6a314a}} 
+\index{ToolFramework::JobDeque@{ToolFramework::JobDeque}!GetJob@{GetJob}}
+\index{GetJob@{GetJob}!ToolFramework::JobDeque@{ToolFramework::JobDeque}}
+\doxysubsubsection{\texorpdfstring{GetJob()}{GetJob()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$ Job\+Deque\+::\+Get\+Job (\begin{DoxyParamCaption}\item[{std\+::string}]{id }\end{DoxyParamCaption})}
+
+
+
+function to pop a job off the queue. it returns the first job with the matching id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the id of the job to retrieve \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1JobDeque_afa22a5d552ea19af1c6233de0a58468d}\label{classToolFramework_1_1JobDeque_afa22a5d552ea19af1c6233de0a58468d}} 
+\index{ToolFramework::JobDeque@{ToolFramework::JobDeque}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!ToolFramework::JobDeque@{ToolFramework::JobDeque}}
+\doxysubsubsection{\texorpdfstring{push\_back()}{push\_back()}}
+{\footnotesize\ttfamily void Job\+Deque\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $\ast$}]{job }\end{DoxyParamCaption})}
+
+
+
+add a job to the deque. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em job} & job to add \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Job\+Deque.\+h\item 
+src/\+Data\+Model\+Base/Job\+Deque.\+cpp\end{DoxyCompactItemize}

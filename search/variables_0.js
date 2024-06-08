@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buffer_138',['buffer',['../classToolFramework_1_1Logging.html#ae01d63aa43ef0fdd7bb93ebd617a77d7',1,'ToolFramework::Logging']]]
+  ['args_183',['args',['../structToolFramework_1_1PoolManager__args.html#a9414b098320ade432b70bcb4fdec9e09',1,'ToolFramework::PoolManager_args']]]
 ];

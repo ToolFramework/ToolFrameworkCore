@@ -1,0 +1,50 @@
+\hypertarget{classToolFramework_1_1Job}{}\doxysection{Tool\+Framework\+::Job Class Reference}
+\label{classToolFramework_1_1Job}\index{ToolFramework::Job@{ToolFramework::Job}}
+
+
+{\ttfamily \#include $<$Job.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_a9a84c3adece2f92eccea4ce6cca5dede}\label{classToolFramework_1_1Job_a9a84c3adece2f92eccea4ce6cca5dede}} 
+\mbox{\hyperlink{classToolFramework_1_1Job_a9a84c3adece2f92eccea4ce6cca5dede}{Job}} (std\+::string id)
+\begin{DoxyCompactList}\small\item\em constructor with string to pass identification information for retreival \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_a0a06947e07f48ca2c78a5ff263462249}\label{classToolFramework_1_1Job_a0a06947e07f48ca2c78a5ff263462249}} 
+bool($\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_a0a06947e07f48ca2c78a5ff263462249}{func}} )(void $\ast$)
+\begin{DoxyCompactList}\small\item\em function for worker thread to run \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_ab45f88ef6f03b4bf03d81ca288ee4dc9}\label{classToolFramework_1_1Job_ab45f88ef6f03b4bf03d81ca288ee4dc9}} 
+void $\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_ab45f88ef6f03b4bf03d81ca288ee4dc9}{data}}
+\begin{DoxyCompactList}\small\item\em data packet for thread to retreive data \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_afe57de0763c8016021506c7768e8bf0f}\label{classToolFramework_1_1Job_afe57de0763c8016021506c7768e8bf0f}} 
+bool \mbox{\hyperlink{classToolFramework_1_1Job_afe57de0763c8016021506c7768e8bf0f}{m\+\_\+complete}}
+\begin{DoxyCompactList}\small\item\em if the job is complete \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_a53db3440fa8f659c5679ba6ea1f3768f}\label{classToolFramework_1_1Job_a53db3440fa8f659c5679ba6ea1f3768f}} 
+bool \mbox{\hyperlink{classToolFramework_1_1Job_a53db3440fa8f659c5679ba6ea1f3768f}{m\+\_\+in\+\_\+progress}}
+\begin{DoxyCompactList}\small\item\em if the job is in progress \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_a2a5b1b3183403d9bd2c7a2d9775ae468}\label{classToolFramework_1_1Job_a2a5b1b3183403d9bd2c7a2d9775ae468}} 
+bool \mbox{\hyperlink{classToolFramework_1_1Job_a2a5b1b3183403d9bd2c7a2d9775ae468}{m\+\_\+failed}}
+\begin{DoxyCompactList}\small\item\em if the job ahs failed \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_a295965ab7c885923eaa893af7dcd03d7}\label{classToolFramework_1_1Job_a295965ab7c885923eaa893af7dcd03d7}} 
+std\+::string \mbox{\hyperlink{classToolFramework_1_1Job_a295965ab7c885923eaa893af7dcd03d7}{m\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em string to hold id \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to store jobs for worker threads
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2024/06/08 1\+:17\+:00 
+\end{DoxyParagraph}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Job.\+h\item 
+src/\+Data\+Model\+Base/Job.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\hypertarget{structToolFramework_1_1PoolManager__args}{}\doxysection{Tool\+Framework\+::Pool\+Manager\+\_\+args Struct Reference}
+\label{structToolFramework_1_1PoolManager__args}\index{ToolFramework::PoolManager\_args@{ToolFramework::PoolManager\_args}}
+
+
+{\ttfamily \#include $<$Worker\+Pool\+Manager.\+h$>$}
+
+Inheritance diagram for Tool\+Framework\+::Pool\+Manager\+\_\+args\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structToolFramework_1_1PoolManager__args}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a6cd4a9b4eb8516eda4578c0230e3e4bd}\label{structToolFramework_1_1PoolManager__args_a6cd4a9b4eb8516eda4578c0230e3e4bd}} 
+\mbox{\hyperlink{classToolFramework_1_1JobQueue}{Job\+Queue}} $\ast$ {\bfseries job\+\_\+queue}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_aef24ad1b9ce5e1533ad0d1d7103f7944}\label{structToolFramework_1_1PoolManager__args_aef24ad1b9ce5e1533ad0d1d7103f7944}} 
+unsigned int \mbox{\hyperlink{structToolFramework_1_1PoolManager__args_aef24ad1b9ce5e1533ad0d1d7103f7944}{thread\+\_\+cap}}
+\begin{DoxyCompactList}\small\item\em Variable to cap the number of thread workers. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a381c8e5decf9558bed9ec811a3380d7c}\label{structToolFramework_1_1PoolManager__args_a381c8e5decf9558bed9ec811a3380d7c}} 
+unsigned int $\ast$ {\bfseries global\+\_\+thread\+\_\+cap}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a8611a881b80311cb8fa157af6eba010a}\label{structToolFramework_1_1PoolManager__args_a8611a881b80311cb8fa157af6eba010a}} 
+unsigned int $\ast$ {\bfseries global\+\_\+thread\+\_\+num}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_ab9b3b6070d6d360c2c59e898b69bf5a5}\label{structToolFramework_1_1PoolManager__args_ab9b3b6070d6d360c2c59e898b69bf5a5}} 
+\mbox{\hyperlink{classToolFramework_1_1JobDeque}{Job\+Deque}} $\ast$ {\bfseries job\+\_\+out\+\_\+deque}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a6e7e80596ccd1fb55e174f84d3e079e7}\label{structToolFramework_1_1PoolManager__args_a6e7e80596ccd1fb55e174f84d3e079e7}} 
+bool {\bfseries self\+\_\+serving}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a0301b8f47622dc731925a703ec5c231c}\label{structToolFramework_1_1PoolManager__args_a0301b8f47622dc731925a703ec5c231c}} 
+unsigned int {\bfseries thread\+\_\+sleep\+\_\+us}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a11b1657c00319326db59f701a12bfd75}\label{structToolFramework_1_1PoolManager__args_a11b1657c00319326db59f701a12bfd75}} 
+unsigned int {\bfseries thread\+\_\+management\+\_\+period\+\_\+us}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_ad70face2a7cf10e3a8446032ef00c0bb}\label{structToolFramework_1_1PoolManager__args_ad70face2a7cf10e3a8446032ef00c0bb}} 
+unsigned int {\bfseries job\+\_\+assignment\+\_\+period\+\_\+us}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a9824f09fc7f5a7bdf790709a8d388ae7}\label{structToolFramework_1_1PoolManager__args_a9824f09fc7f5a7bdf790709a8d388ae7}} 
+\mbox{\hyperlink{classToolFramework_1_1Utilities}{Utilities}} $\ast$ {\bfseries util}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a9414b098320ade432b70bcb4fdec9e09}\label{structToolFramework_1_1PoolManager__args_a9414b098320ade432b70bcb4fdec9e09}} 
+std\+::vector$<$ \mbox{\hyperlink{structToolFramework_1_1PoolWorker__args}{Pool\+Worker\+\_\+args}} $\ast$ $>$ \mbox{\hyperlink{structToolFramework_1_1PoolManager__args_a9414b098320ade432b70bcb4fdec9e09}{args}}
+\begin{DoxyCompactList}\small\item\em Vector of thread args (also holds pointers to the threads) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a8ceacfd6a484e6963731154287007ac6}\label{structToolFramework_1_1PoolManager__args_a8ceacfd6a484e6963731154287007ac6}} 
+unsigned long \mbox{\hyperlink{structToolFramework_1_1PoolManager__args_a8ceacfd6a484e6963731154287007ac6}{thread\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em Counter for unique naming of threads. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a0032b2d581f03dc86834be7076b45234}\label{structToolFramework_1_1PoolManager__args_a0032b2d581f03dc86834be7076b45234}} 
+bool {\bfseries manage}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_afdeead95ddcd672c7eac2cdd225eed88}\label{structToolFramework_1_1PoolManager__args_afdeead95ddcd672c7eac2cdd225eed88}} 
+bool {\bfseries serve}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a354f65d3bad81cd979eca71f6649f1de}\label{structToolFramework_1_1PoolManager__args_a354f65d3bad81cd979eca71f6649f1de}} 
+bool {\bfseries sleep}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a27e38f3eb3b477152fe224f5eafe8572}\label{structToolFramework_1_1PoolManager__args_a27e38f3eb3b477152fe224f5eafe8572}} 
+unsigned int {\bfseries sleep\+\_\+us}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a64d47433909f49086b9a9013e35c9c40}\label{structToolFramework_1_1PoolManager__args_a64d47433909f49086b9a9013e35c9c40}} 
+unsigned int \mbox{\hyperlink{structToolFramework_1_1PoolManager__args_a64d47433909f49086b9a9013e35c9c40}{free\+\_\+threads}}
+\begin{DoxyCompactList}\small\item\em Keeps track of free threads. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_aa97a48b26a126327c906df96d4d814d9}\label{structToolFramework_1_1PoolManager__args_aa97a48b26a126327c906df96d4d814d9}} 
+std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point {\bfseries now}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_ab67c6fa11d1030cb98247df3a0968d78}\label{structToolFramework_1_1PoolManager__args_ab67c6fa11d1030cb98247df3a0968d78}} 
+std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point {\bfseries managing\+\_\+timer}
+\item 
+\mbox{\Hypertarget{structToolFramework_1_1PoolManager__args_a31cbb715328d564abe86dbb4e4da3426}\label{structToolFramework_1_1PoolManager__args_a31cbb715328d564abe86dbb4e4da3426}} 
+std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point {\bfseries serving\+\_\+timer}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is a struct to place data you want your thread to acess or exchange with it. The idea is the datainside is only used by the thread and so will be thread safe
+
+\begin{DoxyParagraph}{Author}
+B.\+Richards 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date}
+2024/06/08 1\+:17\+:00 
+\end{DoxyParagraph}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Data\+Model\+Base/Worker\+Pool\+Manager.\+h\item 
+src/\+Data\+Model\+Base/Worker\+Pool\+Manager.\+cpp\end{DoxyCompactItemize}

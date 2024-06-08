@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['serialisableobject_53',['SerialisableObject',['../classToolFramework_1_1SerialisableObject.html',1,'ToolFramework']]],
-  ['serialise_54',['Serialise',['../classToolFramework_1_1BStore.html#aad69a5bed1adbf77c47bff31b3509880',1,'ToolFramework::BStore']]],
-  ['set_55',['Set',['../classToolFramework_1_1BStore.html#a69211f9087b585b34fee5818c7e0f67b',1,'ToolFramework::BStore::Set(std::string name, T &amp;in)'],['../classToolFramework_1_1BStore.html#a0e0ec34501857cca62a9c52e2115a953',1,'ToolFramework::BStore::Set(std::string name, T *in, bool persist=true)'],['../classToolFramework_1_1Store.html#acbdc2f9391b5a9ce57d7126b45ffb200',1,'ToolFramework::Store::Set(std::string name, T in)'],['../classToolFramework_1_1Store.html#a5ce187dc136beb765a9f0c9361b68b8e',1,'ToolFramework::Store::Set(std::string name, std::string in)'],['../classToolFramework_1_1Store.html#ab4830efa9947d54d79299a3c834b6de7',1,'ToolFramework::Store::Set(std::string name, const char *in)'],['../classToolFramework_1_1Store.html#af5c02078af68cf5d47bd7851c4e6888a',1,'ToolFramework::Store::Set(std::string name, std::vector&lt; T &gt; in)'],['../classToolFramework_1_1Store.html#a42eb7ae42ace36b9a08116ad50926c34',1,'ToolFramework::Store::Set(std::string name, std::vector&lt; std::string &gt; in)']]],
-  ['store_56',['Store',['../classToolFramework_1_1Store.html',1,'ToolFramework']]],
-  ['stores_57',['Stores',['../classToolFramework_1_1DataModelBase.html#ae6dcda92cb7872e42b696c9afaf5f7f5',1,'ToolFramework::DataModelBase']]]
+  ['readme_68',['README',['../md_DataModel_README.html',1,'(Global Namespace)'],['../md_README.html',1,'(Global Namespace)'],['../md_src_DataModelBase_README.html',1,'(Global Namespace)']]],
+  ['remove_69',['Remove',['../classToolFramework_1_1BStore.html#a6a8bfbede11adc57503efeca395dd5b4',1,'ToolFramework::BStore']]],
+  ['running_70',['running',['../structToolFramework_1_1Thread__args.html#a79abba9a5142227f8dfa90539e9d9575',1,'ToolFramework::Thread_args']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['stores_151',['Stores',['../classToolFramework_1_1DataModelBase.html#ae6dcda92cb7872e42b696c9afaf5f7f5',1,'ToolFramework::DataModelBase']]]
+  ['pointer_201',['pointer',['../classToolFramework_1_1PointerWrapper.html#a826c4e2046d82a292899363303132a79',1,'ToolFramework::PointerWrapper']]]
 ];
