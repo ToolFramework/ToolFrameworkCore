@@ -36,7 +36,13 @@ bool \mbox{\hyperlink{classToolFramework_1_1Store_a4e4e474d7b527e6fe07eabfbcb547
 \item 
 {\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classToolFramework_1_1Store_acbdc2f9391b5a9ce57d7126b45ffb200}{Set}} (std\+::string name, T in)
 \item 
+void \mbox{\hyperlink{classToolFramework_1_1Store_a5ce187dc136beb765a9f0c9361b68b8e}{Set}} (std\+::string name, std\+::string in)
+\item 
+void \mbox{\hyperlink{classToolFramework_1_1Store_ab4830efa9947d54d79299a3c834b6de7}{Set}} (std\+::string name, const char $\ast$in)
+\item 
 {\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classToolFramework_1_1Store_af5c02078af68cf5d47bd7851c4e6888a}{Set}} (std\+::string name, std\+::vector$<$ T $>$ in)
+\item 
+void \mbox{\hyperlink{classToolFramework_1_1Store_a42eb7ae42ace36b9a08116ad50926c34}{Set}} (std\+::string name, std\+::vector$<$ std\+::string $>$ in)
 \item 
 std\+::string $\ast$ \mbox{\hyperlink{classToolFramework_1_1Store_a83f771d0447f39599fadf2da95b40907}{operator\mbox{[}$\,$\mbox{]}}} (std\+::string key)
 \item 
@@ -225,10 +231,49 @@ Returns string pointer to \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} 
 \begin{DoxyReturn}{Returns}
 a pointer to the string version of the value within the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classToolFramework_1_1Store_ab4830efa9947d54d79299a3c834b6de7}\label{classToolFramework_1_1Store_ab4830efa9947d54d79299a3c834b6de7}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Set@{Set}}
+\index{Set@{Set}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily void Store\+::\+Set (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{const char $\ast$}]{in }\end{DoxyParamCaption})}
+
+string setter function to assign vairables in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The key to be used to store and reference the variable in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. \\
+\hline
+{\em in} & the varaible to be stored. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1Store_a5ce187dc136beb765a9f0c9361b68b8e}\label{classToolFramework_1_1Store_a5ce187dc136beb765a9f0c9361b68b8e}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Set@{Set}}
+\index{Set@{Set}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily void Store\+::\+Set (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string}]{in }\end{DoxyParamCaption})}
+
+string setter function to assign vairables in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The key to be used to store and reference the variable in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. \\
+\hline
+{\em in} & the varaible to be stored. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1Store_a42eb7ae42ace36b9a08116ad50926c34}\label{classToolFramework_1_1Store_a42eb7ae42ace36b9a08116ad50926c34}} 
+\index{ToolFramework::Store@{ToolFramework::Store}!Set@{Set}}
+\index{Set@{Set}!ToolFramework::Store@{ToolFramework::Store}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily void Store\+::\+Set (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::vector$<$ std\+::string $>$}]{in }\end{DoxyParamCaption})}
+
+string setter function to assign vairables in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} from a vector. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The key to be used to store and reference the variable in the \mbox{\hyperlink{classToolFramework_1_1Store}{Store}}. \\
+\hline
+{\em in} & the varaible to be stored. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classToolFramework_1_1Store_af5c02078af68cf5d47bd7851c4e6888a}\label{classToolFramework_1_1Store_af5c02078af68cf5d47bd7851c4e6888a}} 
 \index{ToolFramework::Store@{ToolFramework::Store}!Set@{Set}}
 \index{Set@{Set}!ToolFramework::Store@{ToolFramework::Store}}
-\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 void Tool\+Framework\+::\+Store\+::\+Set (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::vector$<$ T $>$}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -242,7 +287,7 @@ Templated setter function to assign vairables in the \mbox{\hyperlink{classToolF
 \mbox{\Hypertarget{classToolFramework_1_1Store_acbdc2f9391b5a9ce57d7126b45ffb200}\label{classToolFramework_1_1Store_acbdc2f9391b5a9ce57d7126b45ffb200}} 
 \index{ToolFramework::Store@{ToolFramework::Store}!Set@{Set}}
 \index{Set@{Set}!ToolFramework::Store@{ToolFramework::Store}}
-\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 void Tool\+Framework\+::\+Store\+::\+Set (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{T}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
