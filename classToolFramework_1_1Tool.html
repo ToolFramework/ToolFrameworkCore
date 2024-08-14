@@ -128,6 +128,12 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a33d26fe6c6ceb153f06a544e77646378"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Tool.html#a33d26fe6c6ceb153f06a544e77646378">Log</a> (T message, int messagelevel=0)</td></tr>
 <tr class="memdesc:a33d26fe6c6ceb153f06a544e77646378"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classToolFramework_1_1Logging.html">Logging</a> fuction for printouts.  <a href="classToolFramework_1_1Tool.html#a33d26fe6c6ceb153f06a544e77646378">More...</a><br /></td></tr>
 <tr class="separator:a33d26fe6c6ceb153f06a544e77646378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e7dc8fe9e6bfb1192002cdc81796436"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Tool.html#a6e7dc8fe9e6bfb1192002cdc81796436">InitialiseTool</a> (<a class="el" href="classDataModel.html">DataModel</a> &amp;data)</td></tr>
+<tr class="separator:a6e7dc8fe9e6bfb1192002cdc81796436"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa59317621b38d3c30aad772c61159510"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Tool.html#aa59317621b38d3c30aad772c61159510">InitialiseConfiguration</a> (std::string &amp;configfile)</td></tr>
+<tr class="separator:aa59317621b38d3c30aad772c61159510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa912f0865d56215cb03042e03f8e2aa3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Tool.html#aa912f0865d56215cb03042e03f8e2aa3">ExportConfiguration</a> ()</td></tr>
+<tr class="separator:aa912f0865d56215cb03042e03f8e2aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -156,6 +162,32 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <dl class="section rcs"><dt>Author</dt><dd>B.Richards </dd></dl>
 <dl class="section rcs"><dt>Date</dt><dd>2019/05/28 10:44:00 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa912f0865d56215cb03042e03f8e2aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa912f0865d56215cb03042e03f8e2aa3">&#9670;&nbsp;</a></span>ExportConfiguration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ToolFramework::Tool::ExportConfiguration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>&lt; Export of local m_variables <a class="el" href="classToolFramework_1_1Store.html">Store</a> to matamodel vars for central exporting of configuration to data file.</p>
+
+</div>
+</div>
 <a id="acd45ac0abe3bf8b2cfbdd78802e2c648"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd45ac0abe3bf8b2cfbdd78802e2c648">&#9670;&nbsp;</a></span>Initialise()</h2>
 
@@ -200,6 +232,70 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </dl>
 
 <p>Implemented in <a class="el" href="classMyToolThread.html#adc7ab1ab74fc1564f07e52e63383d679">MyToolThread</a>, <a class="el" href="classMyToolMultiThread.html#a19dc55079a7b2da02ad9addd565b8e80">MyToolMultiThread</a>, <a class="el" href="classMyToolDynamicMultiThread.html#ac082408d85bc3e76214e55d4f62de0da">MyToolDynamicMultiThread</a>, <a class="el" href="classMyTool.html#a3bf60061195a18542c4cfb2916b9dad9">MyTool</a>, and <a class="el" href="classDummyTool.html#a0d9cd781681a06ee3cf0cd1e7bb770a8">DummyTool</a>.</p>
+
+</div>
+</div>
+<a id="aa59317621b38d3c30aad772c61159510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa59317621b38d3c30aad772c61159510">&#9670;&nbsp;</a></span>InitialiseConfiguration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ToolFramework::Tool::InitialiseConfiguration </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>configfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>&lt; Inisialisation of m_varaiables first from global vars and then local config file to overlaod.</p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">configfile</td><td>configfile path.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6e7dc8fe9e6bfb1192002cdc81796436"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e7dc8fe9e6bfb1192002cdc81796436">&#9670;&nbsp;</a></span>InitialiseTool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ToolFramework::Tool::InitialiseTool </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classDataModel.html">DataModel</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>&lt; <a class="el" href="classToolFramework_1_1Logging.html">Logging</a> fuction to set the datamodel and and logging poitners</p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">messagelevel</td><td>data <a class="el" href="classDataModel.html">DataModel</a> reference;</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

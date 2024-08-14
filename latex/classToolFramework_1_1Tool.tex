@@ -39,7 +39,13 @@ void \mbox{\hyperlink{classToolFramework_1_1Tool_aafcc67dab81dba1428cb89ed1f7dd0
 {\footnotesize template$<$typename T $>$ }\\void {\bfseries Log} (T message, int messagelevel, int verbosity)
 \item 
 {\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classToolFramework_1_1Tool_a33d26fe6c6ceb153f06a544e77646378}{Log}} (T message, int messagelevel=0)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} fuction for printouts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} fuction for printouts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classToolFramework_1_1Tool_a6e7dc8fe9e6bfb1192002cdc81796436}{Initialise\+Tool}} (\mbox{\hyperlink{classDataModel}{Data\+Model}} \&data)
+\item 
+bool \mbox{\hyperlink{classToolFramework_1_1Tool_aa59317621b38d3c30aad772c61159510}{Initialise\+Configuration}} (std\+::string \&configfile)
+\item 
+void \mbox{\hyperlink{classToolFramework_1_1Tool_aa912f0865d56215cb03042e03f8e2aa3}{Export\+Configuration}} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -72,7 +78,13 @@ B.\+Richards
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classToolFramework_1_1Tool_acd45ac0abe3bf8b2cfbdd78802e2c648}\label{classToolFramework_1_1Tool_acd45ac0abe3bf8b2cfbdd78802e2c648}} 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_aa912f0865d56215cb03042e03f8e2aa3}\label{classToolFramework_1_1Tool_aa912f0865d56215cb03042e03f8e2aa3}} 
+\index{ToolFramework::Tool@{ToolFramework::Tool}!ExportConfiguration@{ExportConfiguration}}
+\index{ExportConfiguration@{ExportConfiguration}!ToolFramework::Tool@{ToolFramework::Tool}}
+\doxysubsubsection{\texorpdfstring{ExportConfiguration()}{ExportConfiguration()}}
+{\footnotesize\ttfamily void Tool\+Framework\+::\+Tool\+::\+Export\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+$<$ Export of local m\+\_\+variables \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} to matamodel vars for central exporting of configuration to data file.\mbox{\Hypertarget{classToolFramework_1_1Tool_acd45ac0abe3bf8b2cfbdd78802e2c648}\label{classToolFramework_1_1Tool_acd45ac0abe3bf8b2cfbdd78802e2c648}} 
 \index{ToolFramework::Tool@{ToolFramework::Tool}!Initialise@{Initialise}}
 \index{Initialise@{Initialise}!ToolFramework::Tool@{ToolFramework::Tool}}
 \doxysubsubsection{\texorpdfstring{Initialise()}{Initialise()}}
@@ -93,6 +105,28 @@ virtual Initialise function that reads in the assigned config file and optain Da
 
 Implemented in \mbox{\hyperlink{classMyToolThread_adc7ab1ab74fc1564f07e52e63383d679}{My\+Tool\+Thread}}, \mbox{\hyperlink{classMyToolMultiThread_a19dc55079a7b2da02ad9addd565b8e80}{My\+Tool\+Multi\+Thread}}, \mbox{\hyperlink{classMyToolDynamicMultiThread_ac082408d85bc3e76214e55d4f62de0da}{My\+Tool\+Dynamic\+Multi\+Thread}}, \mbox{\hyperlink{classMyTool_a3bf60061195a18542c4cfb2916b9dad9}{My\+Tool}}, and \mbox{\hyperlink{classDummyTool_a0d9cd781681a06ee3cf0cd1e7bb770a8}{Dummy\+Tool}}.
 
+\mbox{\Hypertarget{classToolFramework_1_1Tool_aa59317621b38d3c30aad772c61159510}\label{classToolFramework_1_1Tool_aa59317621b38d3c30aad772c61159510}} 
+\index{ToolFramework::Tool@{ToolFramework::Tool}!InitialiseConfiguration@{InitialiseConfiguration}}
+\index{InitialiseConfiguration@{InitialiseConfiguration}!ToolFramework::Tool@{ToolFramework::Tool}}
+\doxysubsubsection{\texorpdfstring{InitialiseConfiguration()}{InitialiseConfiguration()}}
+{\footnotesize\ttfamily bool Tool\+Framework\+::\+Tool\+::\+Initialise\+Configuration (\begin{DoxyParamCaption}\item[{std\+::string \&}]{configfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+$<$ Inisialisation of m\+\_\+varaiables first from global vars and then local config file to overlaod.
+\begin{DoxyParams}{Parameters}
+{\em configfile} & configfile path.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classToolFramework_1_1Tool_a6e7dc8fe9e6bfb1192002cdc81796436}\label{classToolFramework_1_1Tool_a6e7dc8fe9e6bfb1192002cdc81796436}} 
+\index{ToolFramework::Tool@{ToolFramework::Tool}!InitialiseTool@{InitialiseTool}}
+\index{InitialiseTool@{InitialiseTool}!ToolFramework::Tool@{ToolFramework::Tool}}
+\doxysubsubsection{\texorpdfstring{InitialiseTool()}{InitialiseTool()}}
+{\footnotesize\ttfamily void Tool\+Framework\+::\+Tool\+::\+Initialise\+Tool (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDataModel}{Data\+Model}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+$<$ \mbox{\hyperlink{classToolFramework_1_1Logging}{Logging}} fuction to set the datamodel and and logging poitners
+\begin{DoxyParams}{Parameters}
+{\em messagelevel} & data \mbox{\hyperlink{classDataModel}{Data\+Model}} reference;\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classToolFramework_1_1Tool_a33d26fe6c6ceb153f06a544e77646378}\label{classToolFramework_1_1Tool_a33d26fe6c6ceb153f06a544e77646378}} 
 \index{ToolFramework::Tool@{ToolFramework::Tool}!Log@{Log}}
 \index{Log@{Log}!ToolFramework::Tool@{ToolFramework::Tool}}
