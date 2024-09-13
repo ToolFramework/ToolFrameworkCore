@@ -8,6 +8,18 @@
 #include <iostream>
 #include <sstream> 
 
+/**
+ * Replace all instances of @param from inside @param str by @param to.
+ * https://stackoverflow.com/a/24315631
+ */
+static inline void ReplaceAll(std::string &str, const std::string& from, const std::string& to) {
+  size_t start_pos = 0;
+  while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+    str.replace(start_pos, from.length(), to);
+    start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
+  }
+}
+
 namespace ToolFramework{
 
   /**
@@ -204,15 +216,21 @@ namespace ToolFramework{
       stream<<"{";
       bool first=true;
       for (std::map<std::string,std::string>::iterator it=m_variables.begin(); it!=m_variables.end(); ++it){
-	if (!first) stream<<",";
-	stream<<"\""<<it->first<<"\":"<< it->second<<" ";
+	if (!first) stream<<", ";
+
+	//Replace any occurances of "{ or }"
+	// (e.g. if one of the it->second is a JSON dump of its own)
+	// This should also work if there are multiple levels of JSON dump
+	ReplaceAll(it->second, "\"{", "{");
+	ReplaceAll(it->second, "}\"", "}");
+
+	stream<<"\""<<it->first<<"\":"<< it->second;
 	
 	first=false;
       }
       stream<<"}";
-      
+
       obj=stream.str();
-      
     } 
     
     std::map<std::string, std::string>::iterator begin() { return m_variables.begin(); }
@@ -226,7 +244,7 @@ namespace ToolFramework{
     std::string StringStrip(std::string in);
     
   };
-  
+
 }
 
 #endif
