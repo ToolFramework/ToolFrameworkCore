@@ -86,6 +86,8 @@ void Store::JsonParser(std::string input){
      //        6 - object
      //        7 - array
 
+    if ((input[i] == '\n' || input[i] == '\r') && type != 4) continue;
+
     if(input[i]=='\"' && type<5){
       if(type==4) value+='"';
       type++;
