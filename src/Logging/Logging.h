@@ -15,6 +15,11 @@
 
 namespace ToolFramework{
 
+  const int v_error = 0;
+  const int v_warning = 1;
+  const int v_message = 2;
+  const int v_debug = 3;
+
   #ifndef NO_COLOUR
   const char red[] = "\033[31m"; //"\033[38;5;88m"
   const char lightred[] = "\033[91m"; //"\033[38;5;196m"

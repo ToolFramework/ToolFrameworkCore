@@ -104,6 +104,7 @@ void Store::JsonParser(std::string input){
      }
      else if(type==3  && !(input[i]==' ' || input[i]=='{' || input[i]=='[')) value+=input[i];
      else if(type==3  && input[i]=='{'){ value+=input[i]; type=6; }
+     else if(type==4  && input[i]=='{'){ value.replace(value.length()-1, 1, "{"); type=6; }
      else if(type==6  && input[i]=='{'){ value+=input[i]; bracket_counter++; }
      else if(type==6  && input[i]=='}'){ value+=input[i]; bracket_counter--;if(bracket_counter==-1){ type=5; bracket_counter=0;} }
      else if(type==3  && input[i]=='['){ value+=input[i]; type=7; }
