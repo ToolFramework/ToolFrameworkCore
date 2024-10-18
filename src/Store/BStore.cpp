@@ -1,5 +1,7 @@
 #include <BStore.h>
 
+#include <unordered_map>
+
 using namespace ToolFramework;
 
 ////////////////////////
@@ -952,4 +954,112 @@ BStore::~BStore(){
   Delete();
 
 
+}
+
+namespace ToolFramework {
+  bool json_encode(std::ostream& output, const BStore& store) {
+    return store.JsonEncode(output);
+  }
+};
+
+template <typename T>
+static bool json_encode_bs(std::ostream& output, const BinaryStream& input) {
+  T datum;
+  // input must be const to conform to the JSON encoders interface layed out in
+  // Json.h (const std::vector<BStore>& must be JSON-serializable) and to the
+  // general idea that reading an object shouldn't change it. However, reading
+  // from BinaryStream changes its position. We have to either cast away the
+  // constness here or declare BinaryStream::m_pos mutable. I don't know which
+  // way is better.  --- Evgenii
+  auto& in = const_cast<BinaryStream&>(input);
+  in.m_pos = 0;
+  return (in >> datum) && json_encode(output, datum);
+}
+
+// Maps typeid().name to a function that extracts data from BinaryStream and
+// prints it as JSON.
+//
+// Extend as needed
+std::unordered_map<std::string, bool (*)(std::ostream&, const BinaryStream&)> json_encoders {
+#define encoder(type) { typeid(type).name(), json_encode_bs<type> }
+  encoder(bool),
+  encoder(int),
+  encoder(unsigned int),
+  encoder(double),
+  encoder(std::string),
+  encoder(BStore),
+  encoder(std::vector<int>),
+  encoder(std::vector<double>),
+  encoder(std::vector<std::string>),
+  encoder(std::vector<BStore>)
+#undef encoder
+};
+
+bool (*BStore::GetJsonEncoder(const std::string& key) const)(std::ostream&, const BinaryStream&){
+  auto type = m_type_info.find(key);
+  if (type == m_type_info.end()) return nullptr;
+  auto encoder = json_encoders.find(type->second);
+  if (encoder == json_encoders.end()) {
+    std::clog
+      << "BStore::JsonEncode: encoder for type "
+      << type->second
+      << " (field "
+      << key
+      << ") is not implemented"
+      << std::endl;
+    return nullptr;
+  };
+  return encoder->second;
+}
+
+bool BStore::JsonEncode(std::ostream& stream) const {
+  if (!m_type_checking) {
+    std::clog
+      << "BStore::JsonEncode: type checking is required for JSON encoding"
+      << std::endl;
+    return false;
+  };
+
+  bool comma = false;
+  stream << '{';
+  for (auto& kv : m_variables) {
+    if (comma)
+      stream << ',';
+    else
+      comma = true;
+    if (!json_encode(stream, kv.first)) return false;
+    stream << ':';
+    auto encoder = GetJsonEncoder(kv.first);
+    if (!encoder || !encoder(stream, kv.second)) return false;
+  };
+  stream << '}';
+  return true;
+}
+
+bool BStore::JsonEncode(std::string& json) const {
+  std::stringstream ss;
+  if (!JsonEncode(ss)) return false;
+  json = ss.str();
+  return true;
+}
+
+bool BStore::JsonEncode(const std::string& key, std::ostream& stream) const {
+  if (!m_type_checking) {
+    std::clog
+      << "BStore::JsonEncode: type checking is required for JSON encoding"
+      << std::endl;
+    return false;
+  };
+
+  auto kv = m_variables.find(key);
+  if (kv == m_variables.end()) return false;
+  auto encoder = GetJsonEncoder(kv->first);
+  return encoder && encoder(stream, kv->second);
+}
+
+bool BStore::JsonEncode(const std::string& key, std::string& json) const {
+  std::stringstream ss;
+  if (!JsonEncode(key, ss)) return false;
+  json = ss.str();
+  return true;
 }
