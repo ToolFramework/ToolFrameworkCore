@@ -801,7 +801,10 @@ bool BStore::Serialise(BinaryStream &bs){ // do return properly
 
   bs & output;
   bs & m_lookup;
-  GetEntry(0);
+  bs & m_variables;
+  bs & m_type_checking;
+  if (m_type_checking) bs & m_type_info;
+
   /*
   save;
 
