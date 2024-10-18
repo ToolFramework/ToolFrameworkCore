@@ -14,6 +14,7 @@
 #include <PointerWrapper.h>
 
 #include <BinaryStream.h>
+#include <Json.h>
 #include <sys/stat.h>
 
 namespace ToolFramework{
@@ -71,6 +72,10 @@ namespace ToolFramework{
     /////////importing
     
     void JsonParser(std::string input); ///< Converts a flat JSON formatted string to Store entries in the form of key value pairs.  @param input The input flat JSON string. 
+    bool JsonEncode(std::ostream& output) const; ///< Prints contents as a JSON object if possible
+    bool JsonEncode(std::string& output) const; ///< Prints contents as a JSON objec if possible
+    bool JsonEncode(const std::string& key, std::ostream& output) const; ///< Prints contents of the given key as a JSON if possible.
+    bool JsonEncode(const std::string& key, std::string& output) const; ///< Prints contents of the given key as JSON if possible.
     bool Print();
     void Print(bool values); ///< Prints the contents of the BoostStore. @param values If true values and keys are printed. If false just keys are printed
     void Delete(); ///< Deletes all entries in the BoostStore.
@@ -78,6 +83,7 @@ namespace ToolFramework{
     std::string Type(std::string key); ///< Queries the type of an entry if type checking is turned on. @param key The key of the entry to check. @return A string encoding the type info.
     bool Has(std::string key); ///< Queries if entry exists in a BoostStore. @param key is the key of the varaible to look up. @return true if varaible is present in the store, false if not. 
     //  BoostStore *Header; ///< Pointer to header BoostStore (only available in multi event BoostStore). This can be used to access and assign header varaibles jsut like a standard non multi event store.
+    bool TypeChecking() const { return m_type_checking; }; ///< Whether type checking is enabled (required for JSON serialisation)
     
     /**
        Templated getter function for BoostStore content. Assignment is templated and via reference.
@@ -248,9 +254,11 @@ namespace ToolFramework{
     //int m_file_type; //0=gzopen, 1=fopen, 2=stringstream
     float m_version;
     
+    bool (*GetJsonEncoder(const std::string& key) const)(std::ostream&, const BinaryStream&);
     
   };
 
+  bool json_encode(std::ostream&, const BStore&);
 }
 
 #endif
