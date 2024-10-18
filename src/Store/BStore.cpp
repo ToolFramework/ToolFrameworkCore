@@ -48,22 +48,23 @@ BStore::BStore(const BStore &bs):m_version(1.0){
    
    if(bs.Header){
      Header = new BStore(*bs.Header);
-   }
+   } else
+     Header = nullptr;
    
    m_lookup = bs.m_lookup;
    output = bs.output;
-   m_file_end = m_file_end;
-   m_file_name = m_file_name;
-   m_open_file_end = m_open_file_end;
-   m_previous_file_end = m_previous_file_end;
-   m_type = m_type;
-   m_type_checking = m_type_checking;
-   m_has_header = m_has_header;
-   m_header_start = m_header_start;
-   m_flags_start = m_flags_start;
-   m_lookup_start = m_lookup_start;
-   m_update = m_update;  
-   m_version = m_version;
+   m_file_end = bs.m_file_end;
+   m_file_name = bs.m_file_name;
+   m_open_file_end = bs.m_open_file_end;
+   m_previous_file_end = bs.m_previous_file_end;
+   m_type = bs.m_type;
+   m_type_checking = bs.m_type_checking;
+   m_has_header = bs.m_has_header;
+   m_header_start = bs.m_header_start;
+   m_flags_start = bs.m_flags_start;
+   m_lookup_start = bs.m_lookup_start;
+   m_update = bs.m_update;
+   m_version = bs.m_version;
    
 }
 
