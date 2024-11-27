@@ -66,6 +66,18 @@ std\+::string {\bfseries Get\+Version} ()
 \item 
 void \mbox{\hyperlink{classToolFramework_1_1BStore_a0fe95a798f8bd5cda4e96bd8ffabb55e}{Json\+Parser}} (std\+::string input)
 \begin{DoxyCompactList}\small\item\em Converts a flat JSON formatted string to \mbox{\hyperlink{classToolFramework_1_1Store}{Store}} entries in the form of key value pairs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1BStore_a670996266dbfb65a16863e851159ca30}\label{classToolFramework_1_1BStore_a670996266dbfb65a16863e851159ca30}} 
+bool \mbox{\hyperlink{classToolFramework_1_1BStore_a670996266dbfb65a16863e851159ca30}{Json\+Encode}} (std\+::ostream \&output) const
+\begin{DoxyCompactList}\small\item\em Prints contents as a JSON object if possible. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1BStore_adaaaf6fb19733990dfb701866942819f}\label{classToolFramework_1_1BStore_adaaaf6fb19733990dfb701866942819f}} 
+bool \mbox{\hyperlink{classToolFramework_1_1BStore_adaaaf6fb19733990dfb701866942819f}{Json\+Encode}} (std\+::string \&output) const
+\begin{DoxyCompactList}\small\item\em Prints contents as a JSON objec if possible. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1BStore_a68997520e75365daa50e50723612a764}\label{classToolFramework_1_1BStore_a68997520e75365daa50e50723612a764}} 
+bool \mbox{\hyperlink{classToolFramework_1_1BStore_a68997520e75365daa50e50723612a764}{Json\+Encode}} (const std\+::string \&key, std\+::ostream \&output) const
+\begin{DoxyCompactList}\small\item\em Prints contents of the given key as a JSON if possible. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1BStore_aac2adaae3b48b60fbac90fbeab10f3b3}\label{classToolFramework_1_1BStore_aac2adaae3b48b60fbac90fbeab10f3b3}} 
+bool \mbox{\hyperlink{classToolFramework_1_1BStore_aac2adaae3b48b60fbac90fbeab10f3b3}{Json\+Encode}} (const std\+::string \&key, std\+::string \&output) const
+\begin{DoxyCompactList}\small\item\em Prints contents of the given key as JSON if possible. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classToolFramework_1_1BStore_afa4b96dbaed11ab909a79465c630e131}\label{classToolFramework_1_1BStore_afa4b96dbaed11ab909a79465c630e131}} 
 bool \mbox{\hyperlink{classToolFramework_1_1BStore_afa4b96dbaed11ab909a79465c630e131}{Print}} ()
 \begin{DoxyCompactList}\small\item\em Simple virtual Pritn function to ensure inhereted classes have one. \end{DoxyCompactList}\item 
@@ -80,8 +92,11 @@ std\+::string \mbox{\hyperlink{classToolFramework_1_1BStore_a1a2e9beec6992ed4f7e
 \begin{DoxyCompactList}\small\item\em Queries the type of an entry if type checking is turned on. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classToolFramework_1_1BStore_aee9b4f22889fc26c3f8f67b0bed3776d}{Has}} (std\+::string key)
 \begin{DoxyCompactList}\small\item\em Queries if entry exists in a Boost\+Store. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classToolFramework_1_1BStore_abbf78b7abfa17846e8af2fe467bfbb3d}{Get}} (std\+::string name, T \&out)
+\mbox{\Hypertarget{classToolFramework_1_1BStore_aab34c5fd03072c69a8900efe43490d8b}\label{classToolFramework_1_1BStore_aab34c5fd03072c69a8900efe43490d8b}} 
+bool {\bfseries Type\+Checking} () const
 \item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classToolFramework_1_1BStore_abbf78b7abfa17846e8af2fe467bfbb3d}{Get}} (std\+::string name, T \&out)
+\begin{DoxyCompactList}\small\item\em Whether type checking is enabled (required for JSON serialisation) \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classToolFramework_1_1BStore_a1cd588c6a372324b42dfa1a5dda0cbfc}{Get}} (std\+::string name, T $\ast$\&out)
 \item 
 {\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classToolFramework_1_1BStore_a69211f9087b585b34fee5818c7e0f67b}{Set}} (std\+::string name, T \&in)
@@ -135,6 +150,10 @@ B.\+Richards
 \doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 bool Tool\+Framework\+::\+BStore\+::\+Get (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{T \&}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Whether type checking is enabled (required for JSON serialisation) 
 
 Templated getter function for Boost\+Store content. Assignment is templated and via reference. 
 \begin{DoxyParams}{Parameters}
