@@ -215,6 +215,8 @@ namespace ToolFramework{
       
     } 
     
+    friend std::ostream& operator<<(std::ostream &stream, const Store &s);
+    
     std::map<std::string, std::string>::iterator begin() { return m_variables.begin(); }
     std::map<std::string, std::string>::iterator end()   { return m_variables.end(); }
     
@@ -227,6 +229,7 @@ namespace ToolFramework{
     
   };
   
-}
+} // end ToolFramework namespace
+  
 
 #endif

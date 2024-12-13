@@ -1,6 +1,6 @@
 #include "Store.h"
 
-using namespace ToolFramework;
+namespace ToolFramework {
 
 Store::Store(){}
 
@@ -210,4 +210,18 @@ bool Store::Destring(std::string key){
   m_variables[key]=StringStrip(m_variables[key]);
   return true;
 
+}
+
+std::ostream& operator<<(std::ostream& stream, const Store& s){
+  stream<<"{";
+  bool first=true;
+  for(auto it=s.m_variables.begin(); it!=s.m_variables.end(); ++it){
+      if (!first) stream<<",";
+      stream<<"\""<<it->first<<"\":"<< it->second<<" ";
+      first=false;
+  }
+  stream<<"}";
+  return stream;
+}
+  
 }
