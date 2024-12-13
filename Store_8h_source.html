@@ -87,11 +87,11 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classToolFramework_1_1Store.html">Store</a>(); </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#a5247080901fb214804d0191681a30a83">Initialise</a>(std::string filename); </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#adb84e3fb286cae07f64e8186b7ab04e1">JsonParser</a>(std::string input); </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#a9d2f000bd849a9f5de71c3ba62dca340">Print</a>(); </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#a7fce0f8f3ec7978c5e7cd3d7053f899b">Delete</a>(); </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#a41eaa81c4612fb5bdbf850afb6428977">Has</a>(std::string key); </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#a25207c3cbe3bbe14b0241471c20a8821">Initialise</a>(std::string filename); </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#a26886e96e8ed9a9e6ac18109e9c3acac">JsonParser</a>(std::string input); </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#a3e55d8f021d872d3d031872980ee1319">Print</a>(); </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classToolFramework_1_1Store.html#ab3b0490f4b8e239e3b010fd6d8945a7e">Delete</a>(); </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1Store.html#a0b81f24e5a6bbfe5466118a696bb036b">Has</a>(std::string key); </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::vector&lt;std::string&gt; Keys(); <span class="comment">//returns a vector of the keys</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span> Destring(std::string key); <span class="comment">//convers an element from a string by stripping the speachmarks @param string key to comapre.</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
@@ -194,8 +194,8 @@ $(function() {
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;      stream&lt;&lt;<span class="stringliteral">&quot;{&quot;</span>;</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      <span class="keywordtype">bool</span> first=<span class="keyword">true</span>;</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;      <span class="keywordflow">for</span> (std::map&lt;std::string,std::string&gt;::iterator it=m_variables.begin(); it!=m_variables.end(); ++it){</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">if</span> (!first) stream&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    stream&lt;&lt;<span class="stringliteral">&quot;\&quot;&quot;</span>&lt;&lt;it-&gt;first&lt;&lt;<span class="stringliteral">&quot;\&quot;:&quot;</span>&lt;&lt; it-&gt;second&lt;&lt;<span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">if</span> (!first) stream&lt;&lt;<span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    stream&lt;&lt;<span class="stringliteral">&quot;\&quot;&quot;</span>&lt;&lt;it-&gt;first&lt;&lt;<span class="stringliteral">&quot;\&quot;:&quot;</span>&lt;&lt; it-&gt;second;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    </div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    first=<span class="keyword">false</span>;</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;      }</div>
@@ -205,33 +205,36 @@ $(function() {
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;      </div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    } </div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    std::map&lt;std::string, std::string&gt;::iterator begin() { <span class="keywordflow">return</span> m_variables.begin(); }</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    std::map&lt;std::string, std::string&gt;::iterator end()   { <span class="keywordflow">return</span> m_variables.end(); }</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">friend</span> std::ostream&amp; operator&lt;&lt;(std::ostream &amp;stream, <span class="keyword">const</span> <a class="code" href="classToolFramework_1_1Store.html">Store</a> &amp;s);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    std::map&lt;std::string, std::string&gt;::iterator begin() { <span class="keywordflow">return</span> m_variables.begin(); }</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    std::map&lt;std::string, std::string&gt;::iterator end()   { <span class="keywordflow">return</span> m_variables.end(); }</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    </div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    std::map&lt;std::string,std::string&gt; m_variables;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    std::string StringStrip(std::string in);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  };</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    std::map&lt;std::string,std::string&gt; m_variables;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    std::string StringStrip(std::string in);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  };</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;} <span class="comment">// end ToolFramework namespace</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html"><div class="ttname"><a href="classToolFramework_1_1Store.html">ToolFramework::Store</a></div><div class="ttdef"><b>Definition:</b> Store.h:22</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html_a03156c69d81940a1edb716d81336332f"><div class="ttname"><a href="classToolFramework_1_1Store.html#a03156c69d81940a1edb716d81336332f">ToolFramework::Store::Get</a></div><div class="ttdeci">T Get(std::string name)</div><div class="ttdef"><b>Definition:</b> Store.h:122</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html_a092956a2210960bd9a1d084c6237f9a1"><div class="ttname"><a href="classToolFramework_1_1Store.html#a092956a2210960bd9a1d084c6237f9a1">ToolFramework::Store::Get</a></div><div class="ttdeci">bool Get(std::string name, std::vector&lt; T &gt; &amp;out)</div><div class="ttdef"><b>Definition:</b> Store.h:61</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html_a0aab0b149dc1445df8395d91f1660507"><div class="ttname"><a href="classToolFramework_1_1Store.html#a0aab0b149dc1445df8395d91f1660507">ToolFramework::Store::operator&gt;&gt;</a></div><div class="ttdeci">void operator&gt;&gt;(T &amp;obj)</div><div class="ttdef"><b>Definition:</b> Store.h:201</div></div>
-<div class="ttc" id="aclassToolFramework_1_1Store_html_a41eaa81c4612fb5bdbf850afb6428977"><div class="ttname"><a href="classToolFramework_1_1Store.html#a41eaa81c4612fb5bdbf850afb6428977">ToolFramework::Store::Has</a></div><div class="ttdeci">bool Has(std::string key)</div><div class="ttdoc">Returns bool based on if store contains entry given by sting.</div><div class="ttdef"><b>Definition:</b> Store.cpp:120</div></div>
-<div class="ttc" id="aclassToolFramework_1_1Store_html_a5247080901fb214804d0191681a30a83"><div class="ttname"><a href="classToolFramework_1_1Store.html#a5247080901fb214804d0191681a30a83">ToolFramework::Store::Initialise</a></div><div class="ttdeci">bool Initialise(std::string filename)</div><div class="ttdoc">Initialises Store by reading in entries from an ASCII text file, when each line is a variable and its...</div><div class="ttdef"><b>Definition:</b> Store.cpp:8</div></div>
-<div class="ttc" id="aclassToolFramework_1_1Store_html_a7fce0f8f3ec7978c5e7cd3d7053f899b"><div class="ttname"><a href="classToolFramework_1_1Store.html#a7fce0f8f3ec7978c5e7cd3d7053f899b">ToolFramework::Store::Delete</a></div><div class="ttdeci">void Delete()</div><div class="ttdoc">Deletes all entries in the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:58</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a0b81f24e5a6bbfe5466118a696bb036b"><div class="ttname"><a href="classToolFramework_1_1Store.html#a0b81f24e5a6bbfe5466118a696bb036b">ToolFramework::Store::Has</a></div><div class="ttdeci">bool Has(std::string key)</div><div class="ttdoc">Returns bool based on if store contains entry given by sting.</div><div class="ttdef"><b>Definition:</b> Store.cpp:120</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a25207c3cbe3bbe14b0241471c20a8821"><div class="ttname"><a href="classToolFramework_1_1Store.html#a25207c3cbe3bbe14b0241471c20a8821">ToolFramework::Store::Initialise</a></div><div class="ttdeci">bool Initialise(std::string filename)</div><div class="ttdoc">Initialises Store by reading in entries from an ASCII text file, when each line is a variable and its...</div><div class="ttdef"><b>Definition:</b> Store.cpp:8</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a26886e96e8ed9a9e6ac18109e9c3acac"><div class="ttname"><a href="classToolFramework_1_1Store.html#a26886e96e8ed9a9e6ac18109e9c3acac">ToolFramework::Store::JsonParser</a></div><div class="ttdeci">void JsonParser(std::string input)</div><div class="ttdoc">Converts a flat JSON formatted string to Store entries in the form of key value pairs.</div><div class="ttdef"><b>Definition:</b> Store.cpp:66</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_a3e55d8f021d872d3d031872980ee1319"><div class="ttname"><a href="classToolFramework_1_1Store.html#a3e55d8f021d872d3d031872980ee1319">ToolFramework::Store::Print</a></div><div class="ttdeci">void Print()</div><div class="ttdoc">Prints the contents of the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:47</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html_a83f771d0447f39599fadf2da95b40907"><div class="ttname"><a href="classToolFramework_1_1Store.html#a83f771d0447f39599fadf2da95b40907">ToolFramework::Store::operator[]</a></div><div class="ttdeci">std::string * operator[](std::string key)</div><div class="ttdef"><b>Definition:</b> Store.h:194</div></div>
-<div class="ttc" id="aclassToolFramework_1_1Store_html_a9d2f000bd849a9f5de71c3ba62dca340"><div class="ttname"><a href="classToolFramework_1_1Store.html#a9d2f000bd849a9f5de71c3ba62dca340">ToolFramework::Store::Print</a></div><div class="ttdeci">void Print()</div><div class="ttdoc">Prints the contents of the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:47</div></div>
+<div class="ttc" id="aclassToolFramework_1_1Store_html_ab3b0490f4b8e239e3b010fd6d8945a7e"><div class="ttname"><a href="classToolFramework_1_1Store.html#ab3b0490f4b8e239e3b010fd6d8945a7e">ToolFramework::Store::Delete</a></div><div class="ttdeci">void Delete()</div><div class="ttdoc">Deletes all entries in the Store.</div><div class="ttdef"><b>Definition:</b> Store.cpp:58</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html_abcacd494094eb4e7df4b1cb2db3d557e"><div class="ttname"><a href="classToolFramework_1_1Store.html#abcacd494094eb4e7df4b1cb2db3d557e">ToolFramework::Store::Get</a></div><div class="ttdeci">bool Get(std::string name, T &amp;out)</div><div class="ttdef"><b>Definition:</b> Store.h:42</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html_acbdc2f9391b5a9ce57d7126b45ffb200"><div class="ttname"><a href="classToolFramework_1_1Store.html#acbdc2f9391b5a9ce57d7126b45ffb200">ToolFramework::Store::Set</a></div><div class="ttdeci">void Set(std::string name, T in)</div><div class="ttdef"><b>Definition:</b> Store.h:138</div></div>
-<div class="ttc" id="aclassToolFramework_1_1Store_html_adb84e3fb286cae07f64e8186b7ab04e1"><div class="ttname"><a href="classToolFramework_1_1Store.html#adb84e3fb286cae07f64e8186b7ab04e1">ToolFramework::Store::JsonParser</a></div><div class="ttdeci">void JsonParser(std::string input)</div><div class="ttdoc">Converts a flat JSON formatted string to Store entries in the form of key value pairs.</div><div class="ttdef"><b>Definition:</b> Store.cpp:66</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Store_html_af5c02078af68cf5d47bd7851c4e6888a"><div class="ttname"><a href="classToolFramework_1_1Store.html#af5c02078af68cf5d47bd7851c4e6888a">ToolFramework::Store::Set</a></div><div class="ttdeci">void Set(std::string name, std::vector&lt; T &gt; in)</div><div class="ttdef"><b>Definition:</b> Store.h:166</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
