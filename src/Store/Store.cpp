@@ -216,8 +216,8 @@ std::ostream& operator<<(std::ostream& stream, const Store& s){
   stream<<"{";
   bool first=true;
   for(auto it=s.m_variables.begin(); it!=s.m_variables.end(); ++it){
-      if (!first) stream<<",";
-      stream<<"\""<<it->first<<"\":"<< it->second<<" ";
+      if (!first) stream<<", ";
+      stream<<"\""<<it->first<<"\":"<< it->second;
       first=false;
   }
   stream<<"}";
