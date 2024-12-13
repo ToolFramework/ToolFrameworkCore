@@ -5,50 +5,73 @@ namespace ToolFramework {
 Store::Store(){}
 
 
+bool Store::Initialise(std::istream& inputstream, std::string filename){
+    
+    bool all_ok = true;
+    
+    std::string line;
+    while (getline(inputstream,line)){
+      if (line.size()>0){
+        if (line.at(0)=='#') continue;
+        std::string key="";
+        std::string value="";
+        std::stringstream stream(line);
+        if(stream>>key>>value){
+            
+            // continue reading any further tokens on this line, appending to value as a space separated list.
+            // we also pre- and post-pend with '"' characters, so a line of 'myval    cat  dog	potato #comment'
+            // will produce a value of '"cat dog potato"'
+            value='"'+value;
+            std::string tmp;
+            stream>>tmp;
+            while(tmp.length() && tmp[0]!='#'){
+              value+=" "+tmp;
+              tmp="";
+              stream>>tmp;
+            }
+            
+            value+='"';
+            
+            if(value!="\"\"") m_variables[key]=value;
+        } else {
+          std::clog<<"\033[38;5;196m WARNING!!!: Store::Initialise failed to parse line '"<<line;
+          if(!filename.empty()) std::clog<<"' in file '"<<filename;
+          std::clog<<"' \033[0m"<<std::endl;
+          all_ok = false;
+        }
+      }
+    }
+    
+    return all_ok;
+    
+}
+
 bool Store::Initialise(std::string filename){
   
+  bool all_ok;
+  
   std::ifstream file(filename.c_str());
-  std::string line;
   
   if(file.is_open()){
     
-    while (getline(file,line)){
-      if (line.size()>0){
-	if (line.at(0)=='#')continue;
-	std::string key="";
-	std::string value="";
-	std::stringstream stream(line);
-	stream>>key>>value;
-	std::string tmp;
-	stream>>tmp;
-	value='"'+value;
-	  
-	while(tmp.length() && tmp[0]!='#'){
-	  value+=" "+tmp;
-	  tmp="";
-	  stream>>tmp;
-	}
-	value+="\"";
-
-	if(value!="") m_variables[key]=value;
-      }
-      
-    }
+    all_ok = Initialise(file);
     file.close();
-  }
-  else{
-    std::cout<<"\033[38;5;196m WARNING!!!: Config file "<<filename<<" does not exist no config loaded \033[0m"<<std::endl;
+    
+  } else{
+    
+    std::clog<<"\033[38;5;196m WARNING!!!: Config file "<<filename<<" does not exist no config loaded \033[0m"<<std::endl;
     return false;
+    
   }
   
-  return true;
+  return all_ok;
 }
 
 void Store::Print(){
   
   for (std::map<std::string,std::string>::iterator it=m_variables.begin(); it!=m_variables.end(); ++it){
     
-    std::cout<< it->first << " => " << it->second <<std::endl;
+    std::clog<< it->first << " => " << it->second <<std::endl;
     
   }
   
