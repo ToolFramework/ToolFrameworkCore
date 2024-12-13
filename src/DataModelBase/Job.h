@@ -21,6 +21,7 @@ namespace ToolFramework{
     
     Job(std::string id); ///< constructor with string to pass identification information for retreival 
     bool (*func)(void*); ///< function for worker thread to run
+    void (*fail_func)(void*); ///< function for worker thread to run
     void* data; ///< data packet for thread to retreive data
     bool m_complete; ///< if the job is complete
     bool m_in_progress; ///< if the job is in progress 

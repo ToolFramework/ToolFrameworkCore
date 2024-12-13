@@ -60,7 +60,11 @@ namespace ToolFramework{
     }
     
   private:
-    
+
+  static const int v_error=0;
+  static const int v_warning=1;
+  static const int v_message=2;
+  static const int v_debug=3;
     
     
     
