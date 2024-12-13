@@ -204,8 +204,8 @@ namespace ToolFramework{
       stream<<"{";
       bool first=true;
       for (std::map<std::string,std::string>::iterator it=m_variables.begin(); it!=m_variables.end(); ++it){
-	if (!first) stream<<",";
-	stream<<"\""<<it->first<<"\":"<< it->second<<" ";
+	if (!first) stream<<", ";
+	stream<<"\""<<it->first<<"\":"<< it->second;
 	
 	first=false;
       }
