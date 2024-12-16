@@ -1,2 +1,5 @@
 *~
 *.o
+lib/*.so
+include/*.h
+main
