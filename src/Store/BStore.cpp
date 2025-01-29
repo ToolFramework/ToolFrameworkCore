@@ -985,6 +985,8 @@ std::unordered_map<std::string, bool (*)(std::ostream&, const BinaryStream&)> js
   encoder(bool),
   encoder(int),
   encoder(unsigned int),
+  encoder(long),
+  encoder(unsigned long),
   encoder(double),
   encoder(std::string),
   encoder(BStore),
