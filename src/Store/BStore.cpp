@@ -991,6 +991,10 @@ std::unordered_map<std::string, bool (*)(std::ostream&, const BinaryStream&)> js
   encoder(std::string),
   encoder(BStore),
   encoder(std::vector<int>),
+  encoder(std::vector<long>),
+  encoder(std::vector<unsigned int>),
+  encoder(std::vector<unsigned long>),
+  encoder(std::vector<float>),
   encoder(std::vector<double>),
   encoder(std::vector<std::string>),
   encoder(std::vector<BStore>)
