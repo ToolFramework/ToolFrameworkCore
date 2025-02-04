@@ -1,5 +1,6 @@
 *~
 *.o
+*.e
 include/*.h
 tempinclude/*.h
 lib/*.so
