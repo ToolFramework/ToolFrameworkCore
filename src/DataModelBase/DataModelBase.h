@@ -30,7 +30,9 @@ namespace ToolFramework{
     
   public:
     
-    DataModelBase(); ///< Simple constructor 
+    DataModelBase(); ///< Simple constructor
+
+    virtual ~DataModelBase() = default; ///< Simple destructor
     
     Logging *Log; ///< Log class pointer for use in Tools, it can be used to send messages which can have multiple error levels and destination end points
     
