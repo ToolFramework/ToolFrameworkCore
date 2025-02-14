@@ -75,39 +75,58 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;Job.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>ToolFramework{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classToolFramework_1_1JobQueue.html">   20</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classToolFramework_1_1JobQueue.html">JobQueue</a>{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classToolFramework_1_1JobQueue.html#aed770e1578fe6cf644cc707755d2a0c1">JobQueue</a>(); </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classToolFramework_1_1JobQueue.html#a73698d50e973c6f01b7219c61aa0f6d8">~JobQueue</a>(); </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1JobQueue.html#ad95a4c88702d1f9dcb9beaa9e8aef676">AddJob</a>(<a class="code" href="classToolFramework_1_1Job.html">Job</a>* job); </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classToolFramework_1_1Job.html">Job</a>* <a class="code" href="classToolFramework_1_1JobQueue.html#a21c27cb3ff30e220fb14322396ee8a3f">GetJob</a>(); </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1JobQueue.html#a68c7792abc8be78764c0eade74dc4f2c">pop</a>(); </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classToolFramework_1_1JobQueue.html#a7207aac41499172fb2255f03eb1bde5e">size</a>(); </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::queue&lt;Job*&gt; m_jobs;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::mutex m_lock;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  };</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassToolFramework_1_1JobQueue_html"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html">ToolFramework::JobQueue</a></div><div class="ttdef"><b>Definition:</b> JobQueue.h:20</div></div>
-<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a21c27cb3ff30e220fb14322396ee8a3f"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a21c27cb3ff30e220fb14322396ee8a3f">ToolFramework::JobQueue::GetJob</a></div><div class="ttdeci">Job * GetJob()</div><div class="ttdoc">function to get job from the front of the queue, the function pops the job off the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:34</div></div>
-<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a68c7792abc8be78764c0eade74dc4f2c"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a68c7792abc8be78764c0eade74dc4f2c">ToolFramework::JobQueue::pop</a></div><div class="ttdeci">bool pop()</div><div class="ttdoc">function to pop a job off the front of the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:48</div></div>
-<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a7207aac41499172fb2255f03eb1bde5e"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a7207aac41499172fb2255f03eb1bde5e">ToolFramework::JobQueue::size</a></div><div class="ttdeci">unsigned int size()</div><div class="ttdoc">function to return number of jobs in the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:60</div></div>
-<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a73698d50e973c6f01b7219c61aa0f6d8"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a73698d50e973c6f01b7219c61aa0f6d8">ToolFramework::JobQueue::~JobQueue</a></div><div class="ttdeci">~JobQueue()</div><div class="ttdoc">simple destructor</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:7</div></div>
-<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_ad95a4c88702d1f9dcb9beaa9e8aef676"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#ad95a4c88702d1f9dcb9beaa9e8aef676">ToolFramework::JobQueue::AddJob</a></div><div class="ttdeci">bool AddJob(Job *job)</div><div class="ttdoc">fucntion to adda job to the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:19</div></div>
-<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_aed770e1578fe6cf644cc707755d2a0c1"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#aed770e1578fe6cf644cc707755d2a0c1">ToolFramework::JobQueue::JobQueue</a></div><div class="ttdeci">JobQueue()</div><div class="ttdoc">simple constructor</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:5</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>ToolFramework{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structToolFramework_1_1QueueStats.html">   20</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structToolFramework_1_1QueueStats.html">QueueStats</a>{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="structToolFramework_1_1QueueStats.html">QueueStats</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> Clear();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> submitted;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> queued;    </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  };</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classToolFramework_1_1JobQueue.html">   39</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classToolFramework_1_1JobQueue.html">JobQueue</a>{</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classToolFramework_1_1WorkerPoolManager.html">WorkerPoolManager</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classToolFramework_1_1JobQueue.html#aed770e1578fe6cf644cc707755d2a0c1">JobQueue</a>(); </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classToolFramework_1_1JobQueue.html#a73698d50e973c6f01b7219c61aa0f6d8">~JobQueue</a>(); </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1JobQueue.html#ad95a4c88702d1f9dcb9beaa9e8aef676">AddJob</a>(<a class="code" href="classToolFramework_1_1Job.html">Job</a>* job); </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classToolFramework_1_1Job.html">Job</a>* <a class="code" href="classToolFramework_1_1JobQueue.html#a21c27cb3ff30e220fb14322396ee8a3f">GetJob</a>(); </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classToolFramework_1_1JobQueue.html#a68c7792abc8be78764c0eade74dc4f2c">pop</a>(); </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classToolFramework_1_1JobQueue.html#a7207aac41499172fb2255f03eb1bde5e">size</a>(); </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> Print();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> ClearStats();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> Clear();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::queue&lt;Job*&gt; m_jobs;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::mutex m_lock;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::map&lt;std::string, QueueStats&gt; m_stats;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  };</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassToolFramework_1_1JobQueue_html"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html">ToolFramework::JobQueue</a></div><div class="ttdef"><b>Definition:</b> JobQueue.h:39</div></div>
+<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a21c27cb3ff30e220fb14322396ee8a3f"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a21c27cb3ff30e220fb14322396ee8a3f">ToolFramework::JobQueue::GetJob</a></div><div class="ttdeci">Job * GetJob()</div><div class="ttdoc">function to get job from the front of the queue, the function pops the job off the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:53</div></div>
+<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a68c7792abc8be78764c0eade74dc4f2c"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a68c7792abc8be78764c0eade74dc4f2c">ToolFramework::JobQueue::pop</a></div><div class="ttdeci">bool pop()</div><div class="ttdoc">function to pop a job off the front of the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:68</div></div>
+<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a7207aac41499172fb2255f03eb1bde5e"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a7207aac41499172fb2255f03eb1bde5e">ToolFramework::JobQueue::size</a></div><div class="ttdeci">unsigned int size()</div><div class="ttdoc">function to return number of jobs in the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:81</div></div>
+<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_a73698d50e973c6f01b7219c61aa0f6d8"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#a73698d50e973c6f01b7219c61aa0f6d8">ToolFramework::JobQueue::~JobQueue</a></div><div class="ttdeci">~JobQueue()</div><div class="ttdoc">simple destructor</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:23</div></div>
+<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_ad95a4c88702d1f9dcb9beaa9e8aef676"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#ad95a4c88702d1f9dcb9beaa9e8aef676">ToolFramework::JobQueue::AddJob</a></div><div class="ttdeci">bool AddJob(Job *job)</div><div class="ttdoc">fucntion to adda job to the queue</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:35</div></div>
+<div class="ttc" id="aclassToolFramework_1_1JobQueue_html_aed770e1578fe6cf644cc707755d2a0c1"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html#aed770e1578fe6cf644cc707755d2a0c1">ToolFramework::JobQueue::JobQueue</a></div><div class="ttdeci">JobQueue()</div><div class="ttdoc">simple constructor</div><div class="ttdef"><b>Definition:</b> JobQueue.cpp:21</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Job_html"><div class="ttname"><a href="classToolFramework_1_1Job.html">ToolFramework::Job</a></div><div class="ttdef"><b>Definition:</b> Job.h:18</div></div>
+<div class="ttc" id="aclassToolFramework_1_1WorkerPoolManager_html"><div class="ttname"><a href="classToolFramework_1_1WorkerPoolManager.html">ToolFramework::WorkerPoolManager</a></div><div class="ttdef"><b>Definition:</b> WorkerPoolManager.h:105</div></div>
+<div class="ttc" id="astructToolFramework_1_1QueueStats_html"><div class="ttname"><a href="structToolFramework_1_1QueueStats.html">ToolFramework::QueueStats</a></div><div class="ttdef"><b>Definition:</b> JobQueue.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

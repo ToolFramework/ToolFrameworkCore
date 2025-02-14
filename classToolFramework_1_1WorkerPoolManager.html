@@ -91,6 +91,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1WorkerPoolManager.html#acbc7d485f504ae364fcc31073568dba3">NumThreads</a> ()</td></tr>
 <tr class="memdesc:acbc7d485f504ae364fcc31073568dba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to return the number of current worker threads. <br /></td></tr>
 <tr class="separator:acbc7d485f504ae364fcc31073568dba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8913e407685ef9bb5aad2b7ede96ab7"><td class="memItemLeft" align="right" valign="top"><a id="af8913e407685ef9bb5aad2b7ede96ab7"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1WorkerPoolManager.html#af8913e407685ef9bb5aad2b7ede96ab7">GetStats</a> ()</td></tr>
+<tr class="memdesc:af8913e407685ef9bb5aad2b7ede96ab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get the current stats. <br /></td></tr>
+<tr class="separator:af8913e407685ef9bb5aad2b7ede96ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab292a664f1e09ad956b0ded3c12f539b"><td class="memItemLeft" align="right" valign="top"><a id="ab292a664f1e09ad956b0ded3c12f539b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1WorkerPoolManager.html#ab292a664f1e09ad956b0ded3c12f539b">PrintStats</a> ()</td></tr>
+<tr class="memdesc:ab292a664f1e09ad956b0ded3c12f539b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to print the current stats to screen. <br /></td></tr>
+<tr class="separator:ab292a664f1e09ad956b0ded3c12f539b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb1161ca98806a59120d7ae8d5689749"><td class="memItemLeft" align="right" valign="top"><a id="acb1161ca98806a59120d7ae8d5689749"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1WorkerPoolManager.html#acb1161ca98806a59120d7ae8d5689749">ClearStats</a> ()</td></tr>
+<tr class="memdesc:acb1161ca98806a59120d7ae8d5689749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to clear the current stats. <br /></td></tr>
+<tr class="separator:acb1161ca98806a59120d7ae8d5689749"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is a template for a <a class="el" href="classToolFramework_1_1Tool.html">Tool</a> that dynamically more or less threads, such that there is always 1 available thread.This can therefore be used to scale to your worklaod, however be carefull when using more than one of these tools and to apply upperlimits if necessary both locally within this tool and globally so that more threads than is practical are created causing massive inefficency. Please fill out the descripton and author information.</p>
