@@ -2,6 +2,14 @@
 
 using namespace ToolFramework;
 
+PoolManagerStats::PoolManagerStats(){
+
+  processing = 0;
+  completed = 0 ;
+  failed = 0;
+
+}
+
 PoolWorker_args::PoolWorker_args() : Thread_args() {}
 
 PoolWorker_args::~PoolWorker_args() {}
@@ -32,7 +40,7 @@ WorkerPoolManager::WorkerPoolManager(JobQueue& job_queue, unsigned int* thread_c
   m_manager_args.sleep = false;
   m_manager_args.sleep_us = ( m_manager_args.thread_management_period_us < m_manager_args.job_assignment_period_us ? m_manager_args.thread_management_period_us : m_manager_args.job_assignment_period_us );
   
-  CreateWorkerThread(m_manager_args.args, m_manager_args.self_serving, m_manager_args.thread_sleep_us, m_manager_args.job_queue, m_manager_args.job_out_deque, m_manager_args.thread_num, m_util, global_thread_num);
+  CreateWorkerThread(m_manager_args.args, m_manager_args.self_serving, m_manager_args.thread_sleep_us, m_manager_args.job_queue, m_manager_args.job_out_deque, m_manager_args.thread_num, m_util, &m_manager_args.stats, &m_manager_args.stats_mtx, global_thread_num);
 
   m_manager_args.free_threads = 1;
   if (m_threaded) CreateManagerThread();
@@ -61,13 +69,15 @@ void WorkerPoolManager::CreateManagerThread() {
 }
 
 
-void WorkerPoolManager::CreateWorkerThread(std::vector<PoolWorker_args*>& in_args, bool &in_self_serving, unsigned int &in_thread_sleep_us, JobQueue* in_job_queue, JobDeque* in_job_out_deque,unsigned long &thread_num, Utilities* in_util, unsigned int* global_thread_num) {
+void WorkerPoolManager::CreateWorkerThread(std::vector<PoolWorker_args*>& in_args, bool &in_self_serving, unsigned int &in_thread_sleep_us, JobQueue* in_job_queue, JobDeque* in_job_out_deque,unsigned long &thread_num, Utilities* in_util, std::map<std::string,PoolManagerStats>* in_stats, std::mutex* in_stats_mtx, unsigned int* global_thread_num) {
   PoolWorker_args* tmparg = new PoolWorker_args();
   tmparg->busy = false;
   tmparg->thread_sleep_us = in_thread_sleep_us;
   tmparg->job = 0;
   tmparg->job_queue = 0;
   tmparg->job_out_deque = in_job_out_deque;
+  tmparg->stats = in_stats;
+  tmparg->stats_mtx = in_stats_mtx;
   if(in_self_serving) tmparg->job_queue=in_job_queue;
   tmparg->self_serving = in_self_serving;
   in_args.push_back(tmparg);
@@ -75,7 +85,7 @@ void WorkerPoolManager::CreateWorkerThread(std::vector<PoolWorker_args*>& in_arg
   tmp << "T" << thread_num;
   in_util->CreateThread(tmp.str(), &WorkerThread, in_args.at(in_args.size() - 1));
   thread_num++;
-  if(global_thread_num) global_thread_num++;
+  if(global_thread_num) (*global_thread_num)++;
 }
 
 void WorkerPoolManager::DeleteWorkerThread(unsigned int pos,  Utilities* in_util, std::vector<PoolWorker_args*> &in_args, unsigned int* global_thread_num) {
@@ -93,34 +103,52 @@ void WorkerPoolManager::WorkerThread(Thread_args* arg) {
   else {
     if(args->self_serving){
       args->job=args->job_queue->GetJob();
-      if(!args->job) return;
+      args->stats_mtx->lock();
+      (*args->stats)[args->job->m_id].processing++;
+      args->stats_mtx->unlock();
       args->job->m_in_progress=true;
       args->busy = true;
     }
-
-    try{
-      if(args->job->func(args->job->data)) args->job->m_complete=true;
-      else args->job->m_failed=true;
+    
+    if(args->job){
+      try{
+	if(args->job->func(args->job->data)){
+	  args->job->m_complete=true;
+	  args->stats_mtx->lock();
+	  (*args->stats)[args->job->m_id].processing--;
+	  (*args->stats)[args->job->m_id].completed++;
+	  args->stats_mtx->unlock();
+	}
+	else args->job->m_failed=true;
+      }
+      catch (std::exception& e) {
+	std::clog<<"Job Failed \""<<args->job->m_id<<"\": "<<e.what() <<std::endl;
+	args->job->m_failed=true;
+      }
+      catch(...){
+	std::clog<<"Job Failed \""<<args->job->m_id<<"\""<<std::endl;
+	args->job->m_failed=true;
+      }
     }
-    catch (std::exception& e) {
-      std::clog<<"Job Failed \""<<args->job->m_id<<"\": "<<e.what() <<std::endl;
-      args->job->m_failed=true;
-    }
-    catch(...){
-      std::clog<<"Job Failed \""<<args->job->m_id<<"\""<<std::endl;
+    else{
+      std::clog<<"Job Failed \""<<args->job->m_id<<"\": null job pointer"<<std::endl;
       args->job->m_failed=true;
     }
     
     if(args->job->m_failed){
-       try{
-	 if(args->job->fail_func) args->job->fail_func(args->job->data);
-       }
-       catch (std::exception& p) {
-	 std::clog<<"Job fail_func Failed \"args->job->m_id\" likely memory leaking: "<<p.what() <<std::endl;
-       }
-       catch(...){
-	 std::clog<<"Job fail_func Failed \"args->job->m_id\" likely memory leaking: "<<std::endl;
-       }
+      args->stats_mtx->lock();
+      (*args->stats)[args->job->m_id].processing--;
+      (*args->stats)[args->job->m_id].failed++;
+      args->stats_mtx->unlock();
+      try{
+	if(args->job->fail_func) args->job->fail_func(args->job->data);
+      }
+      catch (std::exception& p) {
+	std::clog<<"Job fail_func Failed \"args->job->m_id\" likely memory leaking: "<<p.what() <<std::endl;
+      }
+      catch(...){
+	std::clog<<"Job fail_func Failed \"args->job->m_id\" likely memory leaking: "<<std::endl;
+      }
     }
     
     if (args->job_out_deque) {
@@ -159,6 +187,10 @@ void WorkerPoolManager::ManagerThread(Thread_args* arg) {
       for (unsigned int i = 0; i < args->args.size(); i++) {
 	if (!args->args.at(i)->busy && args->job_queue->size() > 0) {
 	  args->args.at(i)->job = args->job_queue->GetJob();
+	  args->stats_mtx.lock();
+	  args->stats[args->args.at(i)->job->m_id].processing++;
+	  args->stats_mtx.unlock();
+	  
 	  args->args.at(i)->job->m_in_progress=true;
 	  args->args.at(i)->busy = true;
         }
@@ -178,7 +210,7 @@ void WorkerPoolManager::ManagerThread(Thread_args* arg) {
       }
     }
     
-    if (args->free_threads < 1 && args->args.size()<(*(args->thread_cap)) && ( !args->global_thread_cap || (*(args->global_thread_num))<(*(args->global_thread_cap))  ) ) CreateWorkerThread(args->args, args->self_serving, args->thread_sleep_us, args->job_queue, args->job_out_deque, args->thread_num, args->util, args->global_thread_num);
+    if (args->free_threads < 1 && args->args.size()<(*(args->thread_cap)) && ( !args->global_thread_cap || (*(args->global_thread_num))<(*(args->global_thread_cap))  ) ) CreateWorkerThread(args->args, args->self_serving, args->thread_sleep_us, args->job_queue, args->job_out_deque, args->thread_num, args->util, &args->stats, &args->stats_mtx, args->global_thread_num);
     
     if (args->free_threads > 1) DeleteWorkerThread(last_free, args->util, args->args, args->global_thread_num);
     
@@ -199,4 +231,46 @@ unsigned int WorkerPoolManager::NumThreads() {
 
   return m_manager_args.args.size();
 
+}
+
+std::string WorkerPoolManager::GetStats(){
+
+  std::string ret="";
+  
+  m_job_queue->m_lock.lock();
+  m_manager_args.stats_mtx.lock(); 
+
+  ret="Queued Jobs Total = " + std::to_string(m_job_queue->size()) + " \n";
+
+  for(std::map<std::string, QueueStats>::iterator it = m_job_queue->m_stats.begin(); it!=m_job_queue->m_stats.end(); it++){
+
+    ret += "  " + it->first + ": submitted = " + std::to_string(it->second.submitted) + ", queued = " + std::to_string(it->second.queued) + ", processing = " + std::to_string(m_manager_args.stats[it->first].processing) + ", completed = " + std::to_string(m_manager_args.stats[it->first].completed) + ", failed = " + std::to_string(m_manager_args.stats[it->first].failed) +"\n"; 
+
+  }
+  
+  m_manager_args.stats_mtx.unlock();
+  m_job_queue->m_lock.unlock();
+  
+  return ret;
+  
+}
+
+void WorkerPoolManager::PrintStats(){
+
+  printf("%s\n", GetStats().c_str());
+
+}
+
+void WorkerPoolManager::ClearStats(){
+
+  m_job_queue->m_lock.lock();
+  m_manager_args.stats_mtx.lock(); 
+
+  m_job_queue->ClearStats();
+  m_manager_args.stats.clear();
+  
+  m_manager_args.stats_mtx.unlock();
+  m_job_queue->m_lock.unlock();
+
+  
 }

@@ -4,8 +4,27 @@
 #include <queue>
 #include <mutex>
 #include <Job.h>
+#include <map>
 
 namespace ToolFramework{
+
+ /**
+   * \struct QueueStats
+   *
+   * This is a struct to define stats measured for job types;
+   *
+   * $Author: B.Richards $
+   * $Date: 2024/06/08 1:17:00 $
+   */
+  
+  struct QueueStats{
+
+    QueueStats();
+    void Clear();
+    unsigned long submitted;
+    unsigned long queued;    
+
+  };
 
   /**
    * \class JobQueue
@@ -18,6 +37,8 @@ namespace ToolFramework{
 
   
   class JobQueue{
+
+    friend class WorkerPoolManager;
     
   public:
     
@@ -28,11 +49,16 @@ namespace ToolFramework{
     Job* GetJob(); ///< function to get job from the front of the queue, the function pops the job off the queue
     bool pop(); ///< function to pop a job off the front of the queue
     unsigned int size(); ///< function to return number of jobs in the queue
+    void Print();
+    void ClearStats();
+    void Clear();
+    
     
   private:
     
     std::queue<Job*> m_jobs;
     std::mutex m_lock;
+    std::map<std::string, QueueStats> m_stats;
     
   };
 
