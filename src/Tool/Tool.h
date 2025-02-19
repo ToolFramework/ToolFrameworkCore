@@ -59,13 +59,13 @@ namespace ToolFramework{
       reinterpret_cast<DataModelBase*>(m_data)->vars.Set(m_tool_name,vars_json);
     }
     
-  private:
 
   static const int v_error=0;
   static const int v_warning=1;
   static const int v_message=2;
   static const int v_debug=3;
     
+  private:
     
     
     
