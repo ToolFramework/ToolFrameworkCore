@@ -60,7 +60,8 @@ namespace ToolFramework{
     }
     
   private:
-
+  
+  std::string m_configfile;
   static const int v_error=0;
   static const int v_warning=1;
   static const int v_message=2;
