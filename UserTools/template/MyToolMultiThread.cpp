@@ -10,7 +10,8 @@ MyToolMultiThread::MyToolMultiThread():Tool(){}
 
 bool MyToolMultiThread::Initialise(std::string configfile, DataModel &data){
 
-  InitialiseTool(data);                                                                                               
+  InitialiseTool(data);
+  m_configfile = configfile;
   InitialiseConfiguration(configfile);
   //m_variables.Print();
 
