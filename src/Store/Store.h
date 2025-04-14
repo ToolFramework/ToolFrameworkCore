@@ -32,6 +32,7 @@ namespace ToolFramework{
     bool Has(std::string key); ///<Returns bool based on if store contains entry given by sting @param string key to comapre.
     std::vector<std::string> Keys(); //returns a vector of the keys
     bool Destring(std::string key); //convers an element from a string by stripping the speachmarks @param string key to comapre.
+    bool Erase(std::string key);
     
     /**
        Templated getter function for sore content. Assignment is templated and via reference.
