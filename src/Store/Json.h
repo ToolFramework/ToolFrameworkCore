@@ -78,6 +78,54 @@ bool json_encode(std::string& output, T data) {
   return true;
 }
 
+namespace json_internal {
+
+  inline bool json_encode_object_slots(std::ostream& output, bool& comma) {
+    return true;
+  };
+
+  template <typename Slot, typename... Rest>
+  bool json_encode_object_slots(
+      std::ostream& output,
+      bool& comma,
+      const char* name,
+      const Slot& slot,
+      Rest... rest
+  ) {
+    if (comma) output << ',';
+    comma = true;
+    output << '"' << name << '"' << ':';
+    if (!json_encode(output, slot)) return false;
+    return json_encode_object_slots(output, comma, rest...);
+  };
+
+  template <typename Slot, typename... Rest>
+  bool json_encode_object_slots(
+      std::ostream& output,
+      bool& comma,
+      const std::string& name,
+      const Slot& slot,
+      Rest... rest
+  ) {
+    return json_encode_object_slots(output, comma, name.c_str(), slot, rest...);
+  };
+
+}; // json_internal
+
+
+// A helper function to write fixed-size objects
+// Example: call `json_encode_object(output, "x", 42, "a", false)`
+// to produce `{"x":42,"a":false}`
+template <typename... Args>
+bool json_encode_object(std::ostream& output, Args... args) {
+  output << '{';
+  bool comma = false;
+  if (!json_internal::json_encode_object_slots(output, comma, args...))
+    return false;
+  output << '}';
+  return true;
 }
+
+}; // ToolFramework
 
 #endif
