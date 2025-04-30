@@ -29,7 +29,7 @@ bool json_encode(std::ostream& output, const std::vector<T>& data) {
       output << ',';
     else
       comma = true;
-    json_encode(output, datum);
+    if (!json_encode(output, datum)) return false;
   };
   output << ']';
   return true;
@@ -44,9 +44,9 @@ bool json_encode(std::ostream& output, const std::map<std::string, T>& data) {
       output << ',';
     else
       comma = true;
-    json_encode(output, datum.first);
+    if (!json_encode(output, datum.first)) return false;
     output << ':';
-    json_encode(output, datum.second);
+    if (!json_encode(output, datum.second)) return false;
   };
   output << '}';
   return true;
