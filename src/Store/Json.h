@@ -17,6 +17,7 @@ json_encode(std::ostream& output, T datum) {
   return true;
 }
 
+bool json_encode(std::ostream& output, const char* datum);
 bool json_encode(std::ostream& output, const std::string& datum);
 
 template <typename T>
