@@ -141,8 +141,10 @@ int ToolChain::Initialise(){
 #ifndef DEBUG
       }
       catch(std::exception& e){
+        *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!! "<<m_toolnames.at(i)<<" Failed to initialise (uncaught exception)\n"<<std::endl;
         *m_log<<MsgL(0,m_verbose)<<red<<e.what()<<"\n"<<std::endl;
-        throw;
+        result=2;
+        if(m_errorlevel>0) exit(1);
       }
       catch(...){
         *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!! "<<m_toolnames.at(i)<<" Failed to initialise (uncaught error)\n"<<std::endl;
@@ -220,8 +222,17 @@ int ToolChain::Execute(int repeates){
         }
         
         catch(std::exception& e){
+          *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!!! "<<m_toolnames.at(i)<<" Failed to execute (uncaught exception)\n"<<std::endl;
           *m_log<<MsgL(0,m_verbose)<<red<<e.what()<<"\n"<<std::endl;
-          throw;
+          result=2;
+          if(m_errorlevel>0){
+            if(m_recover){
+              m_errorlevel=0;
+              Finalise();
+            }
+            exit(1);
+          }
+                    
         }
         catch(...){
           *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!!! "<<m_toolnames.at(i)<<" Failed to execute (uncaught error)\n"<<std::endl;
@@ -274,7 +285,7 @@ int ToolChain::Finalise(){
         if(m_tools.at(i)->Finalise()) *m_log<<MsgL(2,m_verbose)<<green<<m_toolnames.at(i)<<" Finalised successfully\n"<<std::endl;
         
         else{
-          *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!!!! "<<m_toolnames.at(i)<<" Finalised successfully (error code)\n"<<std::endl;
+          *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!!!! "<<m_toolnames.at(i)<<" Error Finalising (error code)\n"<<std::endl;
           result=1;
           if(m_errorlevel>1)exit(1);
         }
@@ -283,11 +294,15 @@ int ToolChain::Finalise(){
       }
       
       catch(std::exception& e){
+        *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!!!! "<<m_toolnames.at(i)<<" Error Finalising (uncaught exception)\n"<<std::endl;
         *m_log<<MsgL(0,m_verbose)<<red<<e.what()<<"\n"<<std::endl;
-        throw;
+        
+        result=2;
+        if(m_errorlevel>0)exit(1);
+        
       }
       catch(...){
-        *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!!!! "<<m_toolnames.at(i)<<" Finalised successfully (uncaught error)\n"<<std::endl;
+        *m_log<<MsgL(0,m_verbose)<<red<<"WARNING !!!!!!! "<<m_toolnames.at(i)<<" Error Finalising (uncaught error)\n"<<std::endl;
         
         result=2;
         if(m_errorlevel>0)exit(1);
