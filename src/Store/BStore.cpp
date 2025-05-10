@@ -960,7 +960,7 @@ namespace ToolFramework {
   bool json_encode(std::ostream& output, const BStore& store) {
     return store.JsonEncode(output);
   }
-};
+}
 
 template <typename T>
 static bool json_encode_bs(std::ostream& output, const BinaryStream& input) {

@@ -151,10 +151,16 @@ void WorkerPoolManager::WorkerThread(Thread_args* arg) {
       }
     }
     
-    if (args->job_out_deque) {
-      args->job_out_deque->push_back(args->job);
-      args->job->m_in_progress=false;
-    } else {
+    if (args->job_out_deque || args->job->out_deque) {
+      if(args->job->out_deque) args->job->out_deque->push_back(args->job);
+      else args->job_out_deque->push_back(args->job);
+     args->job->m_in_progress=false;
+    } 
+    else if(args->job->out_pool){
+      args->job->out_pool->Add(args->job);
+      args->job=0;
+    }
+    else {
       delete args->job;
       args->job=0;
     }
@@ -236,29 +242,29 @@ unsigned int WorkerPoolManager::NumThreads() {
 std::string WorkerPoolManager::GetStats(){
 
   std::string ret="";
-  
+ 
+  ret="Queued Jobs Total = " + std::to_string(m_job_queue->size()) + " \n"; 
   m_job_queue->m_lock.lock();
   m_manager_args.stats_mtx.lock(); 
-
-  ret="Queued Jobs Total = " + std::to_string(m_job_queue->size()) + " \n";
-
+  
   for(std::map<std::string, QueueStats>::iterator it = m_job_queue->m_stats.begin(); it!=m_job_queue->m_stats.end(); it++){
-
+    
     ret += "  " + it->first + ": submitted = " + std::to_string(it->second.submitted) + ", queued = " + std::to_string(it->second.queued) + ", processing = " + std::to_string(m_manager_args.stats[it->first].processing) + ", completed = " + std::to_string(m_manager_args.stats[it->first].completed) + ", failed = " + std::to_string(m_manager_args.stats[it->first].failed) +"\n"; 
 
   }
   
   m_manager_args.stats_mtx.unlock();
   m_job_queue->m_lock.unlock();
-  
+    
+
   return ret;
   
 }
 
 void WorkerPoolManager::PrintStats(){
-
+  
   printf("%s\n", GetStats().c_str());
-
+  
 }
 
 void WorkerPoolManager::ClearStats(){

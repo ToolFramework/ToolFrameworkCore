@@ -6,6 +6,7 @@
 #include <vector>
 #include "Utilities.h"
 #include "WorkerPoolManager.h"
+#include "Pool.h"
 
 #include "Store.h"
 #include "BStore.h"
