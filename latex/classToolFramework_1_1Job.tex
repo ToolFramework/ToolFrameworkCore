@@ -20,7 +20,7 @@ bool($\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_a8f8dbc443f7f351429240ccd
 void($\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_a02a1fe02de231d3cddf92593062c6471}{fail\+\_\+func}} )(void $\ast$\&)
 \begin{DoxyCompactList}\small\item\em function for worker thread to run \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classToolFramework_1_1Job_ab45f88ef6f03b4bf03d81ca288ee4dc9}\label{classToolFramework_1_1Job_ab45f88ef6f03b4bf03d81ca288ee4dc9}} 
-void $\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_ab45f88ef6f03b4bf03d81ca288ee4dc9}{data}}
+void $\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_ab45f88ef6f03b4bf03d81ca288ee4dc9}{data}} = 0
 \begin{DoxyCompactList}\small\item\em data packet for thread to retreive data \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classToolFramework_1_1Job_afe57de0763c8016021506c7768e8bf0f}\label{classToolFramework_1_1Job_afe57de0763c8016021506c7768e8bf0f}} 
 bool \mbox{\hyperlink{classToolFramework_1_1Job_afe57de0763c8016021506c7768e8bf0f}{m\+\_\+complete}}
@@ -30,10 +30,16 @@ bool \mbox{\hyperlink{classToolFramework_1_1Job_a53db3440fa8f659c5679ba6ea1f3768
 \begin{DoxyCompactList}\small\item\em if the job is in progress \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classToolFramework_1_1Job_a2a5b1b3183403d9bd2c7a2d9775ae468}\label{classToolFramework_1_1Job_a2a5b1b3183403d9bd2c7a2d9775ae468}} 
 bool \mbox{\hyperlink{classToolFramework_1_1Job_a2a5b1b3183403d9bd2c7a2d9775ae468}{m\+\_\+failed}}
-\begin{DoxyCompactList}\small\item\em if the job ahs failed \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em if the job has failed \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classToolFramework_1_1Job_a295965ab7c885923eaa893af7dcd03d7}\label{classToolFramework_1_1Job_a295965ab7c885923eaa893af7dcd03d7}} 
 std\+::string \mbox{\hyperlink{classToolFramework_1_1Job_a295965ab7c885923eaa893af7dcd03d7}{m\+\_\+id}}
-\begin{DoxyCompactList}\small\item\em string to hold id \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em string to hold id \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_a747b2d40db42725db29177ae745d7419}\label{classToolFramework_1_1Job_a747b2d40db42725db29177ae745d7419}} 
+\mbox{\hyperlink{classToolFramework_1_1JobDeque}{Job\+Deque}} $\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_a747b2d40db42725db29177ae745d7419}{out\+\_\+deque}} = 0
+\begin{DoxyCompactList}\small\item\em output deque to place finished job \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classToolFramework_1_1Job_a00527abad163601e1874cfc3985acf56}\label{classToolFramework_1_1Job_a00527abad163601e1874cfc3985acf56}} 
+\mbox{\hyperlink{classToolFramework_1_1Pool}{Pool}}$<$ \mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $>$ $\ast$ \mbox{\hyperlink{classToolFramework_1_1Job_a00527abad163601e1874cfc3985acf56}{out\+\_\+pool}} = 0
+\begin{DoxyCompactList}\small\item\em output pool to place finished jobs \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

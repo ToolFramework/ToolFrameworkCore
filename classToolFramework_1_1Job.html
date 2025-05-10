@@ -94,7 +94,7 @@ void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="memdesc:a02a1fe02de231d3cddf92593062c6471"><td class="mdescLeft">&#160;</td><td class="mdescRight">function for worker thread to run <br /></td></tr>
 <tr class="separator:a02a1fe02de231d3cddf92593062c6471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab45f88ef6f03b4bf03d81ca288ee4dc9"><td class="memItemLeft" align="right" valign="top"><a id="ab45f88ef6f03b4bf03d81ca288ee4dc9"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Job.html#ab45f88ef6f03b4bf03d81ca288ee4dc9">data</a></td></tr>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Job.html#ab45f88ef6f03b4bf03d81ca288ee4dc9">data</a> = 0</td></tr>
 <tr class="memdesc:ab45f88ef6f03b4bf03d81ca288ee4dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">data packet for thread to retreive data <br /></td></tr>
 <tr class="separator:ab45f88ef6f03b4bf03d81ca288ee4dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe57de0763c8016021506c7768e8bf0f"><td class="memItemLeft" align="right" valign="top"><a id="afe57de0763c8016021506c7768e8bf0f"></a>
@@ -107,12 +107,20 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a53db3440fa8f659c5679ba6ea1f3768f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a5b1b3183403d9bd2c7a2d9775ae468"><td class="memItemLeft" align="right" valign="top"><a id="a2a5b1b3183403d9bd2c7a2d9775ae468"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Job.html#a2a5b1b3183403d9bd2c7a2d9775ae468">m_failed</a></td></tr>
-<tr class="memdesc:a2a5b1b3183403d9bd2c7a2d9775ae468"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the job ahs failed <br /></td></tr>
+<tr class="memdesc:a2a5b1b3183403d9bd2c7a2d9775ae468"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the job has failed <br /></td></tr>
 <tr class="separator:a2a5b1b3183403d9bd2c7a2d9775ae468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a295965ab7c885923eaa893af7dcd03d7"><td class="memItemLeft" align="right" valign="top"><a id="a295965ab7c885923eaa893af7dcd03d7"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Job.html#a295965ab7c885923eaa893af7dcd03d7">m_id</a></td></tr>
 <tr class="memdesc:a295965ab7c885923eaa893af7dcd03d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">string to hold id <br /></td></tr>
 <tr class="separator:a295965ab7c885923eaa893af7dcd03d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a747b2d40db42725db29177ae745d7419"><td class="memItemLeft" align="right" valign="top"><a id="a747b2d40db42725db29177ae745d7419"></a>
+<a class="el" href="classToolFramework_1_1JobDeque.html">JobDeque</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Job.html#a747b2d40db42725db29177ae745d7419">out_deque</a> = 0</td></tr>
+<tr class="memdesc:a747b2d40db42725db29177ae745d7419"><td class="mdescLeft">&#160;</td><td class="mdescRight">output deque to place finished job <br /></td></tr>
+<tr class="separator:a747b2d40db42725db29177ae745d7419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00527abad163601e1874cfc3985acf56"><td class="memItemLeft" align="right" valign="top"><a id="a00527abad163601e1874cfc3985acf56"></a>
+<a class="el" href="classToolFramework_1_1Pool.html">Pool</a>&lt; <a class="el" href="classToolFramework_1_1Job.html">Job</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classToolFramework_1_1Job.html#a00527abad163601e1874cfc3985acf56">out_pool</a> = 0</td></tr>
+<tr class="memdesc:a00527abad163601e1874cfc3985acf56"><td class="mdescLeft">&#160;</td><td class="mdescRight">output pool to place finished jobs <br /></td></tr>
+<tr class="separator:a00527abad163601e1874cfc3985acf56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to store jobs for worker threads</p>
