@@ -29,7 +29,7 @@ namespace ToolFramework{
     bool m_complete; ///< if the job is complete
     bool m_in_progress; ///< if the job is in progress 
     bool m_failed; ///< if the job has failed
-    std::string m_id; ///< string to hold id
+    std::string m_id = ""; ///< string to hold id
     JobDeque* out_deque = 0; ///< output deque to place finished job
     Pool<Job>* out_pool = 0; ///< output pool to place finished jobs
 

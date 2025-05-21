@@ -41,17 +41,17 @@ bool json_encode(std::ostream& output, const T* data, size_t size) {
   };
   output << ']';
   return true;
-};
+}
 
 template <typename T, size_t N>
 bool json_encode(std::ostream& output, const std::array<T, N>& array) {
   return json_encode(output, array.data(), array.size());
-};
+}
 
 template <typename T>
 bool json_encode(std::ostream& output, const std::vector<T>& vector) {
   return json_encode(output, vector.data(), vector.size());
-};
+}
 
 template <typename T>
 bool json_encode(std::ostream& output, const std::map<std::string, T>& data) {
@@ -82,7 +82,7 @@ namespace json_internal {
 
   inline bool json_encode_object_slots(std::ostream& output, bool& comma) {
     return true;
-  };
+  }
 
   template <typename Slot, typename... Rest>
   bool json_encode_object_slots(
@@ -97,7 +97,7 @@ namespace json_internal {
     output << '"' << name << '"' << ':';
     if (!json_encode(output, slot)) return false;
     return json_encode_object_slots(output, comma, rest...);
-  };
+  }
 
   template <typename Slot, typename... Rest>
   bool json_encode_object_slots(
@@ -108,9 +108,9 @@ namespace json_internal {
       Rest... rest
   ) {
     return json_encode_object_slots(output, comma, name.c_str(), slot, rest...);
-  };
+  }
 
-}; // json_internal
+} // json_internal
 
 
 // A helper function to write fixed-size objects
@@ -126,6 +126,6 @@ bool json_encode_object(std::ostream& output, Args... args) {
   return true;
 }
 
-}; // ToolFramework
+} // ToolFramework
 
 #endif
