@@ -9,6 +9,7 @@
 #include <Utilities.h>
 #include <mutex>
 #include <chrono>
+#include <atomic>
 
 namespace ToolFramework{
 
@@ -72,7 +73,7 @@ namespace ToolFramework{
     JobQueue* job_queue;
     unsigned int* thread_cap;  ///< Variable to cap the number of thread workers
     unsigned int* global_thread_cap;
-    unsigned int* global_thread_num;
+    std::atomic<unsigned int>* global_thread_num;
     JobDeque* job_out_deque;
     bool self_serving;
     unsigned int thread_sleep_us;
@@ -120,7 +121,7 @@ namespace ToolFramework{
        * @param thrad_management_period_us how long between evaluating the number of worker threads to avoid rapid killing and recreating
        * @param job_assignment_period how long the managers sleeps between checking if there are free workers to assign them new jobs
        */
-    WorkerPoolManager(JobQueue& job_queue,  unsigned int* thread_cap=0, unsigned int* global_thread_cap=0, unsigned int* global_thread_num=0, JobDeque* job_out_deque=0, bool self_serving=false, bool threaded=true, unsigned int thread_sleep_us=100, unsigned int thread_management_period_us=10000, unsigned int job_assignment_period_us=1000);
+    WorkerPoolManager(JobQueue& job_queue,  unsigned int* thread_cap=0, unsigned int* global_thread_cap=0, std::atomic<unsigned int>* global_thread_num=0, JobDeque* job_out_deque=0, bool self_serving=false, bool threaded=true, unsigned int thread_sleep_us=100, unsigned int thread_management_period_us=10000, unsigned int job_assignment_period_us=1000);
     ~WorkerPoolManager(); ///< Simple Destructor
     
     void ManageWorkers(); ///< Function to manage workers and distribute jobs to be run when unthreaded if you choose to not have the managment run on a thread.
@@ -132,8 +133,8 @@ namespace ToolFramework{
   private:
     
     void CreateManagerThread(); ///< Function to Create Manager Thread
-    static void CreateWorkerThread(std::vector<PoolWorker_args*> &in_args, bool &in_self_serving, unsigned int &in_thread_sleep_us, JobQueue* in_job_queue, JobDeque* in_job_out_deque,unsigned long &thread_num, Utilities* in_util, std::map<std::string,PoolManagerStats>* in_stats, std::mutex* in_stats_mtx, unsigned int* global_thread_num=0 ); ///< Function to Create Worker Thread
-    static void DeleteWorkerThread(unsigned int pos,  Utilities* in_util, std::vector<PoolWorker_args*> &in_args, unsigned int* global_thread_num=0); ///< Function to delete thread @param pos is the position in the args vector below
+    static void CreateWorkerThread(std::vector<PoolWorker_args*> &in_args, bool &in_self_serving, unsigned int &in_thread_sleep_us, JobQueue* in_job_queue, JobDeque* in_job_out_deque,unsigned long &thread_num, Utilities* in_util, std::map<std::string,PoolManagerStats>* in_stats, std::mutex* in_stats_mtx, std::atomic<unsigned int>* global_thread_num=0 ); ///< Function to Create Worker Thread
+    static void DeleteWorkerThread(unsigned int pos,  Utilities* in_util, std::vector<PoolWorker_args*> &in_args, std::atomic<unsigned int>* global_thread_num=0); ///< Function to delete thread @param pos is the position in the args vector below
     
     static void WorkerThread(Thread_args* arg); ///< Function to be run by the thread in a loop. Make sure not to block in it
     static void ManagerThread(Thread_args* arg); ///< Function to be run by the thread manager. Make sure not to block in it
