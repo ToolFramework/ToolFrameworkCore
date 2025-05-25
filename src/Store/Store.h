@@ -61,13 +61,15 @@ namespace ToolFramework{
     */
     template<typename T> bool Get(std::string name,std::vector<T> &out){
 
-      if(m_variables.count(name)>0 && StringStrip(m_variables[name])[0]=='['){
+      std::string stripped = StringStrip(m_variables[name]);
+
+      if(m_variables.count(name)>0 && stripped[0]=='['){
 	std::stringstream stream;
 	out.clear();
 	  
-	for(unsigned int i=1; i<m_variables[name].length(); i++){
-	  if(m_variables[name][i]!=',' && m_variables[name][i]!=']'){
-	    if(m_variables[name][i]!='"') stream.put(m_variables[name][i]);
+	for(unsigned int i=1; i<stripped.length(); i++){
+	  if(stripped[i]!=',' && stripped[i]!=']'){
+	    if(stripped[i]!='"') stream.put(stripped[i]);
 	  }
 	  else {
 	    T tmp;
