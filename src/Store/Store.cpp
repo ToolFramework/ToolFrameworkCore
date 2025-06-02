@@ -1,3 +1,6 @@
+#include <iomanip>
+#include <memory>
+
 #include "Store.h"
 
 namespace ToolFramework {
@@ -61,62 +64,58 @@ namespace ToolFramework {
     
     
   }
-  
-  
-  void Store::JsonParser(std::string input){ 
-    
-    int type=0;
-    std::string key="";
-    std::string value="";
-    int bracket_counter=0;
 
-    for(std::string::size_type i = 0; i < input.size(); ++i) {
-      
-      //std::cout<<"i="<<i<<" , "<<input[i]<<" , type="<<type<<std::endl;
-      
-      //type 0011112233444444550011112233333333001111223366666665500111122337777777555
-      //     { "key" : "value" , "key" : value , "key" : {......} , "key" : [......] }
-      
-      // types: 0 - pre key
-      //        1 - key
-      //        2 - postkey
-      //        3 - value
-      //        4 - string value
-      //        5 - post value
-      //        6 - object
-      //        7 - array
-      
-      if ((input[i] == '\n' || input[i] == '\r') && type != 4) continue;
-      
-      if(input[i]=='\"' && type<5){
-	if(type==4) value+='"';
-	type++;
-	if(type==4) value+='"';
-      }
-      else if(type==1) key+=input[i];
-      else if(input[i]==':' && type==2) type=3;   
-      else if((input[i]==',' || input[i]=='}') && (type==5 || type==3)){
-	type=0;
-	//std::cout<<"key="<<key<<" , value="<<value<<std::endl;
-	m_variables[key]=value;
-	key="";
-	value="";
-      }
-      else if(type==3  && !(input[i]==' ' || input[i]=='{' || input[i]=='[')) value+=input[i];
-      else if(type==3  && input[i]=='{'){ value+=input[i]; type=6; }
-      else if(type==4  && input[i]=='{'){ value.replace(value.length()-1, 1, "{"); type=6; }
-      else if(type==6  && input[i]=='{'){ value+=input[i]; bracket_counter++; }
-      else if(type==6  && input[i]=='}'){ value+=input[i]; bracket_counter--;if(bracket_counter==-1){ type=5; bracket_counter=0;} }
-      else if(type==3  && input[i]=='['){ value+=input[i]; type=7; }
-      else if(type==7  && input[i]=='['){ value+=input[i]; bracket_counter++; }
-      else if(type==7  && input[i]==']'){ value+=input[i]; bracket_counter--;if(bracket_counter==-1){ type=5; bracket_counter=0;} }
-      else if(type==4 || type==6 || type==7) value+=input[i];
-    }
-    
+  bool Store::JsonParser(const char* input) {
+    bool result = json_decode_object(
+        input,
+        [this](const char*& input_, std::string key) -> bool {
+          const char* i = input_;
+          i = json_scan_whitespace(i);
+          switch (*i) {
+            case '"':
+              {
+                std::string value;
+                if (!json_internal::json_decode_string(i, value, true))
+                  return false;
+                m_variables[std::move(key)] = std::move(value);
+              };
+              break;
+            case 'f':
+              i = json_scan_token(i, "false");
+              if (!i) return false;
+              m_variables[std::move(key)] = "0";
+              break;
+            case 't':
+              i = json_scan_token(i, "true");
+              if (!i) return false;
+              m_variables[std::move(key)] = "1";
+              break;
+            case 'n':
+              i = json_scan_token(i, "null");
+              if (!i) return false;
+              m_variables[std::move(key)] = "0";
+              break;
+            default:
+              const char* value = i;
+              i = json_scan(i);
+              if (!i) return false;
+              m_variables[std::move(key)] = std::string(value, i);
+          };
+          input_ = i;
+          return true;
+        }
+    );
+    if (!result) return false;
+
+    input = json_scan_whitespace(input);
+    if (!input || *input) return false; // junk at the end
+    return true;
+  };
+  
+  bool Store::JsonParser(const std::string& input) {
+    return JsonParser(input.c_str());
   }
-  
 
-  
   bool Store::Has(std::string key){
     
     return (m_variables.count(key)!=0);
@@ -139,64 +138,6 @@ namespace ToolFramework {
   }
   
   
-  bool Store::Get(std::string name, std::string &out){
-    if(m_variables.count(name)>0){ 
-      out=StringStrip(m_variables[name]);
-      return true;
-    }
-    return false;
-  }
-  
-  bool Store::Get(std::string name, bool &out){
-    if(m_variables.count(name)>0){
-      std::string tmp=StringStrip(m_variables[name]);
-      if(tmp=="true") out=true;
-      else if(tmp=="false") out=false;
-      else if(tmp=="" || tmp=="0") out=false;
-      else out=true;
-      return true;
-      
-    }
-    return false;
-    
-  }
-  
-  bool Store::Get(std::string name, Store &out){
-    if(m_variables.count(name)>0 && StringStrip(m_variables[name])[0]=='{'){
-      out.JsonParser(StringStrip(m_variables[name]));
-      return true;
-    }
-    return false;
-    
-  }
-  
-  void Store::Set(std::string name, std::string in){
-    std::stringstream stream;
-    stream<<"\""<<in<<"\"";
-    m_variables[name]=stream.str();
-  }
-  
-  void Store::Set(std::string name, const char* in){
-    std::stringstream stream;
-    stream<<"\""<<in<<"\"";
-    m_variables[name]=stream.str();
-  }
-  
-  void Store::Set(std::string name,std::vector<std::string> in){
-    std::stringstream stream;
-    std::string tmp="[";
-    for(unsigned int i=0; i<in.size(); i++){
-      stream<<"\""<<in.at(i)<<"\"";
-      tmp+=stream.str();
-      if(i!=in.size()-1)tmp+=',';
-      stream.str("");
-      stream.clear();
-    }
-    tmp+=']';
-    m_variables[name]=tmp;
-    
-  }
-  
   std::string Store::StringStrip(std::string in){
     
     if(in.length() && in[0]=='"' && in[in.length()-1]=='"') return in.substr(1,in.length()-2);
@@ -211,20 +152,41 @@ namespace ToolFramework {
     return true;
     
   }
-  
-  std::ostream& operator<<(std::ostream& stream, const Store& s){
-    stream<<"{";
-    bool first=true;
-    for(auto it=s.m_variables.begin(); it!=s.m_variables.end(); ++it){
-      if (!first) stream<<", ";
-      stream<<"\""<<it->first<<"\":"<< it->second;
-      first=false;
-    }
-    stream<<"}";
+
+  void Store::operator>>(std::string& out) const {
+    std::stringstream ss;
+    ss << *this;
+    out = ss.str();
+  }
+
+  std::ostream& operator<<(std::ostream& stream, const Store& store) {
+    bool comma = false;
+    stream << '{';
+    for (const auto& kv : store) {
+      if (comma)
+        stream << ',';
+      else
+        comma = true;
+
+      json_encode(stream, kv.first);
+      stream << ':';
+      char c = kv.second.empty() ? 0 : kv.second[0];
+      if (c == '{' || c == '[')
+        stream << kv.second;
+      else if (c == '"')
+        json_encode(stream, kv.second.begin() + 1, kv.second.end() - 1);
+      else {
+        const char* s = json_scan_number(kv.second.c_str());
+        s = json_scan_whitespace(s);
+        if (s && !*s)
+          stream << kv.second;
+        else
+          json_encode(stream, kv.second);
+      };
+    };
+    stream << '}';
     return stream;
   }
-  
-  
   
   bool Store::Erase(std::string key){
     
