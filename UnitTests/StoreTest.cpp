@@ -3,6 +3,8 @@
 
 #include <string.h>
 
+#include <unistd.h>
+
 #include <Store.h>
 
 using ToolFramework::Store;
@@ -282,6 +284,117 @@ static bool test_json(
   return true;
 };
 
+template <typename T>
+static bool test_initialise_check(
+    Store& store, const char* key, const T& expected
+) {
+  T x = store.Get<T>(key);
+  if (x != expected) {
+    std::cout
+      << "test_initialise "
+      << key
+      << ": expected `"
+      << expected
+      << "', got `"
+      << x
+      << "'\n";
+    return false;
+  };
+  return true;
+};
+
+static bool test_initialise() {
+  const char* tmpdir = getenv("TMPDIR");
+  if (!tmpdir) tmpdir = "/tmp";
+  std::string tmp(tmpdir);
+  tmp += "/StoreTest.XXXXXX";
+
+  int fd = mkstemp(&tmp[0]);
+  if (fd == -1) {
+    std::cout
+      << "test_initialise: cannot create a temporary file "
+      << tmp
+      << ": "
+      << strerror(errno)
+      << '\n';
+    return false;
+  };
+
+  const char* data =
+    "int 1\n"
+    "float 2.71828e0\n"
+    "string test\n"
+    "long_string a string with several words, a\ttab and a    long space  \n"
+    "vector<int> [1, 2, 3, 4]\n"
+    "inline_comment test # test2\n"
+    "inword_comment test#test2\n"
+    "escaped_comment test\\#test2\n"
+    "escaped_newline test\\\n"
+    "test2\n"
+    "escaped_whitespace test   \\ \n"
+  ;
+
+  size_t size = strlen(data);
+  ssize_t ssize = write(fd, data, size);
+  if (ssize != static_cast<ssize_t>(size)) {
+    std::cout
+      << "test_initialise: write to temporary file "
+      << tmp
+      << " returned "
+      << ssize
+      << " (expected "
+      << size
+      << "): "
+      << strerror(errno)
+      << '\n';
+    close(fd);
+    unlink(tmp.c_str());
+    return false;
+  };
+
+  if (close(fd) == -1) {
+    std::cout
+      << "test_initialise: close of temporary file "
+      << tmp
+      << " failed: "
+      << strerror(errno)
+      << '\n';
+    unlink(tmp.c_str());
+    return false;
+  };
+
+  Tester t;
+
+  try {
+    Store store;
+    store.Initialise(tmp);
+
+#define check(type, key, value) t(test_initialise_check<type>(store, key, value))
+    check(int, "int", 1);
+    check(float, "float", 2.71828e0);
+    check(std::string, "string", "test");
+    check(std::string, "long_string", "a string with several words, a\ttab and a    long space");
+    check(std::vector<int>, "vector<int>", (std::vector<int> { 1, 2, 3, 4 }));
+    check(std::string, "inline_comment", "test");
+    check(std::string, "inword_comment", "test");
+    check(std::string, "escaped_comment", "test#test2");
+    check(std::string, "escaped_newline", "test\ntest2");
+    check(std::string, "escaped_whitespace", "test    ");
+#undef check
+
+    if (!t) {
+      std::cout << "Store contents:\n";
+      store.Print();
+    };
+
+    unlink(tmp.c_str());
+  } catch (...) {
+    unlink(tmp.c_str());
+  };
+
+  return t;
+};
+
 int main(int argc, char** argv) {
   Tester t;
 
@@ -518,6 +631,8 @@ int main(int argc, char** argv) {
 
     t(test_json(json, true, expected));
   };
+
+  t(test_initialise());
 
   if (t) std::cout << "ok\n";
 

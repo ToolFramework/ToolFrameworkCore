@@ -1,52 +1,110 @@
 #include <iomanip>
 #include <memory>
+#include <limits>
 
 #include "Store.h"
 
 namespace ToolFramework {
   
   Store::Store(){}
-  
-  
-  bool Store::Initialise(std::string filename){
-    
-    std::ifstream file(filename.c_str());
-    std::string line;
-    
-    if(file.is_open()){
-      
-      while (getline(file,line)){
-	if (line.size()>0){
-	  if (line.at(0)=='#')continue;
-	  std::string key="";
-	  std::string value="";
-	  std::stringstream stream(line);
-	  stream>>key>>value;
-	  std::string tmp;
-	  stream>>tmp;
-	  value='"'+value;
-	  
-	  while(tmp.length() && tmp[0]!='#'){
-	    value+=" "+tmp;
-	    tmp="";
-	    stream>>tmp;
-	  }
-	  value+="\"";
-	  
-	  if(value!="") m_variables[key]=value;
-	}
-	
-      }
-      file.close();
-    }
-    else{
-      std::cout<<"\033[38;5;196m WARNING!!!: Config file "<<filename<<" does not exist no config loaded \033[0m"<<std::endl;
+
+  bool Store::Initialise(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+      std::cout
+        << "\033[38;5;196m WARNING!!!: Config file "
+        << filename
+        << " does not exist no config loaded \033[0m"
+        << std::endl;
       return false;
-    }
-  
+    };
+
+    std::string key;
+    std::vector<char> value;
+    while (file) {
+      // skip whitespace but not newline
+      int c;
+      do c = file.get();
+      while (std::isspace(c) && c != '\n');
+
+      // skip comments
+      if (c == EOF) break;
+      switch (c) {
+        case '#':
+          file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        case '\n':
+          continue;
+        default:
+          break;
+      };
+
+      // read the key
+      file.unget();
+      file >> key;
+
+      // skip whitespace again
+      do c = file.get();
+      while (std::isspace(c) && c != '\n');
+      file.unget();
+
+      // read the value
+      bool escaped = false;
+      size_t end = 0;
+      value.clear();
+      while (true) {
+        c = file.get();
+        if (escaped) {
+          if (c == EOF) break;
+          escaped = false;
+          end = value.size();
+        } else {
+          switch (c) {
+            case '#':
+              file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            case '\n':
+            case EOF:
+              goto value_read;
+            case '\\':
+              escaped = true;
+              continue;
+            default:
+              break;
+          };
+          if (!isspace(c)) end = value.size();
+        };
+        value.push_back(c);
+      };
+value_read:
+      // XXX: backslash at the end of the file --- ignore?
+      // if (escaped) value.push_back();
+
+      // delete whitespace at the end
+      value.erase(value.begin() + static_cast<ssize_t>(end) + 1, value.end());
+
+      value.push_back('\0');
+
+      if (!value.empty()) {
+        if (value[0] == '{' || value[0] == '[') {
+          const char* s = json_scan(value.data());
+          s = json_scan_whitespace(s);
+          if (!s || *s) {
+            // invalid JSON. Throw an error? Return false?
+            Set(key, value.data()); // store as a string
+            continue;
+          };
+        } else if (value[0] == '"') {
+          // quote to avoid confusion
+          Set(key, value.data());
+          continue;
+        };
+      };
+
+      m_variables[key] = value.data();
+    };
+
     return true;
-  }
-  
+  };
+
   void Store::Print(){
   
     for (std::map<std::string,std::string>::iterator it=m_variables.begin(); it!=m_variables.end(); ++it){
