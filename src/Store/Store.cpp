@@ -124,6 +124,10 @@ value_read:
   }
 
   bool Store::JsonParser(const char* input) {
+    if (!json_valid(input)) return false; // invalid JSON string
+
+    // We have validated input, so in the following `return false` should never
+    // happen. We keep it, however, just in case.
     bool result = json_decode_object(
         input,
         [this](const char*& input_, std::string key) -> bool {
@@ -165,8 +169,6 @@ value_read:
     );
     if (!result) return false;
 
-    input = json_scan_whitespace(input);
-    if (!input || *input) return false; // junk at the end
     return true;
   };
   

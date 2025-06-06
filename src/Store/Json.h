@@ -100,6 +100,8 @@ const char* json_scan_object(const char* input);
 const char* json_scan_array(const char* input);
 const char* json_scan(const char* input); // generic
 
+bool json_valid(const char* input);
+
 
 // json_encode_r implements encoding of specific objects. Add overloads to this
 // function to support custom classes.

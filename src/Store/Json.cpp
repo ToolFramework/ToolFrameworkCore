@@ -206,6 +206,12 @@ const char* json_scan(const char* input) {
   };
 }
 
+bool json_valid(const char* input) {
+  input = json_scan(input);
+  input = json_scan_whitespace(input);
+  return input && !*input;
+};
+
 bool json_decode_r(const char*& input, bool& value, adl_tag) {
   const char* i = json_scan_whitespace(input);
   if (!i) return false;
