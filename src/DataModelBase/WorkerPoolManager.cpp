@@ -265,6 +265,29 @@ std::string WorkerPoolManager::GetStats(){
   
 }
 
+void WorkerPoolManager::GetStats(Store& output){
+
+ 
+  m_job_queue->m_lock.lock();
+  m_manager_args.stats_mtx.lock(); 
+  
+  for(std::map<std::string, QueueStats>::iterator it = m_job_queue->m_stats.begin(); it!=m_job_queue->m_stats.end(); it++){
+    
+    
+    output.Set( it->first + "_submitted", it->second.submitted);
+    output.Set( it->first + "_queued", it->second.queued);
+    output.Set( it->first + "_processing", m_manager_args.stats[it->first].processing);
+    output.Set( it->first + "_completed", m_manager_args.stats[it->first].completed);
+    output.Set( it->first + "_failed", m_manager_args.stats[it->first].failed);
+    
+  }
+  
+  m_manager_args.stats_mtx.unlock();
+  m_job_queue->m_lock.unlock();
+
+  return;
+}
+
 void WorkerPoolManager::PrintStats(){
   
   printf("%s\n", GetStats().c_str());

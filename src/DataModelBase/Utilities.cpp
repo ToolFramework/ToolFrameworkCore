@@ -42,12 +42,13 @@ void *Utilities::Thread(void *arg){
       }  
       catch (std::exception& p) {
 	std::clog<<"Thread function Failed:"<<p.what() <<std::endl;
-        running = false;
+        args->running = false;
       }
       catch(...){
 	std::clog<<"Thread function Failed"<<std::endl;
-        running = false;
+        args->running = false;
       }
+    }
     else usleep(100);
   
   }

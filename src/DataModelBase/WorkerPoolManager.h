@@ -127,6 +127,7 @@ namespace ToolFramework{
     void ManageWorkers(); ///< Function to manage workers and distribute jobs to be run when unthreaded if you choose to not have the managment run on a thread.
     unsigned int NumThreads(); ///< Function to return the number of current worker threads
     std::string GetStats(); ///< Function to get the current stats
+    void GetStats(Store& output); ///< Function to get the current stats
     void PrintStats(); ///< Function to print the current stats to screen
     void ClearStats(); ///< Function to clear the current stats
     
