@@ -1,109 +1,640 @@
 #include <iostream>
+#include <functional>
+
+#include <string.h>
+
+#include <unistd.h>
+
 #include <Store.h>
 
-using namespace ToolFramework;
+using ToolFramework::Store;
 
-int test_counter=0;
+class Tester {
+  public:
+    bool success = true;
 
-template <typename T> int Test(T &a, T &b, std::string message=""){
-test_counter++;
+    void operator()(bool result) {
+      success = success && result;
+    };
 
-if(a!=b){
-    std::cout<<"ERROR "<<test_counter<<" "<<message<<": "<<a<<"!="<<b<<std::endl;
-    return test_counter;
-}
-return 0;
+    operator bool() { return success; };
+};
 
-}
+template <>
+struct std::equal_to<Store> {
+  bool operator()(const Store& a, const Store& b) {
+    auto ia = a.begin();
+    auto ib = b.begin();
+    while (ia != a.end()) if (ib == b.end() || *ia++ != *ib++) return false;
+    return true;
+  };
+};
 
+// Compare two JSON strings neglecting whitespace
+// Skips whitespace and compares further characters. May produce false equals
+// when comparing strings within strings differing in whitespace, e.g.,
+// "{\"a\":\"q w\"}" "{\"a\":\"q  w\"}", but we don't expect those.
+static bool json_eq(const char* a, const char* b) {
+  while (*a && *b) {
+    if (*a != *b) {
+      while (isspace(*a)) ++a;
+      while (isspace(*b)) ++b;
+      if (*a != *b) return false;
+    };
+    ++a;
+    ++b;
+  };
+  while (isspace(*a)) ++a;
+  while (isspace(*b)) ++b;
+  return *a == *b;
+};
 
-int main(){
+template <typename T>
+std::ostream& operator<<(std::ostream&, const std::map<std::string, T>&);
 
-int ret=0;
-bool pass=true;
+template <typename T>
+std::ostream& operator<<(std::ostream& stream, const std::vector<T>& vector) {
+  stream << "[ ";
+  bool comma = false;
+  for (auto& x : vector) {
+    if (comma) stream << ", ";
+    comma = true;
+    stream << x;
+  };
+  return stream << " ]";
+};
 
-int a=1;
-short b=2;
-long c=3;
-float d=4.4;
-double e=5.5;
-bool f=true;
-char g='h';
-std::string h="hello world";
+template <typename T>
+std::ostream& operator<<(std::ostream& stream, const std::map<std::string, T>& map) {
+  stream << "{ ";
+  bool comma = false;
+  for (auto& kv : map) {
+    if (comma) stream << ", ";
+    comma = true;
+    stream << kv.first << " => " << kv.second;
+  };
+  return stream << " }";
+};
 
-unsigned int i=6;
-const int j=7;
+// Custom user class
+struct User {
+  std::string field;
 
+  User() {};
+  User(const char* f): field(f) {};
+  virtual ~User() {};
 
-Store store;
+  bool operator==(const User& u) const {
+    return field == u.field;
+  };
+};
 
-store.Set("a",a);
-store.Set("b",b);
-store.Set("c",c);
-store.Set("d",d);
-store.Set("e",e);
-store.Set("f",f);
-store.Set("g",g);
-store.Set("h",h);
-store.Set("i",i);
-store.Set("j",j);
-store.Set("k","hello world");
-store.Set("l",2);
-store.Set("m",4.4);
-store.Set("n",true);
+static void print(std::ostream& stream, const User& user) {
+  stream << "user " << user.field;
+};
 
-int a2=0;
-short b2=0;
-long c2=0;
-float d2=0;
-double e2=0;
-bool f2=false;
-char g2='0';
-std::string h2="";
-unsigned int i2=0;
-std::string k2="";
-short l2=0;
-float m2=0;
-bool n2=false;
+// Custom user class with implemented json encode/decode
+struct User1: public User {
+  User1() {};
+  User1(const char* f): User(f) {};
+};
 
+namespace ToolFramework {
+  static bool json_encode_r(std::ostream& stream, const User1& user, adl_tag tag) {
+    return json_encode_r(stream, user.field, tag);
+  };
 
- pass= pass && (store.Get("a",a2));
- pass= pass && (store.Get("b",b2));
- pass= pass && (store.Get("c",c2));
- pass= pass && (store.Get("d",d2));
- pass= pass && (store.Get("e",e2));
- pass= pass && (store.Get("f",f2));
- pass= pass && (store.Get("g",g2));
- pass= pass && (store.Get("h",h2));
- pass= pass && (store.Get("i",i2));
- const int j2=store.Get<int>("j");
- pass= pass && (store.Get("k",k2));
- pass= pass && (store.Get("l",l2));
- pass= pass && (store.Get("m",m2));
- pass= pass && (store.Get("n",n2));
+  static bool json_decode_r(const char*& input, User1& user, adl_tag tag) {
+    const char* i = input;
+    if (!json_decode_r(i, user.field, tag)) return false;
+    input = i;
+    return true;
+  };
+};
 
+// Custom user class with implemented input/output operators
+struct User2: public User {
+  User2() {};
+  User2(const char* f): User(f) {};
+};
 
-bool tmp=true;
-ret+=Test(pass,tmp, "Get Fail");
+static std::ostream& operator<<(std::ostream& output, const User2& user) {
+  return output << user.field;
+};
 
-ret+=Test(a,a2);
-ret+=Test(b,b2);
-ret+=Test(c,c2);
-ret+=Test(d,d2);
-ret+=Test(e,e2);
-ret+=Test(f,f2);
-ret+=Test(g,g2);
-ret+=Test(h,h2);
-ret+=Test(i,i2);
-ret+=Test(j,j2);
-ret+=Test(h,k2);
-ret+=Test(b,l2);
-ret+=Test(d,m2);
-ret+=Test(f,n2);
+static std::istream& operator>>(std::istream& input, User2& user) {
+  return input >> user.field;
+};
 
-store.Print();
+// Custom user class with implemented both json encode/decode and input/output
+// operators
+struct User3: public User {
+  User3() {};
+  User3(const char* f): User(f) {};
+};
 
+namespace ToolFramework {
+  static bool json_encode_r(
+      std::ostream& stream, const User3& user, adl_tag tag
+  ) {
+    return json_encode_r(stream, user.field, tag);
+  };
 
-return ret;
+  static bool json_decode_r(
+      const char*& input, User3& user, adl_tag tag
+  ) {
+    const char* i = input;
+    if (!json_decode_r(i, user.field, tag)) return false;
+    input = i;
+    return true;
+  };
+};
 
-}
+static std::ostream& operator<<(std::ostream& output, const User3& user) {
+  return output << user.field;
+};
+
+static std::istream& operator>>(std::istream& input, User3& user) {
+  return input >> user.field;
+};
+
+// Custom user class with json encode/decode implemented through inheritance
+struct User4: public User1 {
+  User4() {};
+  User4(const char* f): User1(f) {};
+};
+
+// Custom user class with both json encode/decode and input/output operators
+// implemented through inheritance
+struct User5: public User3 {
+  User5() {};
+  User5(const char* f): User3(f) {};
+};
+
+// Custom user class with json encode/decode implemented through inheritance
+// and custom input/output operators
+struct User6: public User1 {
+  User6() {};
+  User6(const char* f): User1(f) {};
+};
+
+static std::ostream& operator<<(std::ostream& output, const User6& user) {
+  return output << user.field;
+};
+
+static std::istream& operator>>(std::istream& input, User6& user) {
+  return input >> user.field;
+};
+
+template <typename T, typename Eq = std::equal_to<T>>
+static bool test_var(
+    const char* key,
+    const T& value,
+    const char* json = nullptr,
+    Eq eq = std::equal_to<T>(),
+    const std::function<void (std::ostream&, const T&)>& printer
+      = [](std::ostream& stream, const T& value) { stream << value; }
+) {
+  auto log = [&]() -> std::ostream& {
+    std::cout
+      << "test_var<"
+      << typeid(T).name()
+      << "> `"
+      << key
+      << '\'';
+    if (printer) {
+      std::cout << " `";
+      printer(std::cout, value);
+      std::cout << '\'';
+    };
+    return std::cout << ": ";
+  };
+
+  Store store;
+  store.Set(key, value);
+
+  T value2;
+  store.Get(key, value2);
+  if (!eq(value, value2)) {
+    log() << "Get returned `";
+    printer(std::cout, value2);
+    std::cout << "'. Store contents:\n";
+    store.Print();
+    return false;
+  };
+
+  std::string json2;
+  store >> json2;
+  if (json && !json_eq(json, json2.c_str())) {
+    log()
+      << "JSON mismatch: expected `"
+      << json
+      << "', got `"
+      << json2
+      << "'. Store contents:\n";
+    store.Print();
+    return false;
+  };
+
+  Store store2;
+  if (!store2.JsonParser(json2)) {
+    log() << "JsonParser failed on `" << json2 << "'\n";
+    return false;
+  };
+
+  store2.Get(key, value2);
+  if (!eq(value, value2)) {
+    log() << "Get after deserialization returned `";
+    printer(std::cout, value2);
+    std::cout << "'\n";
+    return false;
+  };
+
+  return true;
+};
+
+static bool test_json(
+    const char* json,
+    bool valid = true,
+    const char* expected = nullptr
+) {
+  if (!expected) expected = json;
+
+  auto log = [&]() -> std::ostream& {
+    return std::cout << "test_json `" << json << "': ";
+  };
+
+  Store store;
+  if (store.JsonParser(json) != valid) {
+    log()
+      << "JsonParser "
+      << (valid ? "failed" : "unexpectedly succeeded")
+      << '\n';
+    return false;
+  };
+
+  std::string json2;
+  store >> json2;
+
+  if (!json_eq(expected, json2.c_str())) {
+    log() << "JSON mismatch: got `" << json2 << "'\n";
+    return false;
+  };
+
+  return true;
+};
+
+template <typename T>
+static bool test_initialise_check(
+    Store& store, const char* key, const T& expected
+) {
+  T x = store.Get<T>(key);
+  if (x != expected) {
+    std::cout
+      << "test_initialise "
+      << key
+      << ": expected `"
+      << expected
+      << "', got `"
+      << x
+      << "'\n";
+    return false;
+  };
+  return true;
+};
+
+static bool test_initialise() {
+  const char* tmpdir = getenv("TMPDIR");
+  if (!tmpdir) tmpdir = "/tmp";
+  std::string tmp(tmpdir);
+  tmp += "/StoreTest.XXXXXX";
+
+  int fd = mkstemp(&tmp[0]);
+  if (fd == -1) {
+    std::cout
+      << "test_initialise: cannot create a temporary file "
+      << tmp
+      << ": "
+      << strerror(errno)
+      << '\n';
+    return false;
+  };
+
+  const char* data =
+    "int 1\n"
+    "float 2.71828e0\n"
+    "string test\n"
+    "long_string a string with several words, a\ttab and a    long space  \n"
+    "vector<int> [1, 2, 3, 4]\n"
+    "inline_comment test # test2\n"
+    "inword_comment test#test2\n"
+    "escaped_comment test\\#test2\n"
+    "escaped_newline test\\\n"
+    "test2\n"
+    "escaped_whitespace test   \\ \n"
+  ;
+
+  size_t size = strlen(data);
+  ssize_t ssize = write(fd, data, size);
+  if (ssize != static_cast<ssize_t>(size)) {
+    std::cout
+      << "test_initialise: write to temporary file "
+      << tmp
+      << " returned "
+      << ssize
+      << " (expected "
+      << size
+      << "): "
+      << strerror(errno)
+      << '\n';
+    close(fd);
+    unlink(tmp.c_str());
+    return false;
+  };
+
+  if (close(fd) == -1) {
+    std::cout
+      << "test_initialise: close of temporary file "
+      << tmp
+      << " failed: "
+      << strerror(errno)
+      << '\n';
+    unlink(tmp.c_str());
+    return false;
+  };
+
+  Tester t;
+
+  try {
+    Store store;
+    store.Initialise(tmp);
+
+#define check(type, key, value) t(test_initialise_check<type>(store, key, value))
+    check(int, "int", 1);
+    check(float, "float", 2.71828e0);
+    check(std::string, "string", "test");
+    check(std::string, "long_string", "a string with several words, a\ttab and a    long space");
+    check(std::vector<int>, "vector<int>", (std::vector<int> { 1, 2, 3, 4 }));
+    check(std::string, "inline_comment", "test");
+    check(std::string, "inword_comment", "test");
+    check(std::string, "escaped_comment", "test#test2");
+    check(std::string, "escaped_newline", "test\ntest2");
+    check(std::string, "escaped_whitespace", "test    ");
+#undef check
+
+    if (!t) {
+      std::cout << "Store contents:\n";
+      store.Print();
+    };
+
+    unlink(tmp.c_str());
+  } catch (...) {
+    unlink(tmp.c_str());
+  };
+
+  return t;
+};
+
+int main(int argc, char** argv) {
+  Tester t;
+
+  t(test_var("a", 1, "{\"a\":1}"));
+  t(test_var("b", static_cast<short>(2), "{\"b\":2}"));
+  t(test_var("c", 3L, "{\"c\":3}"));
+  t(test_var("d", 4.4f, "{\"d\":4.4}"));
+  t(test_var("e", 5.5, "{\"e\":5.5}"));
+  t(test_var("f", true, "{\"f\":1}"));
+  t(test_var("g", 'h', "{\"g\":\"h\"}"));
+  t(test_var<std::string>("h", "hello world", "{\"h\":\"hello world\"}"));
+
+  // TODO: make it work with const char*
+  t(test_var<std::string>("i", "q \" w", "{\"i\":\"q \\\" w\"}"));
+
+  {
+    Store s;
+    s.Set("a", "q } w");
+    t(test_var("j", s, "{\"j\":{\"a\":\"q } w\"}}"));
+  };
+
+  t(test_var<std::string>("k", "{\"a\":{\"q } w\"}}", "{\"k\":\"{\\\"a\\\":{\\\"q } w\\\"}}\"}"));
+  t(test_var("l", std::vector<int> { 42, 11 }, "{\"l\":[42,11]}"));
+
+  t(
+      test_var(
+        "m",
+        std::vector<float> { -2.5e-10, -0.1, 0.1, 2.5e10 },
+        "{\"m\":[-2.5e-10,-0.1,0.1,2.5e+10]}"
+      )
+  );
+
+  {
+    Store s;
+    s.Set("x", std::vector<int> { -5, 5 });
+    s.Set("y", std::vector<float> { 0, 1.333 });
+    t(test_var("n", s, "{\"n\":{\"x\":[-5,5],\"y\":[0,1.333]}}"));
+  };
+
+  t(
+      test_var(
+        "o",
+        std::vector<std::string> { "qwe , asd", "q \"}] w" },
+        "{\"o\":[\"qwe , asd\",\"q \\\"}] w\"]}"
+      )
+  );
+
+  t(
+      test_var(
+        "p",
+        std::vector<std::vector<int>> { { 1, 2 }, { -1, -2 } },
+        "{\"p\":[[1,2],[-1,-2]]}"
+      )
+  );
+
+  t(
+      test_var(
+        "q",
+        std::map<std::string, std::string> {
+          { "a", "qwe" },
+          { "q \" w", "x } z" }
+        },
+        "{\"q\":{\"a\":\"qwe\",\"q \\\" w\":\"x } z\"}}"
+      )
+  );
+
+  t(
+      test_var(
+        "r",
+        std::vector<std::map<std::string, std::vector<int>>> {
+          {
+            { "a", { 1, 2 } },
+            { "b", { -1, -2 } }
+          },
+          {
+            { "q \" w", { 0, 42 } },
+            { "x ] z", { 15, 11 } }
+          }
+        },
+        "{\"r\":[{\"a\":[1,2],\"b\":[-1,-2]},{\"q \\\" w\":[0,42],\"x ] z\":[15,11]}]}"
+      )
+  );
+
+  t(
+      test_var(
+        "user1",
+        User1("user1"),
+        "{\"user1\":\"user1\"}",
+        std::equal_to<User1>(),
+        std::function<void (std::ostream&, const User1&)>(print)
+      )
+  );
+
+  t(
+      test_var(
+        "user2",
+        User2("user2"),
+        "{\"user2\":\"user2\"}",
+        std::equal_to<User2>(),
+        std::function<void (std::ostream&, const User2&)>(print)
+      )
+  );
+
+  t(
+      test_var(
+        "user3",
+        User3("user3"),
+        "{\"user3\":\"user3\"}",
+        std::equal_to<User3>(),
+        std::function<void (std::ostream&, const User3&)>(print)
+      )
+  );
+
+  t(
+      test_var(
+        "user4",
+        User4("user4"),
+        "{\"user4\":\"user4\"}",
+        std::equal_to<User4>(),
+        std::function<void (std::ostream&, const User4&)>(print)
+      )
+  );
+
+  t(
+      test_var(
+        "user5",
+        User5("user5"),
+        "{\"user5\":\"user5\"}",
+        std::equal_to<User5>(),
+        std::function<void (std::ostream&, const User5&)>(print)
+      )
+  );
+
+  t(
+      test_var(
+        "user6",
+        User6("user6"),
+        "{\"user6\":\"user6\"}",
+        std::equal_to<User6>(),
+        std::function<void (std::ostream&, const User6&)>(print)
+      )
+  );
+
+  t(
+      test_json(
+        "{\"key\":[{\"a\":{\"b\":[1,false]}},{\"a\":{\"b\":[null,-2.5e-2]}}]}"
+      )
+  );
+
+  // adapted from https://github.com/briandfoy/json-acceptance-tests, pass1
+  {
+    const char* json =
+      "{\n"
+"        \"integer\": 1234567890,\n"
+"        \"real\": -9876.543210,\n"
+"        \"e\": 0.123456789e-12,\n"
+"        \"E\": 1.234567890E+34,\n"
+"        \"\":  23456789012E66,\n"
+"        \"zero\": 0,\n"
+"        \"one\": 1,\n"
+"        \"space\": \" \",\n"
+"        \"quote\": \"\\\"\",\n"
+"        \"backslash\": \"\\\\\",\n"
+"        \"controls\": \"\\b\\f\\n\\r\\t\",\n"
+"        \"slash\": \"/ & \\/\",\n"
+"        \"alpha\": \"abcdefghijklmnopqrstuvwyz\",\n"
+"        \"ALPHA\": \"ABCDEFGHIJKLMNOPQRSTUVWYZ\",\n"
+"        \"digit\": \"0123456789\",\n"
+"        \"0123456789\": \"digit\",\n"
+"        \"special\": \"`1~!@#$%^&*()_+-={':[,]}|;.</>?\",\n"
+"        \"hex\": \"\\u0123\\u4567\\u89AB\\uCDEF\\uabcd\\uef4A\",\n"
+"        \"true\": true,\n"
+"        \"false\": false,\n"
+"        \"null\": null,\n"
+"        \"array\":[  ],\n"
+"        \"object\":{  },\n"
+"        \"address\": \"50 St. James Street\",\n"
+"        \"url\": \"http://www.JSON.org/\",\n"
+"        \"comment\": \"// /* <!-- --\",\n"
+"        \"# -- --> */\": \" \",\n"
+"        \" s p a c e d \" :[1,2 , 3\n"
+"\n"
+",\n"
+"\n"
+"4 , 5        ,          6           ,7        ],\"compact\":[1,2,3,4,5,6,7],\n"
+"        \"jsontext\": \"{\\\"object with 1 member\\\":[\\\"array with 1 element\\\"]}\",\n"
+"        \"quotes\": \"&#34; \\u0022 %22 0x22 034 &#x22;\",\n"
+"        \"\\/\\\\\\\"\\uCAFE\\uBABE\\uAB98\\uFCDE\\ubcda\\uef4A\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:',./<>?\"\n"
+": \"A key can be any string\"\n"
+"    }"
+    ;
+
+    const char* expected =
+"      {\n"
+"              \"\":  23456789012E66,\n"
+"              \" s p a c e d \" :[1,2 , 3\n"
+"\n"
+"      ,\n"
+"\n"
+"      4 , 5        ,          6           ,7        ],\n"
+"              \"# -- --> */\": \" \",\n"
+"              \"/\\\\\\\"\\ucafe\\ubabe\\uab98\\ufcde\\ubcda\\uef4a\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:',./<>?\"\n"
+"      : \"A key can be any string\",\n"
+"              \"0123456789\": \"digit\",\n"
+"              \"ALPHA\": \"ABCDEFGHIJKLMNOPQRSTUVWYZ\",\n"
+"              \"E\": 1.234567890E+34,\n"
+"              \"address\": \"50 St. James Street\",\n"
+"              \"alpha\": \"abcdefghijklmnopqrstuvwyz\",\n"
+"              \"array\":[  ],\n"
+"              \"backslash\": \"\\\\\",\n"
+"              \"comment\": \"// /* <!-- --\","
+"\"compact\":[1,2,3,4,5,6,7],\n"
+"              \"controls\": \"\\b\\f\\n\\r\\t\",\n"
+"              \"digit\": \"0123456789\",\n"
+"              \"e\": 0.123456789e-12,\n"
+"              \"false\": 0,\n"
+"              \"hex\": \"\\u0123Eg\\u89ab\\ucdef\\uabcd\\uef4a\",\n"
+"              \"integer\": 1234567890,\n"
+"              \"jsontext\": \"{\\\"object with 1 member\\\":[\\\"array with 1 element\\\"]}\",\n"
+"              \"null\": 0,\n"
+"              \"object\":{  },\n"
+"              \"one\": 1,\n"
+"              \"quote\": \"\\\"\",\n"
+"              \"quotes\": \"&#34; \\\" %22 0x22 034 &#x22;\",\n"
+"              \"real\": -9876.543210,\n"
+"              \"slash\": \"/ & /\",\n"
+"              \"space\": \" \",\n"
+"              \"special\": \"`1~!@#$%^&*()_+-={':[,]}|;.</>?\",\n"
+"              \"true\": 1,\n"
+"              \"url\": \"http://www.JSON.org/\",\n"
+"              \"zero\": 0\n"
+"      }\n"
+    ;
+
+    t(test_json(json, true, expected));
+  };
+
+  t(test_initialise());
+
+  if (t) std::cout << "ok\n";
+
+  return 0;
+};
