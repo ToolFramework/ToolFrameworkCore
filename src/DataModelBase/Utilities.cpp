@@ -36,7 +36,19 @@ void *Utilities::Thread(void *arg){
 
   while (!args->kill){
     
-    if(args->running) args->func(args );
+    if(args->running){
+      try{
+        args->func(args);
+      }  
+      catch (std::exception& p) {
+	std::clog<<"Thread function Failed:"<<p.what() <<std::endl;
+        args->running = false;
+      }
+      catch(...){
+	std::clog<<"Thread function Failed"<<std::endl;
+        args->running = false;
+      }
+    }
     else usleep(100);
   
   }

@@ -10,4 +10,5 @@ Job::Job(std::string id){
   m_failed = false;
   func = 0;
   fail_func = 0;
+  out_deque = 0;
 }

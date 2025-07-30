@@ -18,7 +18,7 @@ PoolManager_args::PoolManager_args() : Thread_args() {}
 
 PoolManager_args::~PoolManager_args() {}
 
-WorkerPoolManager::WorkerPoolManager(JobQueue& job_queue, unsigned int* thread_cap, unsigned int* global_thread_cap, unsigned int* global_thread_num, JobDeque* job_out_deque, bool self_serving, bool threaded, unsigned int thread_sleep_us, unsigned int thread_management_period_us, unsigned int job_assignment_period_us){
+WorkerPoolManager::WorkerPoolManager(JobQueue& job_queue, unsigned int* thread_cap, unsigned int* global_thread_cap, std::atomic<unsigned int>* global_thread_num, JobDeque* job_out_deque, bool self_serving, bool threaded, unsigned int thread_sleep_us, unsigned int thread_management_period_us, unsigned int job_assignment_period_us){
 
   m_util = new Utilities();
   
@@ -69,7 +69,7 @@ void WorkerPoolManager::CreateManagerThread() {
 }
 
 
-void WorkerPoolManager::CreateWorkerThread(std::vector<PoolWorker_args*>& in_args, bool &in_self_serving, unsigned int &in_thread_sleep_us, JobQueue* in_job_queue, JobDeque* in_job_out_deque,unsigned long &thread_num, Utilities* in_util, std::map<std::string,PoolManagerStats>* in_stats, std::mutex* in_stats_mtx, unsigned int* global_thread_num) {
+void WorkerPoolManager::CreateWorkerThread(std::vector<PoolWorker_args*>& in_args, bool &in_self_serving, unsigned int &in_thread_sleep_us, JobQueue* in_job_queue, JobDeque* in_job_out_deque,unsigned long &thread_num, Utilities* in_util, std::map<std::string,PoolManagerStats>* in_stats, std::mutex* in_stats_mtx, std::atomic<unsigned int>* global_thread_num) {
   PoolWorker_args* tmparg = new PoolWorker_args();
   tmparg->busy = false;
   tmparg->thread_sleep_us = in_thread_sleep_us;
@@ -88,12 +88,12 @@ void WorkerPoolManager::CreateWorkerThread(std::vector<PoolWorker_args*>& in_arg
   if(global_thread_num) (*global_thread_num)++;
 }
 
-void WorkerPoolManager::DeleteWorkerThread(unsigned int pos,  Utilities* in_util, std::vector<PoolWorker_args*> &in_args, unsigned int* global_thread_num) {
+void WorkerPoolManager::DeleteWorkerThread(unsigned int pos,  Utilities* in_util, std::vector<PoolWorker_args*> &in_args, std::atomic<unsigned int>* global_thread_num) {
   in_util->KillThread(in_args.at(pos));
   delete in_args.at(pos);
   in_args.at(pos) = 0;
   in_args.erase(in_args.begin() + pos );
-  if(global_thread_num) global_thread_num--;
+  if(global_thread_num) (*global_thread_num)--;
 }
 
 void WorkerPoolManager::WorkerThread(Thread_args* arg) {
@@ -103,6 +103,11 @@ void WorkerPoolManager::WorkerThread(Thread_args* arg) {
   else {
     if(args->self_serving){
       args->job=args->job_queue->GetJob();
+      if(!args->job){
+	usleep(args->thread_sleep_us);
+	return;
+      }
+
       args->stats_mtx->lock();
       (*args->stats)[args->job->m_id].processing++;
       args->stats_mtx->unlock();
@@ -151,10 +156,16 @@ void WorkerPoolManager::WorkerThread(Thread_args* arg) {
       }
     }
     
-    if (args->job_out_deque) {
-      args->job_out_deque->push_back(args->job);
+    if (args->job_out_deque || args->job->out_deque) {
+      if(args->job->out_deque) args->job->out_deque->push_back(args->job);
+      else args->job_out_deque->push_back(args->job);
       args->job->m_in_progress=false;
-    } else {
+    } 
+    else if(args->job->out_pool){
+      args->job->out_pool->Add(args->job);
+      args->job=0;
+    }
+    else {
       delete args->job;
       args->job=0;
     }
@@ -166,11 +177,11 @@ void WorkerPoolManager::WorkerThread(Thread_args* arg) {
 void WorkerPoolManager::ManagerThread(Thread_args* arg) {
 
   PoolManager_args* args = reinterpret_cast<PoolManager_args*>(arg);
-
+ 
   args->now = std::chrono::high_resolution_clock::now();
   args->manage = std::chrono::duration<double, std::micro>(args->now - args->managing_timer).count() > args->thread_management_period_us;
   args->sleep = !args->manage;
-
+  
   if(!args->self_serving){
     args->serve = std::chrono::duration<double, std::micro>(args->now - args->serving_timer).count() > args->job_assignment_period_us;
     args->sleep = !args->serve && !args->manage;  
@@ -182,11 +193,11 @@ void WorkerPoolManager::ManagerThread(Thread_args* arg) {
   }
   
   if(args->serve){
-   
     if (args->job_queue->size() > 0) {
       for (unsigned int i = 0; i < args->args.size(); i++) {
 	if (!args->args.at(i)->busy && args->job_queue->size() > 0) {
-	  args->args.at(i)->job = args->job_queue->GetJob();
+	  args->args.at(i)->job = args->job_queue->GetJob(); 
+	  if(args->args.at(i)->job == 0) continue;
 	  args->stats_mtx.lock();
 	  args->stats[args->args.at(i)->job->m_id].processing++;
 	  args->stats_mtx.unlock();
@@ -200,7 +211,6 @@ void WorkerPoolManager::ManagerThread(Thread_args* arg) {
   }
   
   if(args->manage){
-
     args->free_threads = 0;
     unsigned int last_free = 0;
     for (unsigned int i = 0; i < args->args.size(); i++) {
@@ -210,8 +220,8 @@ void WorkerPoolManager::ManagerThread(Thread_args* arg) {
       }
     }
     
-    if (args->free_threads < 1 && args->args.size()<(*(args->thread_cap)) && ( !args->global_thread_cap || (*(args->global_thread_num))<(*(args->global_thread_cap))  ) ) CreateWorkerThread(args->args, args->self_serving, args->thread_sleep_us, args->job_queue, args->job_out_deque, args->thread_num, args->util, &args->stats, &args->stats_mtx, args->global_thread_num);
-    
+    if (args->free_threads < 1 && args->args.size()<(*(args->thread_cap)) && ( !args->global_thread_cap || (*(args->global_thread_num))<(*(args->global_thread_cap))  ) )       CreateWorkerThread(args->args, args->self_serving, args->thread_sleep_us, args->job_queue, args->job_out_deque, args->thread_num, args->util, &args->stats, &args->stats_mtx, args->global_thread_num);
+
     if (args->free_threads > 1) DeleteWorkerThread(last_free, args->util, args->args, args->global_thread_num);
     
     args->managing_timer = std::chrono::high_resolution_clock::now();
@@ -236,29 +246,52 @@ unsigned int WorkerPoolManager::NumThreads() {
 std::string WorkerPoolManager::GetStats(){
 
   std::string ret="";
-  
+ 
+  ret="Queued Jobs Total = " + std::to_string(m_job_queue->size()) + " : Total Workers = " + std::to_string(NumThreads()) + " \n"; 
   m_job_queue->m_lock.lock();
   m_manager_args.stats_mtx.lock(); 
-
-  ret="Queued Jobs Total = " + std::to_string(m_job_queue->size()) + " \n";
-
+  
   for(std::map<std::string, QueueStats>::iterator it = m_job_queue->m_stats.begin(); it!=m_job_queue->m_stats.end(); it++){
-
+    
     ret += "  " + it->first + ": submitted = " + std::to_string(it->second.submitted) + ", queued = " + std::to_string(it->second.queued) + ", processing = " + std::to_string(m_manager_args.stats[it->first].processing) + ", completed = " + std::to_string(m_manager_args.stats[it->first].completed) + ", failed = " + std::to_string(m_manager_args.stats[it->first].failed) +"\n"; 
 
   }
   
   m_manager_args.stats_mtx.unlock();
   m_job_queue->m_lock.unlock();
-  
+    
+
   return ret;
   
 }
 
+void WorkerPoolManager::GetStats(Store& output){
+
+ 
+  m_job_queue->m_lock.lock();
+  m_manager_args.stats_mtx.lock(); 
+  
+  for(std::map<std::string, QueueStats>::iterator it = m_job_queue->m_stats.begin(); it!=m_job_queue->m_stats.end(); it++){
+    
+    
+    output.Set( it->first + "_submitted", it->second.submitted);
+    output.Set( it->first + "_queued", it->second.queued);
+    output.Set( it->first + "_processing", m_manager_args.stats[it->first].processing);
+    output.Set( it->first + "_completed", m_manager_args.stats[it->first].completed);
+    output.Set( it->first + "_failed", m_manager_args.stats[it->first].failed);
+    
+  }
+  
+  m_manager_args.stats_mtx.unlock();
+  m_job_queue->m_lock.unlock();
+
+  return;
+}
+
 void WorkerPoolManager::PrintStats(){
-
+  
   printf("%s\n", GetStats().c_str());
-
+  
 }
 
 void WorkerPoolManager::ClearStats(){
