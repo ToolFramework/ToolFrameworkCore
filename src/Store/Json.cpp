@@ -7,6 +7,7 @@ bool json_encode(std::ostream& output, const char* datum) {
   while (*datum) {
     if (*datum == '"' || *datum == '\\') output << '\\';
     output << *datum;
+    ++datum;
   };
   output << '"';
   return true;
