@@ -11,6 +11,7 @@ MyToolThread::MyToolThread():Tool(){}
 bool MyToolThread::Initialise(std::string configfile, DataModel &data){
 
   InitialiseTool(data);
+  m_configfile = configfile;
   InitialiseConfiguration(configfile);
   //m_variables.Print();
 

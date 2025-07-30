@@ -40,6 +40,7 @@ namespace ToolFramework{
     DataModel* m_data; ///< Pointer to transiant DataModel class
     Logging* m_log; ///< Pointer to logging class
     int m_verbose; ///< verbosity variable for direct logging level 
+    std::string m_configfile;  ///< path to configuration file
     MsgL ML(int messagelevel) {return MsgL(messagelevel,m_verbose);} ///< Function for setting logging level instream @param messagelevel the verboisty level at which to show the message. Checked against internal verbosity level.
     void MLC() {*(m_log)<<MsgL(0,m_verbose);}  ///< Function for clearing logging level
     template <typename T>  void Log(T message, int messagelevel, int verbosity){m_log->Log("-"+m_tool_name+"-: "+message,messagelevel,verbosity);}
@@ -58,9 +59,8 @@ namespace ToolFramework{
       m_variables>>vars_json;
       reinterpret_cast<DataModelBase*>(m_data)->vars.Set(m_tool_name,vars_json);
     }
-    
+      
   private:
-
   };
   
 }
