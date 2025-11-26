@@ -1,0 +1,40 @@
+\hypertarget{structMemoryUsage}{}\doxysection{Memory\+Usage Struct Reference}
+\label{structMemoryUsage}\index{MemoryUsage@{MemoryUsage}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structMemoryUsage_a5a2c7be224cf8226c99d6098b8d7f0e2}\label{structMemoryUsage_a5a2c7be224cf8226c99d6098b8d7f0e2}} 
+uint32\+\_\+t {\bfseries Current\+Usage} ()
+\item 
+\mbox{\Hypertarget{structMemoryUsage_ab83c68099460a4ea446212d4b90b178b}\label{structMemoryUsage_ab83c68099460a4ea446212d4b90b178b}} 
+void {\bfseries Print\+Usage} (std\+::string label=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{structMemoryUsage_ad7551c39ff8263c3056d4406243ef231}\label{structMemoryUsage_ad7551c39ff8263c3056d4406243ef231}} 
+void {\bfseries Clear} ()
+\item 
+\mbox{\Hypertarget{structMemoryUsage_a5f12d672be8e1fa33bdc3b98fb30213e}\label{structMemoryUsage_a5f12d672be8e1fa33bdc3b98fb30213e}} 
+void {\bfseries Catalogue\+Add} (void $\ast$ptr, size\+\_\+t size)
+\item 
+\mbox{\Hypertarget{structMemoryUsage_a0d55954f913f9098e9b448495081a7e4}\label{structMemoryUsage_a0d55954f913f9098e9b448495081a7e4}} 
+unsigned long {\bfseries Catalogue\+Del} (void $\ast$ptr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structMemoryUsage_ac187ee73ae308b2fe4b5a756627737d6}\label{structMemoryUsage_ac187ee73ae308b2fe4b5a756627737d6}} 
+uint32\+\_\+t {\bfseries total\+\_\+allocated} = 0
+\item 
+\mbox{\Hypertarget{structMemoryUsage_a195132d2c6fc8dca04fc1ef39bfb3f3c}\label{structMemoryUsage_a195132d2c6fc8dca04fc1ef39bfb3f3c}} 
+uint32\+\_\+t {\bfseries total\+\_\+freed} = 0
+\item 
+\mbox{\Hypertarget{structMemoryUsage_a9e5dd7e089536b38afac861ac5f17623}\label{structMemoryUsage_a9e5dd7e089536b38afac861ac5f17623}} 
+unsigned long {\bfseries catalogue\+\_\+ptr} \mbox{[}catalogue\+\_\+range\mbox{]}
+\item 
+\mbox{\Hypertarget{structMemoryUsage_aa18d08858c3c33fa0d159459e2fd0e23}\label{structMemoryUsage_aa18d08858c3c33fa0d159459e2fd0e23}} 
+unsigned long {\bfseries catalogue\+\_\+size} \mbox{[}catalogue\+\_\+range\mbox{]}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/mem.\+hpp\end{DoxyCompactItemize}
