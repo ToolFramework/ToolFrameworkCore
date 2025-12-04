@@ -51,8 +51,10 @@ WorkerPoolManager::~WorkerPoolManager() {
 
   m_util->KillThread(&m_manager_args);
   
-  for (unsigned int i = 0; i < m_manager_args.args.size(); i++)
+  for (unsigned int i = 0; i < m_manager_args.args.size(); i++){
     m_util->KillThread(m_manager_args.args.at(i));
+    delete m_manager_args.args.at(i);
+  }
 
   m_manager_args.args.clear();
 
