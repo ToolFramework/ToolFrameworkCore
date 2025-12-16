@@ -27,6 +27,7 @@ namespace ToolFramework{
     Thread_args(){ ///< Simple constructor 
       kill=false;
       running=false;
+      thread=0;
     }
     
     virtual ~Thread_args(){ ///< virtual constructor 
