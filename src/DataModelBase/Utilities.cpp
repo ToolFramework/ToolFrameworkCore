@@ -62,7 +62,7 @@ bool Utilities::KillThread(Thread_args* &args){
   
   bool ret=false;
   
-  if(args){
+  if(args && args->thread){
     
     args->running=false;
     args->kill=true;
@@ -78,7 +78,7 @@ bool Utilities::KillThread(Thread_args* &args){
 }
 
 bool Utilities::KillThread(std::string ThreadName){
-  
+  if(Threads.count(ThreadName) == 0 ) return false;
   return KillThread(Threads[ThreadName]);
 
 }
