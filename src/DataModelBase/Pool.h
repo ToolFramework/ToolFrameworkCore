@@ -42,6 +42,7 @@ namespace ToolFramework{
       args.sum = &sum;
       args.counter = &counter;
       args.mtx = &mtx;
+      args.objects=&objects;
       
       if(manage) m_utils.CreateThread("pool_manager", &Thread, &args);
       
