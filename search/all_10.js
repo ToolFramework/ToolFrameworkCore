@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queuestats_84',['QueueStats',['../structToolFramework_1_1QueueStats.html',1,'ToolFramework']]]
+  ['queuestats_90',['QueueStats',['../structToolFramework_1_1QueueStats.html',1,'ToolFramework']]]
 ];

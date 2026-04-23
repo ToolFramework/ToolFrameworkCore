@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['running_238',['running',['../structToolFramework_1_1Thread__args.html#a79abba9a5142227f8dfa90539e9d9575',1,'ToolFramework::Thread_args']]]
+  ['pointer_252',['pointer',['../classToolFramework_1_1PointerWrapper.html#a826c4e2046d82a292899363303132a79',1,'ToolFramework::PointerWrapper']]]
 ];
