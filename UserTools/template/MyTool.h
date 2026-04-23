@@ -12,8 +12,8 @@
  *
  * This is a balnk template for a Tool used by the script to generate a new custom tool. Please fill out the descripton and author information.
 *
-* $Author: B.Richards $
-* $Date: 2019/05/28 10:44:00 $
+* $Author:  $
+* $Date:  $
 */
 
 class MyTool: public Tool {

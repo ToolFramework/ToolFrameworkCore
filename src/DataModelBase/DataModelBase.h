@@ -7,6 +7,7 @@
 #include "Utilities.h"
 #include "WorkerPoolManager.h"
 #include "Pool.h"
+#include "BufferDispatcher.h"
 
 #include "Store.h"
 #include "BStore.h"
