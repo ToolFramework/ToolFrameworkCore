@@ -20,7 +20,7 @@ PoolManager_args::~PoolManager_args() {}
 
 WorkerPoolManager::WorkerPoolManager(JobQueue& job_queue, unsigned int* thread_cap, unsigned int* global_thread_cap, std::atomic<unsigned int>* global_thread_num, JobDeque* job_out_deque, bool self_serving, bool threaded, unsigned int thread_sleep_us, unsigned int thread_management_period_us, unsigned int job_assignment_period_us){
 
-  m_util = new Utilities();
+  //m_util = new Utilities();
   
   m_job_queue = &job_queue;
   m_manager_args.job_queue=m_job_queue;
@@ -33,14 +33,14 @@ WorkerPoolManager::WorkerPoolManager(JobQueue& job_queue, unsigned int* thread_c
   m_manager_args.thread_sleep_us = thread_sleep_us;
   m_manager_args.thread_management_period_us = thread_management_period_us;
   m_manager_args.job_assignment_period_us = job_assignment_period_us;
-  m_manager_args.util = m_util;
+  m_manager_args.util = &m_util;
   m_manager_args.thread_num = 0;
   m_manager_args.manage = false;
   m_manager_args.serve = false;
   m_manager_args.sleep = false;
   m_manager_args.sleep_us = ( m_manager_args.thread_management_period_us < m_manager_args.job_assignment_period_us ? m_manager_args.thread_management_period_us : m_manager_args.job_assignment_period_us );
   
-  CreateWorkerThread(m_manager_args.args, m_manager_args.self_serving, m_manager_args.thread_sleep_us, m_manager_args.job_queue, m_manager_args.job_out_deque, m_manager_args.thread_num, m_util, &m_manager_args.stats, &m_manager_args.stats_mtx, global_thread_num);
+  CreateWorkerThread(m_manager_args.args, m_manager_args.self_serving, m_manager_args.thread_sleep_us, m_manager_args.job_queue, m_manager_args.job_out_deque, m_manager_args.thread_num, &m_util, &m_manager_args.stats, &m_manager_args.stats_mtx, global_thread_num);
 
   m_manager_args.free_threads = 1;
   if (m_threaded) CreateManagerThread();
@@ -49,24 +49,26 @@ WorkerPoolManager::WorkerPoolManager(JobQueue& job_queue, unsigned int* thread_c
 
 WorkerPoolManager::~WorkerPoolManager() {
 
-  m_util->KillThread(&m_manager_args);
+  m_util.KillThread(&m_manager_args);
   
   for (unsigned int i = 0; i < m_manager_args.args.size(); i++){
-    m_util->KillThread(m_manager_args.args.at(i));
+    m_util.KillThread(m_manager_args.args.at(i));
     delete m_manager_args.args.at(i);
   }
 
   m_manager_args.args.clear();
 
-  delete m_util;
-  m_util = 0;
+  //  delete m_util;
+  // m_util = 0;
+
+  ClearStats();
 
 }
 
 void WorkerPoolManager::CreateManagerThread() {
 
   std::string tmp="TManager";
-  m_util->CreateThread(tmp, &ManagerThread, &m_manager_args);
+  m_util.CreateThread(tmp, &ManagerThread, &m_manager_args);
 
 }
 

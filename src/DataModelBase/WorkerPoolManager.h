@@ -142,7 +142,7 @@ namespace ToolFramework{
     
     JobQueue* m_job_queue; ///< Job queue to hold jobs
     JobDeque* m_job_out_deque; ///< Job deque to hold completed jobs
-    Utilities* m_util; ///< Pointer to utilities class to help with threading
+    Utilities m_util; ///< Pointer to utilities class to help with threading
     PoolManager_args m_manager_args; ///< Thread args for manager
     bool m_threaded;
     
