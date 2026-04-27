@@ -127,62 +127,63 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    args.algorithms = 0;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    args.job_queue = 0;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    args.job_pool = 0;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      std::atomic&lt;uint64_t&gt; counter;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    counter = 0;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      std::atomic&lt;uint64_t&gt; counter;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">void</span> Thread(<a class="code" href="structToolFramework_1_1Thread__args.html">Thread_args</a>* arg){  </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="structToolFramework_1_1BufferDispatcher__args.html">BufferDispatcher_args&lt;T&gt;</a>* args=<span class="keyword">reinterpret_cast&lt;</span><a class="code" href="structToolFramework_1_1BufferDispatcher__args.html">BufferDispatcher_args&lt;T&gt;</a>*<span class="keyword">&gt;</span>(arg);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span>(args-&gt;algorithms-&gt;size()==0){</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      usleep(100); </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keywordflow">return</span>;   </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    args-&gt;buffer-&gt;Swap(args-&gt;local_buffer);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span>(args-&gt;local_buffer.size() == 0){</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      usleep(100);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; args-&gt;local_buffer.size(); i++){</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> j = 0; j &lt; args-&gt;algorithms-&gt;size(); j++){</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        args-&gt;job = args-&gt;job_pool-&gt;GetNew(args-&gt;algorithms-&gt;at(j).name);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a295965ab7c885923eaa893af7dcd03d7">m_id</a> = args-&gt;algorithms-&gt;at(j).name;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a8f8dbc443f7f351429240ccd262591a1">func</a> = args-&gt;algorithms-&gt;at(j).algo;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a02a1fe02de231d3cddf92593062c6471">fail_func</a> = args-&gt;algorithms-&gt;at(j).fail_func;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#ab45f88ef6f03b4bf03d81ca288ee4dc9">data</a> = args-&gt;algorithms-&gt;at(j).setup_func(args-&gt;local_buffer.at(i));</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a00527abad163601e1874cfc3985acf56">out_pool</a> = args-&gt;job_pool;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        args-&gt;job_queue-&gt;<a class="code" href="classToolFramework_1_1JobQueue.html#ad95a4c88702d1f9dcb9beaa9e8aef676">AddJob</a>(args-&gt;job);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        args-&gt;job = 0;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        (*args-&gt;counter)++;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      args-&gt;local_buffer.at(i) = 0;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    args-&gt;local_buffer.clear();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span>; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      }    </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <a class="code" href="structToolFramework_1_1BufferDispatcher__args.html">BufferDispatcher_args&lt;T&gt;</a> args;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <a class="code" href="classToolFramework_1_1Utilities.html">Utilities</a> m_util;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">void</span> Thread(<a class="code" href="structToolFramework_1_1Thread__args.html">Thread_args</a>* arg){  </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="structToolFramework_1_1BufferDispatcher__args.html">BufferDispatcher_args&lt;T&gt;</a>* args=<span class="keyword">reinterpret_cast&lt;</span><a class="code" href="structToolFramework_1_1BufferDispatcher__args.html">BufferDispatcher_args&lt;T&gt;</a>*<span class="keyword">&gt;</span>(arg);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span>(args-&gt;algorithms-&gt;size()==0){</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      usleep(100); </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keywordflow">return</span>;   </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    args-&gt;buffer-&gt;Swap(args-&gt;local_buffer);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span>(args-&gt;local_buffer.size() == 0){</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      usleep(100);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; args-&gt;local_buffer.size(); i++){</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> j = 0; j &lt; args-&gt;algorithms-&gt;size(); j++){</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        args-&gt;job = args-&gt;job_pool-&gt;GetNew(args-&gt;algorithms-&gt;at(j).name);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a295965ab7c885923eaa893af7dcd03d7">m_id</a> = args-&gt;algorithms-&gt;at(j).name;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a8f8dbc443f7f351429240ccd262591a1">func</a> = args-&gt;algorithms-&gt;at(j).algo;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a02a1fe02de231d3cddf92593062c6471">fail_func</a> = args-&gt;algorithms-&gt;at(j).fail_func;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#ab45f88ef6f03b4bf03d81ca288ee4dc9">data</a> = args-&gt;algorithms-&gt;at(j).setup_func(args-&gt;local_buffer.at(i));</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        args-&gt;job-&gt;<a class="code" href="classToolFramework_1_1Job.html#a00527abad163601e1874cfc3985acf56">out_pool</a> = args-&gt;job_pool;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        args-&gt;job_queue-&gt;<a class="code" href="classToolFramework_1_1JobQueue.html#ad95a4c88702d1f9dcb9beaa9e8aef676">AddJob</a>(args-&gt;job);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        args-&gt;job = 0;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        (*args-&gt;counter)++;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      args-&gt;local_buffer.at(i) = 0;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    args-&gt;local_buffer.clear();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span>; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      }    </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <a class="code" href="structToolFramework_1_1BufferDispatcher__args.html">BufferDispatcher_args&lt;T&gt;</a> args;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <a class="code" href="classToolFramework_1_1Utilities.html">Utilities</a> m_util;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    };</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    };</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassToolFramework_1_1BufferDispatcher_html"><div class="ttname"><a href="classToolFramework_1_1BufferDispatcher.html">ToolFramework::BufferDispatcher</a></div><div class="ttdef"><b>Definition:</b> BufferDispatcher.h:30</div></div>
 <div class="ttc" id="aclassToolFramework_1_1Buffer_html"><div class="ttname"><a href="classToolFramework_1_1Buffer.html">ToolFramework::Buffer</a></div><div class="ttdef"><b>Definition:</b> Buffer.h:11</div></div>
 <div class="ttc" id="aclassToolFramework_1_1JobQueue_html"><div class="ttname"><a href="classToolFramework_1_1JobQueue.html">ToolFramework::JobQueue</a></div><div class="ttdef"><b>Definition:</b> JobQueue.h:39</div></div>
