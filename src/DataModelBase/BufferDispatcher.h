@@ -56,6 +56,7 @@ namespace ToolFramework{
 	args.algorithms = 0;
 	args.job_queue = 0;
 	args.job_pool = 0;
+	counter = 0;
 	
       }
       
