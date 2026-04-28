@@ -69,6 +69,15 @@ bool Utilities::KillThread(Thread_args* &args){
     args->kill=true;
     
     pthread_join(args->thread, NULL);
+   
+    for(std::map<std::string, Thread_args*>::iterator it= Threads.begin(); it!=Threads.end(); it++){
+    
+      if(it->second == args){
+	Threads.erase(it->first);
+	break;
+      }
+      
+    }
     //delete args;
     //args=0;    
     

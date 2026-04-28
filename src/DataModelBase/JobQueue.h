@@ -52,14 +52,15 @@ namespace ToolFramework{
     void Print();
     void ClearStats();
     void Clear();
-    
+
+    bool pause =false;
     
   private:
     
     std::queue<Job*> m_jobs;
     std::mutex m_lock;
     std::map<std::string, QueueStats> m_stats;
-    
+  
   };
 
 }

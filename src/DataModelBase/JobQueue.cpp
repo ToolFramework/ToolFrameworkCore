@@ -34,7 +34,7 @@ JobQueue::~JobQueue(){
 
 bool JobQueue::AddJob(Job* job){
 
-  if(job!=0 && job->func!=0){
+  if(job!=0 && job->func!=0 && !pause){
     job->m_complete=false;
     job->m_in_progress=false;
     job->m_failed=false;

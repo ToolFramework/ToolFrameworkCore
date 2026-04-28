@@ -49,19 +49,27 @@ WorkerPoolManager::WorkerPoolManager(JobQueue& job_queue, unsigned int* thread_c
 
 WorkerPoolManager::~WorkerPoolManager() {
 
-  m_util.KillThread(&m_manager_args);
-  
-  for (unsigned int i = 0; i < m_manager_args.args.size(); i++){
-    m_util.KillThread(m_manager_args.args.at(i));
-    delete m_manager_args.args.at(i);
+  m_job_queue->pause = true;
+  while(m_job_queue->size()){
+    //    printf("job queue size=%u\n",m_job_queue->size());
+    usleep(10);
   }
 
-  m_manager_args.args.clear();
+  m_util.KillThread(&m_manager_args);
+ 
+  for (unsigned int i = 0; i < m_manager_args.args.size(); i++){
 
+    m_util.KillThread(m_manager_args.args.at(i));
+    delete m_manager_args.args.at(i);
+ 
+ }
+
+  m_manager_args.args.clear();
   //  delete m_util;
   // m_util = 0;
 
   ClearStats();
+  m_job_queue->pause = false;
 
 }
 
@@ -300,14 +308,10 @@ void WorkerPoolManager::PrintStats(){
 
 void WorkerPoolManager::ClearStats(){
 
-  m_job_queue->m_lock.lock();
   m_manager_args.stats_mtx.lock(); 
+  m_manager_args.stats.clear();
+  m_manager_args.stats_mtx.unlock();
 
   m_job_queue->ClearStats();
-  m_manager_args.stats.clear();
-  
-  m_manager_args.stats_mtx.unlock();
-  m_job_queue->m_lock.unlock();
-
   
 }
