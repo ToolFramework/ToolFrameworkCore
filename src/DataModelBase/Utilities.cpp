@@ -7,7 +7,7 @@ Utilities::Utilities(){
 }
 
 
-Thread_args* Utilities::CreateThread(std::string ThreadName,  void (*func)(Thread_args*), Thread_args* args){
+Thread_args* Utilities::CreateThread(std::string ThreadName,  void (*func)(Thread_args*), Thread_args* args, bool start){
  
   if(Threads.count(ThreadName)==0){
     
@@ -15,7 +15,7 @@ Thread_args* Utilities::CreateThread(std::string ThreadName,  void (*func)(Threa
     
     args->ThreadName=ThreadName;
     args->func=func;
-    args->running=true;
+    args->running=start;
     args->kill=false;
     
     pthread_create(&(args->thread), NULL, Utilities::Thread, args);

@@ -39,7 +39,8 @@ namespace ToolFramework{
     bool Print();
     bool Serialise(BinaryStream &bs);  
     std::string GetVersion();
-    
+    size_t Size();
+      
     enum_endpoint m_endpoint;
     FILE* pfile;
 #ifdef ZLIB

@@ -452,16 +452,26 @@ void BinaryStream::zerr(int ret){
 #endif
 }
 
+size_t BinaryStream::Size(){
+
+  return buffer.size();
+  
+}
+
+
 bool SerialisableObject::SerialiseWrapper(BinaryStream &bs){
   //  if(!m_serialise) return false; //not sure i should ahve a serialise flag, causes major issues with empty mapps and vector elements!!!! so remove. People wouldnt be calling serialise method if they didnt want to serialse
-  //std::cout<<"in serialise wrapper"<<std::endl;
+  /*
+  std::cout<<"in serialise wrapper"<<std::endl;
   if(bs.m_write){
-    if(!(bs << GetVersion())) return false;
+    //   if(!(bs << GetVersion())) return false;
   }
   else{
     std::string version="";
     if(!(bs >> version)) return false;
     if(version!=GetVersion()) return false;
   }
+  */
   return Serialise(bs);
 }
+
