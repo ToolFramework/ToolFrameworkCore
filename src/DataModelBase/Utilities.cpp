@@ -40,13 +40,13 @@ void *Utilities::Thread(void *arg){
     if(args->running){
       try{
         args->func(args);
-      }  
+      }
       catch (std::exception& p) {
-	std::clog<<"Thread function Failed:"<<p.what() <<std::endl;
+        std::clog<<"Thread '"<<args->ThreadName<<"' function Failed:"<<p.what() <<std::endl;
         args->running = false;
       }
       catch(...){
-	std::clog<<"Thread function Failed"<<std::endl;
+        std::clog<<"Thread '"<<args->ThreadName<<"' function Failed"<<std::endl;
         args->running = false;
       }
     }
