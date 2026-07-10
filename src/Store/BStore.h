@@ -258,7 +258,7 @@ namespace ToolFramework{
     
   };
 
-  bool json_encode(std::ostream&, const BStore&);
+  bool json_encode_r(std::ostream&, const BStore&, adl_tag);
 }
 
 #endif

@@ -957,7 +957,7 @@ BStore::~BStore(){
 }
 
 namespace ToolFramework {
-  bool json_encode(std::ostream& output, const BStore& store) {
+  bool json_encode_r(std::ostream& output, const BStore& store, adl_tag) {
     return store.JsonEncode(output);
   }
 }
