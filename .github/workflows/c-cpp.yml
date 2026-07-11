@@ -21,29 +21,29 @@ jobs:
     - name: test
       run : export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH && ./main
     
-  build_centos-stream-8:
-    runs-on: ubuntu-latest
-    container: 'quay.io/centos/centos:stream8'
-    steps:
-    - uses: actions/checkout@v2
-    - name: prerequisits
-      run: cd /etc/yum.repos.d/ && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-* && yum install -y git make gcc-c++ zlib-devel dialog
-    - name: make
-      run: make
-    - name: test
-      run : export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH && ./main
+#  build_centos-stream-8:
+#    runs-on: ubuntu-latest
+#    container: 'quay.io/centos/centos:stream8'
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: prerequisits
+#      run: cd /etc/yum.repos.d/ && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-* && yum install -y git make gcc-c++ zlib-devel dialog
+#    - name: make
+#      run: make
+#    - name: test
+#      run : export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH && ./main
 
-  build_centos-7:
-    runs-on: ubuntu-latest
-    container: 'centos:centos7'
-    steps:
-    - uses: actions/checkout@v2
-    - name: prerequisits
-      run: yum install -y git make gcc-c++ zlib-devel dialog
-    - name: make
-      run: make
-    - name: test
-      run : export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH && ./main
+#  build_centos-7:
+#    runs-on: ubuntu-latest
+#    container: 'centos:centos7'
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: prerequisits
+#      run: yum install -y git make gcc-c++ zlib-devel dialog
+#    - name: make
+#      run: make
+#    - name: test
+#      run : export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH && ./main
 
   build_rocky-9:
     runs-on: ubuntu-latest

@@ -2,7 +2,8 @@
 
 ### Download base image from cern repo on docker hub
 #FROM cern/cc7-base:latest
-From centos:centos7
+#From centos:centos7
+From rockylinux:9
 
 ### Run the following commands as super user (root):
 USER root
