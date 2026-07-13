@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: make
-      run: make
+      run: make -j `nproc --all`
     - name: test
       run : export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH && ./main
     
@@ -53,6 +53,6 @@ jobs:
     - name: prerequisits
       run: yum install -y git make gcc-c++ zlib-devel dialog
     - name: make
-      run: make
+      run: make -j `nproc --all`
     - name: test
       run : export LD_LIBRARY_PATH=`pwd`/lib:$LD_LIBRARY_PATH && ./main
