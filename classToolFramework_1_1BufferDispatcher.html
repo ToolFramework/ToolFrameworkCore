@@ -76,12 +76,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2e4a71433c9885a0cbaced8b63ea1104"><td class="memItemLeft" align="right" valign="top"><a id="a2e4a71433c9885a0cbaced8b63ea1104"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Init</b> (<a class="el" href="classToolFramework_1_1Buffer.html">Buffer</a>&lt; T &gt; *buffer, std::vector&lt; <a class="el" href="structToolFramework_1_1AlgorithmWrapper.html">AlgorithmWrapper</a>&lt; T &gt; &gt; *algorithms, <a class="el" href="classToolFramework_1_1JobQueue.html">JobQueue</a> *job_queue, <a class="el" href="classToolFramework_1_1Pool.html">Pool</a>&lt; <a class="el" href="classToolFramework_1_1Job.html">Job</a> &gt; *job_pool)</td></tr>
-<tr class="separator:a2e4a71433c9885a0cbaced8b63ea1104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae267bb62b63daf18821287591dd65eb3"><td class="memItemLeft" align="right" valign="top"><a id="ae267bb62b63daf18821287591dd65eb3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Init</b> (<a class="el" href="classToolFramework_1_1Buffer.html">Buffer</a>&lt; T &gt; *buffer, std::vector&lt; <a class="el" href="structToolFramework_1_1AlgorithmWrapper.html">AlgorithmWrapper</a>&lt; T &gt; &gt; *algorithms, <a class="el" href="classToolFramework_1_1JobQueue.html">JobQueue</a> *job_queue, <a class="el" href="classToolFramework_1_1Pool.html">Pool</a>&lt; <a class="el" href="classToolFramework_1_1Job.html">Job</a> &gt; *job_pool, std::mutex *algorithms_mtx=0)</td></tr>
+<tr class="separator:ae267bb62b63daf18821287591dd65eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e790651c4b4eb1125d41be9c60a9a66"><td class="memItemLeft" align="right" valign="top"><a id="a4e790651c4b4eb1125d41be9c60a9a66"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Close</b> ()</td></tr>
 <tr class="separator:a4e790651c4b4eb1125d41be9c60a9a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2901b20cd06f27f1b3b8afb696b6839"><td class="memItemLeft" align="right" valign="top"><a id="aa2901b20cd06f27f1b3b8afb696b6839"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GetStats</b> (<a class="el" href="classToolFramework_1_1Store.html">Store</a> *store, std::string prefix, std::mutex *mtx=0)</td></tr>
+<tr class="separator:aa2901b20cd06f27f1b3b8afb696b6839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>

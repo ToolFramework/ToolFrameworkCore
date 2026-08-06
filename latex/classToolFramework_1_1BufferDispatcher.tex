@@ -3,11 +3,14 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classToolFramework_1_1BufferDispatcher_a2e4a71433c9885a0cbaced8b63ea1104}\label{classToolFramework_1_1BufferDispatcher_a2e4a71433c9885a0cbaced8b63ea1104}} 
-bool {\bfseries Init} (\mbox{\hyperlink{classToolFramework_1_1Buffer}{Buffer}}$<$ T $>$ $\ast$buffer, std\+::vector$<$ \mbox{\hyperlink{structToolFramework_1_1AlgorithmWrapper}{Algorithm\+Wrapper}}$<$ T $>$ $>$ $\ast$algorithms, \mbox{\hyperlink{classToolFramework_1_1JobQueue}{Job\+Queue}} $\ast$job\+\_\+queue, \mbox{\hyperlink{classToolFramework_1_1Pool}{Pool}}$<$ \mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $>$ $\ast$job\+\_\+pool)
+\mbox{\Hypertarget{classToolFramework_1_1BufferDispatcher_ae267bb62b63daf18821287591dd65eb3}\label{classToolFramework_1_1BufferDispatcher_ae267bb62b63daf18821287591dd65eb3}} 
+bool {\bfseries Init} (\mbox{\hyperlink{classToolFramework_1_1Buffer}{Buffer}}$<$ T $>$ $\ast$buffer, std\+::vector$<$ \mbox{\hyperlink{structToolFramework_1_1AlgorithmWrapper}{Algorithm\+Wrapper}}$<$ T $>$ $>$ $\ast$algorithms, \mbox{\hyperlink{classToolFramework_1_1JobQueue}{Job\+Queue}} $\ast$job\+\_\+queue, \mbox{\hyperlink{classToolFramework_1_1Pool}{Pool}}$<$ \mbox{\hyperlink{classToolFramework_1_1Job}{Job}} $>$ $\ast$job\+\_\+pool, std\+::mutex $\ast$algorithms\+\_\+mtx=0)
 \item 
 \mbox{\Hypertarget{classToolFramework_1_1BufferDispatcher_a4e790651c4b4eb1125d41be9c60a9a66}\label{classToolFramework_1_1BufferDispatcher_a4e790651c4b4eb1125d41be9c60a9a66}} 
 void {\bfseries Close} ()
+\item 
+\mbox{\Hypertarget{classToolFramework_1_1BufferDispatcher_aa2901b20cd06f27f1b3b8afb696b6839}\label{classToolFramework_1_1BufferDispatcher_aa2901b20cd06f27f1b3b8afb696b6839}} 
+void {\bfseries Get\+Stats} (\mbox{\hyperlink{classToolFramework_1_1Store}{Store}} $\ast$store, std\+::string prefix, std\+::mutex $\ast$mtx=0)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
