@@ -89,10 +89,10 @@ namespace ToolFramework{
 	//std::unique_lock<std::mutex> lock(*args->algorithms_mtx);
 	if(args->algorithms->size()==0){
 	  usleep(100);
-	  lock->unlock();
+	  if(lock) lock->unlock();
 	  return;	
 	}
-	lock->unlock();
+	if(lock) lock->unlock();
 
 	args->buffer->Swap(args->local_buffer);
 	
@@ -101,7 +101,7 @@ namespace ToolFramework{
 	  return;
 	}
 
-	lock->lock();
+	if(lock) lock->lock();
 	for(size_t i = 0; i < args->local_buffer.size(); i++){
 	  
 	  for(size_t j = 0; j < args->algorithms->size(); j++){
@@ -121,7 +121,7 @@ namespace ToolFramework{
 	  args->local_buffer.at(i) = 0;
 	  
 	}
-	lock->unlock();
+	if(lock) lock->unlock();
 	
 	args->local_buffer.clear();
 	
