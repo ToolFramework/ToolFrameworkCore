@@ -86,7 +86,7 @@ namespace ToolFramework {
       //        6 - object
       //        7 - array
       
-      if ((input[i] == '\n' || input[i] == '\r') && type != 4) continue;
+      if ((input[i] == '\n' || input[i] == '\r') && (type < 4 && type != 5 )) continue;
       
       if(input[i]=='\"' && type<5){
 	if(type==4) value+='"';
