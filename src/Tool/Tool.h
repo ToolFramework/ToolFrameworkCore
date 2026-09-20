@@ -55,9 +55,7 @@ namespace ToolFramework{
       return true;
     }
     void ExportConfiguration(){  ///< Export of local m_variables Store to matamodel vars for central exporting of configuration to data file.
-      std::string vars_json="";
-      m_variables>>vars_json;
-      reinterpret_cast<DataModelBase*>(m_data)->vars.Set(m_tool_name,vars_json);
+      reinterpret_cast<DataModelBase*>(m_data)->vars.Set(m_tool_name, m_variables);
     }
       
   private:
