@@ -5,3 +5,4 @@ include/*.h
 tempinclude/*.h
 lib/*.so
 main
+.vscode/*

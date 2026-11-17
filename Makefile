@@ -1,6 +1,6 @@
 SOURCEDIR:=`pwd`
 
-CXXFLAGS= -fPIC -march=native -Wpedantic -Wall -std=c++11 -flto -Wno-comment -Wno-unused -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept  -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef  -fopt-info-vec=vec.txt #-fopt-info-inline=inline.txt # -fopt-info-vec-missed=vec_missed.txt  #-Werror -Wold-style-cast #-fopt-info-all=opt.txt #-fno-omit-frame-pointer //optimiasation infromation 
+CXXFLAGS= -fPIC -Wpedantic -Wall -std=c++11 -Wno-comment -Wno-unused -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept  -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default -Wundef  -fopt-info-vec=vec.txt # -march=native -flto -fopt-info-inline=inline.txt # -fopt-info-vec-missed=vec_missed.txt  #-Werror -Wold-style-cast #-fopt-info-all=opt.txt #-fno-omit-frame-pointer //optimiasation infromation 
 
 
 ifeq ($(MAKECMDGOALS),debug)
