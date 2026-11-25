@@ -182,27 +182,27 @@ namespace ToolFramework{
     template <typename T>  void Log(T message, int messagelevel=1, int verbose=1){
       //printf("logmessage\n");
       if(messagelevel<=verbose){
-	
-	buffer->lock1.lock();
-	while(!buffer->lock2.try_lock()){
-	    buffer->lock1.unlock();
-	    usleep(100);
-	    buffer->lock1.lock();
-	  }	    
-	//printf("locg message locked\n");
-	int previous_messagelevel = buffer->m_messagelevel;
-	int previous_verbosity = buffer->m_verbose;
-	
-	buffer->m_messagelevel=messagelevel;
-	buffer->m_verbose=verbose;
-	//printf("log about to sync\n");
-	std::cout.rdbuf(buffer);
-	std::cout<<message<<plain<<std::endl;
-	//printf("log synced\n");
-	buffer->m_messagelevel=previous_messagelevel;
-	buffer->m_verbose=previous_verbosity;
-	buffer->lock2.unlock();
-	buffer->lock1.unlock();
+        
+        buffer->lock1.lock();
+        while(!buffer->lock2.try_lock()){
+            buffer->lock1.unlock();
+            usleep(100);
+            buffer->lock1.lock();
+          }
+        //printf("locg message locked\n");
+        int previous_messagelevel = buffer->m_messagelevel;
+        int previous_verbosity = buffer->m_verbose;
+        
+        buffer->m_messagelevel=messagelevel;
+        buffer->m_verbose=verbose;
+        //printf("log about to sync\n");
+        std::cout.rdbuf(buffer);
+        std::cout<<message<<plain<<std::endl;
+        //printf("log synced\n");
+        buffer->m_messagelevel=previous_messagelevel;
+        buffer->m_verbose=previous_verbosity;
+        buffer->lock2.unlock();
+        buffer->lock1.unlock();
       } 
       
     }
@@ -223,7 +223,7 @@ namespace ToolFramework{
   Logging& operator<<(MsgL a){
 
     buffer->lock1.lock();
-    buffer->lock2.try_lock();
+    std::ignore = buffer->lock2.try_lock();
     
     buffer->m_messagelevel=a.messagelevel;
     buffer->m_verbose=a.verbose;
@@ -238,7 +238,7 @@ namespace ToolFramework{
   Logging& operator<<(std::ostream& (*foo)(std::ostream&)) {
     //printf("special stream tying to lock\n");
     buffer->lock1.lock();
-    buffer->lock2.try_lock();
+    std::ignore = buffer->lock2.try_lock();
     
     //printf("special stream unlocking and about to sync\n");
     
@@ -254,7 +254,7 @@ namespace ToolFramework{
   template<typename T>  Logging& operator<<(T &a){
     //printf("stream locking\n");
     buffer->lock1.lock();
-    buffer->lock2.try_lock();
+    std::ignore = buffer->lock2.try_lock();
     //printf("stream locked\n");
     
     std::cout.rdbuf(buffer);
@@ -269,7 +269,7 @@ namespace ToolFramework{
   template<typename T>  Logging& operator<<(const T &a){
     //printf("stream locking\n");
     buffer->lock1.lock();
-    buffer->lock2.try_lock();
+    std::ignore = buffer->lock2.try_lock();
     //printf("stream locked\n");
     
     std::cout.rdbuf(buffer);
